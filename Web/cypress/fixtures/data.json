@@ -1,6 +1,9 @@
 {
   "loginPage": {
-    "dummyEmail": "dummy@example.com"
+    "dummyEmail": "dummy@example.com",
+    "dummyPassword": "dummyPassword",
+    "invalidPassword": "",
+    "invalidEmail": "invalidEmail"
   },
   "name": "Using fixtures to represent data",
   "email": "hello@cypress.io",
