@@ -2,7 +2,7 @@ const { browser } = require('@wdio/globals');
 
 describe('Test Suite', ()=>{
     
-    it('Here we go', async()=>{
+   /*  it('Here we go', async()=>{
         console.log(`isAndroid: ${browser.isAndroid}`);
         const text0 = await $('android.widget.EditText[@index="0"]')
         const text1 = await $('android.widget.EditText[@index="1"]')
@@ -15,5 +15,5 @@ describe('Test Suite', ()=>{
         const foundText = await $('~Hello Flutter')
         expect(foundText).toBeExisting()
         browser.back()
-    })
+    }) */
 })

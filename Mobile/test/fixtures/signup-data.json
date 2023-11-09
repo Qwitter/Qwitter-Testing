@@ -1,0 +1,8 @@
+{
+    "invalidName": "Ma", 
+    "validName": "Marwan",
+    "invalidEmail": "marwan@gmail.",
+    "validEmail": "marwan@gmail.com",
+    "validInputDate": "10/14/2001", 
+    "validTextDate": "2001-11-15"
+}
