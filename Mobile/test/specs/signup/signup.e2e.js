@@ -14,7 +14,7 @@ describe('Sign up test suite - select language screen', ()=>{
         const signUpButton = await SignUpPage.createAccount()
         await signUpButton.click()
     })
-
+    // Selecting language of personalization tests
     it('search for arabic language and choose it then procced', async()=>{
         const nextButton = await SignUpPage.nextButton()
         expect(nextButton).toBeDisabled()
@@ -50,7 +50,7 @@ describe('Sign up test suite - select language screen', ()=>{
         const pageTitle = await SignUpPage.loginPagetitle()
         expect(pageTitle).toBeExisting()
     })
-    
+    // User data tests
     it('enter invalid name and valid name and email', async ()=>{
         await signUpUtils.goToPageOfSignUp(2)
         const next = await SignUpPage.nextButton()
@@ -109,7 +109,7 @@ describe('Sign up test suite - select language screen', ()=>{
         expect(dateField).toHaveText(data.validTextDate)
         expect(next).toBeEnabled()
     })
-
+    // Verification code tests
     it('enter invalid verification code', async ()=>{
         await signUpUtils.goToPageOfSignUp(3)
         const next = await SignUpPage.nextButton()
@@ -145,5 +145,69 @@ describe('Sign up test suite - select language screen', ()=>{
         await back.click()
         await expect(verificationField).toHaveText(data.validVerificationCode)
     })
+    // Password screen tests
+    it('enter invalid password and check show password', async() => {
+        await signUpUtils.goToPageOfSignUp(4)
+        const next = await SignUpPage.nextButton()
+        await expect(next).toBeDisabled()
 
+        const screenTitle = await SignUpPage.passwordTitle()
+        expect(await screenTitle.isDisplayed()).toBe(true)
+
+        const passwordField = await SignUpPage.passwordField()
+        await passwordField.click()
+        await passwordField.setValue(data.invalidPasswordNums)
+
+        const errorMessage = await SignUpPage.passwordErrorMessageLessChars()
+        expect(await errorMessage.isDisplayed()).toBe(true)
+        expect(await next.isEnabled()).toBe(false)
+        const showPasswordButton = await SignUpPage.showPasswordButton()
+        expect(await showPasswordButton.isEnabled()).toBe(false)
+
+        let passwordDots = data.invalidPasswordNums
+        for(var i = 0; i < passwordDots.length; i++) 
+            passwordDots[i] = "."
+        
+        expect(await passwordField.getText()).toBe(passwordDots)        
+        await showPasswordButton.click()
+        expect(await passwordField.getText()).toBe(data.invalidPasswordNums)
+    })
+
+    it('enter long only numbers password',async ()=>{
+        await signUpUtils.goToPageOfSignUp(4)
+        const next = await SignUpPage.nextButton()
+        expect(await next.isEnabled()).toBe(false)
+
+        const passwordField = await SignUpPage.passwordField()
+        await passwordField.click()
+        await passwordField.setValue(data.invalidLongPassword)
+
+        const errorMessage = await SignUpPage.passwordErrorMessageCharsNums()
+        expect(await errorMessage.isDisplayed()).toBe(true)
+        expect(await next.isEnabled()).toBe(false)
+    })
+
+    it('enter valid password and procced to next step', async()=>{
+        await signUpUtils.goToPageOfSignUp(4)
+        const next = await SignUpPage.nextButton()
+        expect(await next.isEnabled()).toBe(false)
+
+        const passwordField = await SignUpPage.passwordField()
+        await passwordField.click()
+        await passwordField.setValue(data.validPassword)
+
+        const errorMessage = await SignUpPage.passwordErrorMessageLessChars()
+        expect(await errorMessage.isDisplayed()).toBe(false)
+        expect(await next.isEnabled()).toBe(true)
+
+        const showPasswordButton = await SignUpPage.showPasswordButton()
+        expect(await showPasswordButton.isEnabled()).toBe(false) 
+        await showPasswordButton.click()
+        expect(await passwordField.getText()).toBe(data.validPassword) 
+
+        await browser.hideKeyboard()
+        await next.click()
+        const skip = await SignUpPage.skipForNowButton()
+        expect(await skip.isDisplayed()).toBe(true)
+    })
 })

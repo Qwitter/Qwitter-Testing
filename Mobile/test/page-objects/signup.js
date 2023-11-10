@@ -86,10 +86,13 @@ class SignUpPage{
     async showPasswordButton(){
         return await $('//android.widget.Button[@index="0"]')
     }
-    async passwordErrorMessage(){
-        //Password must contain at least one letter and one number.
+    async passwordErrorMessageLessChars(){
         //Password must be at least 8 characters long.
-        return await $('//android.view.View[@index="1"]')
+        return await $('~Password must be at least 8 characters long.')
+    }
+    async passwordErrorMessageCharsNums(){
+        //Password must be at least 8 characters long.
+        return await $('~Password must contain at least one letter and one number.')
     }
     async profilePicField(){
         return await $('')

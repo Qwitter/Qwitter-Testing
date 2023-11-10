@@ -21,6 +21,12 @@ module.exports = {
         await module.exports.enterUserData(data.validName, data.validEmail, data.validInputDate, true)
         await nextButton.click()
         if(screenNum == 3) return;
+        const verificationField = await SignUpPage.verificationCodeField()
+        await verificationField.click()
+        await verificationField.setValue(data.validVerificationCode)
+        await browser.hideKeyboard()
+        await nextButton.click()
+        if(screenNum == 4) return;
     },
     enterUserData: async(name, email, date, dateStep = true) =>{
         const emailInput = await SignUpPage.emailField()
