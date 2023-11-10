@@ -17,9 +17,8 @@ module.exports = {
         await englishCheckBox.click()
         const nextButton = await SignUpPage.nextButton()
         await nextButton.click()
-        console.log('before screen 2')
         if(screenNum == 2) return;
-        await this.enterUserData(data.validName, data.validEmail, data.validInputDate, true)
+        await module.exports.enterUserData(data.validName, data.validEmail, data.validInputDate, true)
         await nextButton.click()
         if(screenNum == 3) return;
     },

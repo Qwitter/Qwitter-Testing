@@ -52,7 +52,7 @@ describe('Sign up test suite - select language screen', ()=>{
     })
     
     it('enter invalid name and valid name and email', async ()=>{
-        signUpUtils.goToPageOfSignUp(2)
+        await signUpUtils.goToPageOfSignUp(2)
         const next = await SignUpPage.nextButton()
         expect(next).toBeDisabled()
         signUpUtils.enterUserData(data.invalidName, data.validEmail, data.validInputDate)
@@ -67,7 +67,7 @@ describe('Sign up test suite - select language screen', ()=>{
     })
 
     it('enter invalid email and valid name and date', async ()=>{
-        signUpUtils.goToPageOfSignUp(2)
+        await signUpUtils.goToPageOfSignUp(2)
         const next = SignUpPage.nextButton()
         expect(next).toBeDisabled()
 
@@ -79,7 +79,7 @@ describe('Sign up test suite - select language screen', ()=>{
     })
 
     it('enter empty date and valid name and email', async () =>{
-        signUpUtils.goToPageOfSignUp(2)
+        await signUpUtils.goToPageOfSignUp(2)
         const next = SignUpPage.nextButton()
         expect(next).toBeDisabled()
 
@@ -109,4 +109,41 @@ describe('Sign up test suite - select language screen', ()=>{
         expect(dateField).toHaveText(data.validTextDate)
         expect(next).toBeEnabled()
     })
+
+    it('enter invalid verification code', async ()=>{
+        await signUpUtils.goToPageOfSignUp(3)
+        const next = await SignUpPage.nextButton()
+        expect(next).toBeDisabled()
+
+        const verificationField = await SignUpPage.verificationCodeField()
+        await verificationField.click()
+        await verificationField.setValue(data.invalidVerificationCode)
+        expect(verificationField).toHaveText(data.invalidVerificationCode)
+
+        expect(next).toBeDisabled()
+        const errorMessage = await SignUpPage.verificationCodeErrorMessage()
+        expect(await errorMessage.isDisplayed()).toBe(true)
+    })
+
+    it('enter valid verification code and procced to next page then return back', async()=>{
+        await signUpUtils.goToPageOfSignUp(3)
+        const next = await SignUpPage.nextButton()
+        await expect(next).toBeDisabled()
+        
+        const verificationField = await SignUpPage.verificationCodeField()
+        await verificationField.click()
+        await verificationField.setValue(data.validVerificationCode)
+        await browser.hideKeyboard()
+
+        expect(await next.isEnabled()).toBe(true)
+        await next.click()
+
+        const passwordTitle = await SignUpPage.passwordTitle()
+        await expect(passwordTitle).toBeDisplayed()
+
+        const back = await SignUpPage.backButton()
+        await back.click()
+        await expect(verificationField).toHaveText(data.validVerificationCode)
+    })
+
 })
