@@ -6,7 +6,7 @@ const signUpUtils = require('../../utils/signup.js')
 
 describe('Sign up test suite - select language screen', ()=>{
     afterEach( async ()=>{
-        commands.retsatrtApp()
+        await commands.retsatrtApp()
     })
     beforeEach( async ()=>{
         const pageTitle = await SignUpPage.loginPagetitle()
@@ -88,15 +88,16 @@ describe('Sign up test suite - select language screen', ()=>{
     })
 
     it('enter valid data and proceed to next step then return to check entered data', async ()=>{
-        signUpUtils.goToPageOfSignUp(2)
+        await signUpUtils.goToPageOfSignUp(2)
         const next = await SignUpPage.nextButton()
         expect(next).toBeDisabled()
 
-        signUpUtils.enterUserData(data.validName, data.validEmail, data.validInputDate)
-        expect(next).toBeEnabled()
+        await signUpUtils.enterUserData(data.validName, data.validEmail, data.validInputDate)
+
+        await expect(next).toBeEnabled()
         await next.click()
-        const verificatonTitle = await SignUpPage.verficationCodeTitle()
-        expect(verificatonTitle).toBeDisplayed()
+        const verificatonTitle = await SignUpPage.verificationCodeTitle()
+        await expect( verificatonTitle).toBeDisplayed()
 
         const back = await SignUpPage.backButton()
         await back.click()

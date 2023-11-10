@@ -4,5 +4,10 @@
     "invalidEmail": "marwan@gmail.",
     "validEmail": "marwan@gmail.com",
     "validInputDate": "10/14/2001", 
-    "validTextDate": "2001-11-15"
+    "validTextDate": "2001-11-15",
+    "invalidVerificationCode": "12345",
+    "validVerificationCode": "123456",
+    "invalidPasswordNums": "123456",
+    "invalidPasswordChars":"abcdef",
+    "validPassword": "1234567a"
 }

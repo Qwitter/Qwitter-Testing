@@ -30,7 +30,7 @@ class SignUpPage{
         return await $('//android.widget.Button')
     }
     async nextButton(){
-        return await await $('~Next')
+        return await $('~Next')
     }
     async nameField(){
         return await $('//android.widget.EditText[@index="1"]')
@@ -48,10 +48,10 @@ class SignUpPage{
         return await $('~Invalid email format.')
     }
     async dateOfBirthField(){
-        return 'new UiSelector().className("android.view.View").index(0)'
+        return await $('//android.view.View[@hint="Date of birth"]')
     }
     async editDateOfBirthButton(){
-        return await $('//android.widget.Button=[@index="0"]')
+        return await $('//android.widget.Button[@index="0"]')
     }
     async dateOfBirthOkButton(){
         return await $('~OK')
@@ -60,25 +60,36 @@ class SignUpPage{
         return await $('~CANCEL')
     }
     async dateOfBirthInputField(){
-        return await $('//android.widget.EditText=[@index="1"]')
+        return await $('//android.widget.EditText[@index="1"]')
     }
-    async verficationCodeTitle(){
+    async verificationCodeTitle(){
         return await $('~We sent you a code')
     }
-    async verficationCodeField(){
-        return await $('')
+    async verificationCodeField(){
+        return await $('//android.widget.EditText[@index="2"]')
     }
-    async verficationCodeErrorMessage(){
-        return await $('')
+    async verificationCodeErrorMessage(){
+        return await $('~Invalid confirmation code.')
+    }
+    async verificationEmailText(){
+        return await $('//android.view.View[@index="1"]')
+    }
+    async notRecivedEmail(){
+        return await $('//android.widget.Button[@index="3"]')
+    }
+    async passwordTitle(){
+        return await $('//android.view.View[@index="0"]')
     }
     async passwordField(){
-        return await $('')
+        return await $('//android.widget.EditText[@index="2"]')
     }
     async showPasswordButton(){
         return await $('//android.widget.Button[@index="0"]')
     }
-    async notRecivedEmail(){
-        return await $('')
+    async passwordErrorMessage(){
+        //Password must contain at least one letter and one number.
+        //Password must be at least 8 characters long.
+        return await $('//android.view.View[@index="1"]')
     }
     async profilePicField(){
         return await $('')
