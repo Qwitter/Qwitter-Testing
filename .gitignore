@@ -2,3 +2,8 @@ node_modules
 screenshots
 videos
 *.apk
+downloads
+reports
+allure-report
+allure-results
+*.bat

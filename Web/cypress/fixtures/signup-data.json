@@ -1,0 +1,8 @@
+{
+    "name": "Marwan",
+    "invalidEmail": "marwan@gmail.",
+    "validEmail":"Test@gmail.com",
+    "existingEmail": "test@gmail.com",
+    "validBirthDate":{"day" : "14", "month":"October", "year":"2001"},
+    "invalidBirthDate":{"day" : "14", "month":"October", "year":"2015"}
+}
