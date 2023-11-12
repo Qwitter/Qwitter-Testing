@@ -1,8 +1,17 @@
 {
     "name": "Marwan",
+    "longName": "EmadSamySeifAteeefAliiiiiEmadSamySeifAteeefAliiiiiEmadSamySeifAteeefAliiiii",
     "invalidEmail": "marwan@gmail.",
-    "validEmail":"Test@gmail.com",
+    "validEmail":"sofa@gmail.com",
     "existingEmail": "test@gmail.com",
     "validBirthDate":{"day" : "14", "month":"October", "year":"2001"},
-    "invalidBirthDate":{"day" : "14", "month":"October", "year":"2015"}
+    "invalidBirthDate":{"day" : "14", "month":"October", "year":"2007"},
+    "invalidPassword": "1234567",
+    "weakPasswordNums": "12345678",
+    "weakPasswordChar": "MarwanEmad",
+    "strongPassword": "12345678X",
+    "validVerificationCode": "123456",
+    "invalidVerificationCode": "123457",
+    "smallVerificationCode": "123",
+    "longVerificationCode": "123456789"
 }

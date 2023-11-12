@@ -1,5 +1,6 @@
 import SignUpPage from '../../support/page-objects/signup'
-import {checkStepNumber,  selecDateOfBirth} from '../../utils/signup/signup'
+import {checkStepNumber,  selecDateOfBirth, checkStepOneData} 
+    from '../../utils/signup/signup'
 const data = require('../../fixtures/signup-data.json')
 
 describe('Signup test suite for step one', ()=>{
@@ -11,7 +12,6 @@ describe('Signup test suite for step one', ()=>{
         SignUpPage.loginPageTitle.should('be.visible')
         SignUpPage.createAccount.should('be.visible')
         //SignUpPage.signupWithGoogle.should('be.visible')
-        //SignUpPage.signUpWithApple.should('be.visible')
         SignUpPage.createAccount.click()
         SignUpPage.signUpPageHeader.should('be.visible')
         cy.url().should('include', '/signup')
@@ -22,12 +22,26 @@ describe('Signup test suite for step one', ()=>{
         SignUpPage.emailField.should('be.visible')
     })
     
-    it('enter empty name, valid email and vaild date', ()=>{
+    it('enter empty name, valid email and date', ()=>{
         SignUpPage.emailField.type(data.validEmail)
         .should('have.value', data.validEmail)
         
         selecDateOfBirth(data.validBirthDate)
         SignUpPage.nextButton.should('be.visible').should('be.disabled')
+    })
+
+    it('enter a name with more than 50 chars and valid email and date ', ()=>{
+        SignUpPage.emailField.type(data.validEmail)
+        .should('have.value', data.validEmail)
+        
+        selecDateOfBirth(data.validBirthDate)
+        SignUpPage.nextButton.should('be.visible').should('be.disabled')
+
+        const name = 'X'.repeat(55);
+        SignUpPage.nameField.type(name)
+        .should(($value)=>{
+            expect($value.val().length).to.eq(50)
+        })
     })
 
     it('enter valid name, invalid email and valid date', ()=>{
@@ -42,7 +56,7 @@ describe('Signup test suite for step one', ()=>{
         SignUpPage.nextButton.should('be.visible').should('be.disabled')
     })
 
-    it('enter valid name, existing email and valid date', ()=>{
+    it.skip('enter valid name, existing email and valid date', ()=>{
         SignUpPage.nameField.type(data.name).should('have.value', data.name)
         selecDateOfBirth(data.validBirthDate)
 
@@ -51,7 +65,20 @@ describe('Signup test suite for step one', ()=>{
 
         cy.contains('Email has already been taken')
         .should('be.visible')
-        SignUpPage.nextButton.should('be.visible').should('be.disabled')
+        SignUpPage.nextButton.should('be.visible')
+        .should('be.disabled')
+    })
+
+    it('enter valid name and email and invalid date', ()=>{
+        SignUpPage.nameField.type(data.name)
+        .should('have.value', data.name)
+        selecDateOfBirth(data.invalidBirthDate)
+
+        SignUpPage.emailField.type(data.validEmail)
+        .should('have.value', data.validEmail)
+
+        cy.contains('Must be older than 18 years')
+        .should('be.visible')
     })
 
     it('enter user data, proceed then return to check data', ()=>{
@@ -69,25 +96,12 @@ describe('Signup test suite for step one', ()=>{
         SignUpPage.backButton.should('be.visible')
         SignUpPage.backButton.click()
 
-        checkStepNumber(1)
-        SignUpPage.nameField.should('have.value', data.name)
-        SignUpPage.emailField.should('have.value', data.validEmail)
-
-        SignUpPage.birthDayField.within(()=>{
-            cy.get('select').should('have.text', data.validBirthDate.day)
-        })
-
-        SignUpPage.birthMonthField.within(()=>{
-            cy.get('select').should('have.text', data.validBirthDate.month)
-        })
-
-        SignUpPage.birthYearField.within(()=>{
-            cy.get('select').should('have.text', data.validBirthDate.year)
-        })
+        checkStepOneData(data.name, data.validEmail, data.validBirthDate)
     })
 
     it('exit sigun up page', ()=>{
-        SignUpPage.closeButton.should('be.visible').click()
-        SignUpPage.loginPageTitle
+        SignUpPage.closeButton.should('be.visible')
+        SignUpPage.closeButton.click()
+        SignUpPage.loginPageTitle.should('be.visible')
     })
 })

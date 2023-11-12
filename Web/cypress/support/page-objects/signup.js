@@ -23,6 +23,15 @@ class SignUpPage{
     get emailField(){
         return cy.get('input[name="email"]')
     }
+    get nameAssertion(){
+        return cy.get('[data-testid="nameAssert"]')
+    }
+    get emailAssertion(){
+        return cy.get('[data-testid="emailAssert"]')
+    }
+    get dateOfBirthAssertion(){
+        return cy.get('[data-testid="dateOfBirthAssert"]')
+    }
     get nameErrorMessage(){
         return cy.get('')
     }
@@ -45,7 +54,7 @@ class SignUpPage{
         return cy.contains('button', 'Sign Up')
     }
     get xContentCheckBox(){
-        return cy.get('')
+        return cy.get('#check')
     }
     get closeButton(){
         return cy.get('[data-testid="popupHeaderButton"]')
@@ -60,14 +69,17 @@ class SignUpPage{
         return cy.get('')
     }
     get passwordField(){
-        return cy.get('')
+        return cy.get('input[name="password"]')
+    }
+    get showPasswordButton(){
+        return cy.get('[data-testid="passwordEye"]')
     }
     get profilePicField(){
         return cy.get('')
     }
     // TODO: elements of profile pic => delete pic, next, skip for now, take pic
     get usernameField(){
-        return cy.get('')
+        return cy.get('[data-testid="username"]')
     }
     get usernameSuggestions(){
         return cy.get();
