@@ -14,9 +14,19 @@ class ForgotPasswordPage{
     get confirmNewPasswordField(){
         return cy.get('input[name="ConfirmPassword"]')
     }
+    get passwordEyeButton(){
+        return cy.get('[data-testid="passwordEye"]')
+    }
     get changePasswordButton(){
         return cy.get('button[role="submitButton"]')
     }
+    get exitButton(){
+        return cy.get('[data-testid="popupHeaderButton"]')
+    }
+    get backButton(){
+        return cy.get('[data-testid="popupHeaderButton"]')
+    }
+
 }
 
 export default new ForgotPasswordPage();
