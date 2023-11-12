@@ -30,14 +30,16 @@ module.exports.goToStep = (step) =>{
     module.exports.selecDateOfBirth(data.validBirthDate)
     SignUpPage.nextButton.click();
     if(step == 2) return ;
-
     // Step 3
     SignUpPage.nextButton.click()
     if(step == 3) return;
-    
-    // Step 4
+    //Step4
     SignUpPage.signUpButton.click()
     if(step == 4) return;
+    
+    SignUpPage.verficationCodeField.type(data.validVerificationCode)
+    SignUpPage.nextButton.click()
+
 }
 
 module.exports.checkStepOneData = (name, email, date) => {
