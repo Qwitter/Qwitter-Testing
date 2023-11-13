@@ -2,3 +2,4 @@ node_modules
 bin
 videos
 screenshots
+kill-port.bat

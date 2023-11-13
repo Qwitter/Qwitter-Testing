@@ -10,7 +10,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@wdio/cli": "^8.21.0"
+    "@wdio/cli": "^8.21.0",
+    "@wdio/globals": "^8.22.1"
   },
   "devDependencies": {
     "@wdio/appium-service": "^8.21.0",
