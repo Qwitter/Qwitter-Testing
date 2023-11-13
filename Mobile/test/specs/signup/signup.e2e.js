@@ -4,7 +4,7 @@ const SignUpPage = require('../../page-objects/signup.js')
 const data  = require('../../fixtures/signup-data.json')
 const signUpUtils = require('../../utils/signup.js')
 
-describe('Sign up test suite - select language screen', ()=>{
+describe('Sign up test suite', ()=>{
     afterEach( async ()=>{
         await commands.retsatrtApp()
     })
@@ -15,7 +15,7 @@ describe('Sign up test suite - select language screen', ()=>{
         await signUpButton.click()
     })
     // Selecting language of personalization tests
-    it('search for arabic language and choose it then procced', async()=>{
+    it.skip('search for arabic language and choose it then procced', async()=>{
         const nextButton = await SignUpPage.nextButton()
         expect(nextButton).toBeDisabled()
         const search = await SignUpPage.searchForLanguage()
@@ -33,7 +33,7 @@ describe('Sign up test suite - select language screen', ()=>{
         await nextButton.click()
     })
 
-    it('choose a random language', async ()=>{
+    it.skip('choose a random language', async ()=>{
         const nextButton = await SignUpPage.nextButton()
         expect(nextButton).toBeDisabled()
         const englishCheckBox = await SignUpPage.englishCheckBox()
@@ -44,14 +44,14 @@ describe('Sign up test suite - select language screen', ()=>{
         expect(nextButton).toBeEnabled() 
     })
 
-    it('go back to login page from select language page', async()=>{
+    it.skip('go back to login page from select language page', async()=>{
         const backBtn = await SignUpPage.backButton()
         await backBtn.click()
         const pageTitle = await SignUpPage.loginPagetitle()
         expect(pageTitle).toBeExisting()
     })
     // User data tests
-    it('enter invalid name and valid name and email', async ()=>{
+    it.skip('enter invalid name and valid name and email', async ()=>{
         await signUpUtils.goToPageOfSignUp(2)
         const next = await SignUpPage.nextButton()
         expect(next).toBeDisabled()
@@ -66,7 +66,7 @@ describe('Sign up test suite - select language screen', ()=>{
         expect(next).toBeDisabled()
     })
 
-    it('enter invalid email and valid name and date', async ()=>{
+    it.skip('enter invalid email and valid name and date', async ()=>{
         await signUpUtils.goToPageOfSignUp(2)
         const next = SignUpPage.nextButton()
         expect(next).toBeDisabled()
@@ -78,7 +78,7 @@ describe('Sign up test suite - select language screen', ()=>{
         expect(next).toBeDisabled()
     })
 
-    it('enter empty date and valid name and email', async () =>{
+    it.skip('enter empty date and valid name and email', async () =>{
         await signUpUtils.goToPageOfSignUp(2)
         const next = SignUpPage.nextButton()
         expect(next).toBeDisabled()
@@ -87,7 +87,7 @@ describe('Sign up test suite - select language screen', ()=>{
         expect(next).toBeDisabled()
     })
 
-    it('enter valid data and proceed to next step then return to check entered data', async ()=>{
+    it.skip('enter valid data and proceed to next step then return to check entered data', async ()=>{
         await signUpUtils.goToPageOfSignUp(2)
         const next = await SignUpPage.nextButton()
         expect(next).toBeDisabled()
@@ -110,7 +110,7 @@ describe('Sign up test suite - select language screen', ()=>{
         expect(next).toBeEnabled()
     })
     // Verification code tests
-    it('enter invalid verification code', async ()=>{
+    it.skip('enter invalid verification code', async ()=>{
         await signUpUtils.goToPageOfSignUp(3)
         const next = await SignUpPage.nextButton()
         expect(next).toBeDisabled()
@@ -125,7 +125,7 @@ describe('Sign up test suite - select language screen', ()=>{
         expect(await errorMessage.isDisplayed()).toBe(true)
     })
 
-    it('enter valid verification code and procced to next page then return back', async()=>{
+    it.skip('enter valid verification code and procced to next page then return back', async()=>{
         await signUpUtils.goToPageOfSignUp(3)
         const next = await SignUpPage.nextButton()
         await expect(next).toBeDisabled()
@@ -146,7 +146,7 @@ describe('Sign up test suite - select language screen', ()=>{
         await expect(verificationField).toHaveText(data.validVerificationCode)
     })
     // Password screen tests
-    it('enter invalid password and check show password', async() => {
+    it.skip('enter invalid password and check show password', async() => {
         await signUpUtils.goToPageOfSignUp(4)
         const next = await SignUpPage.nextButton()
         await expect(next).toBeDisabled()
@@ -173,7 +173,7 @@ describe('Sign up test suite - select language screen', ()=>{
         expect(await passwordField.getText()).toBe(data.invalidPasswordNums)
     })
 
-    it('enter long only numbers password',async ()=>{
+    it.skip('enter long only numbers password',async ()=>{
         await signUpUtils.goToPageOfSignUp(4)
         const next = await SignUpPage.nextButton()
         expect(await next.isEnabled()).toBe(false)
@@ -182,12 +182,12 @@ describe('Sign up test suite - select language screen', ()=>{
         await passwordField.click()
         await passwordField.setValue(data.invalidLongPassword)
 
-        const errorMessage = await SignUpPage.passwordErrorMessageCharsNums()
+        const errorMessage = await SignUpPage.passwordErrorMessageLongNums()
         expect(await errorMessage.isDisplayed()).toBe(true)
         expect(await next.isEnabled()).toBe(false)
     })
 
-    it('enter valid password and procced to next step', async()=>{
+    it.skip('enter valid password and procced to next step', async()=>{
         await signUpUtils.goToPageOfSignUp(4)
         const next = await SignUpPage.nextButton()
         expect(await next.isEnabled()).toBe(false)

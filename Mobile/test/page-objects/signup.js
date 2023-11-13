@@ -90,9 +90,9 @@ class SignUpPage{
         //Password must be at least 8 characters long.
         return await $('~Password must be at least 8 characters long.')
     }
-    async passwordErrorMessageCharsNums(){
+    async passwordErrorMessageLongNums(){
         //Password must be at least 8 characters long.
-        return await $('~Password must contain at least one letter and one number.')
+        return await $('~Password must contain at least one letter.')
     }
     async profilePicField(){
         return await $('')
