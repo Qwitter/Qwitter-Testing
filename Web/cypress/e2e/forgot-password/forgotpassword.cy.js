@@ -22,22 +22,31 @@ describe('Forgot password test suite', ()=>{
     })
 
     it('test email step - invalid , not existing and valid email', ()=>{
+        
+        
+    })
+
+    it('enter invalid email', ()=>{
         SignUpPage.emailField.type(data.invalidEmail)
         cy.contains('Must be an email').should('be.visible')
         SignUpPage.nextButton.should('be.disabled')
+    })
 
-        SignUpPage.emailField.clear().type(data.notExistingEmail)
+    it('enter not existing email', ()=>{
+        SignUpPage.emailField.type(data.notExistingEmail)
         SignUpPage.nextButton.click()
         cy.contains('Email is not found').should('be.visible')
         SignUpPage.nextButton.should('be.enabled')
-
-        SignUpPage.emailField.clear().type(data.validEmail)
+    })
+    
+    it('enter valid email and proceed', ()=>{
+        SignUpPage.emailField.type(data.validEmail)
         SignUpPage.nextButton.click()
         cy.contains('We sent you a code')
         .should('be.visible')
     })
-    
-    it('test verification code step - invalid and valid verification code', ()=>{
+
+    it('enter invalid verification code', ()=>{
         SignUpPage.emailField.type(data.validEmail)
         SignUpPage.nextButton.click()
 
@@ -49,6 +58,11 @@ describe('Forgot password test suite', ()=>{
         SignUpPage.verficationCodeField.clear().type(data.invalidVerificationCode)
         SignUpPage.nextButton.click()
         cy.contains('Invalid token').should('be.visible')
+    })
+    
+    it('enter valid verification code and proceed to next step', ()=>{
+        SignUpPage.emailField.type(data.validEmail)
+        SignUpPage.nextButton.click()
 
         SignUpPage.verficationCodeField.clear().type(data.verificationCode)
         SignUpPage.nextButton.click()
@@ -58,7 +72,7 @@ describe('Forgot password test suite', ()=>{
         // TODO: check resend email link
     })
 
-    it('test choose new password step - invalid and valid password', ()=>{
+    it('enter invalid password', ()=>{
         SignUpPage.emailField.type(data.validEmail)
         SignUpPage.nextButton.click()
         SignUpPage.verficationCodeField.type(data.verificationCode)
@@ -67,14 +81,26 @@ describe('Forgot password test suite', ()=>{
         ForgotPasswordPage.newPasswordField.type(data.invalidPassword)
         cy.contains('Your password needs to be at least 8 characters. Please enter a longer one.')
         .should('be.visible')
+        ForgotPasswordPage.changePasswordButton.should('be.disabled')
 
         ForgotPasswordPage.newPasswordField.clear().type(data.weakPassword)
-        cy.contains('Password must contain at least one letter and one number').should('be.visible')
+        cy.contains('Password must contain at least one letter')
+        .should('have.text', 'Password must contain at least one letter')
+        .should('be.visible')
+        ForgotPasswordPage.changePasswordButton.should('be.disabled')
+    })
+
+    it('enter valid password and check show password then proceed', ()=>{
+        SignUpPage.emailField.type(data.validEmail)
+        SignUpPage.nextButton.click()
+        SignUpPage.verficationCodeField.type(data.verificationCode)
+        SignUpPage.nextButton.click()
+
         ForgotPasswordPage.newPasswordField.clear().type(data.strongPassword)
         ForgotPasswordPage.changePasswordButton.should('be.disabled')
 
         ForgotPasswordPage.confirmNewPasswordField.type("123")
-        cy.contains("Passwords doesn't match").should('be.visible')
+        cy.contains("Passwords do not match").should('be.visible')
         ForgotPasswordPage.confirmNewPasswordField.clear().type(data.strongPassword)
         ForgotPasswordPage.changePasswordButton.should('be.enabled')
 

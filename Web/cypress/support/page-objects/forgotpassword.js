@@ -1,6 +1,6 @@
 class ForgotPasswordPage{
     get signInPageHeader(){
-        return cy.contains('p', 'Sign in to Quitter')
+        return cy.contains('p', 'Sign in to Qwitter')
     }
     get forgotPasswordButton(){
         return cy.contains('Forgot Password?')
