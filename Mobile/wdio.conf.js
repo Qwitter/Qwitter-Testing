@@ -1,6 +1,6 @@
 const projectPath = require('path')
 const { cwd } = require('process')
-const androidAppPath = projectPath.join(process.cwd(), 'app/android/app-release-ForgotLogin.apk')
+const androidAppPath = projectPath.join(process.cwd(), 'app/android/app-release-SignUp.apk')
 exports.config = {
     //
     // ====================

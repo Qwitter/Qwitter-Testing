@@ -1,3 +1,4 @@
+const { faker, sk } = require('@faker-js/faker')
 const data = require('../fixtures/signup-data.json')
 const SignUpPage = require('../page-objects/signup')
 
@@ -17,16 +18,29 @@ module.exports = {
         await englishCheckBox.click()
         const nextButton = await SignUpPage.nextButton()
         await nextButton.click()
+        
         if(screenNum == 2) return;
-        await module.exports.enterUserData(data.validName, data.validEmail, data.validInputDate, true)
+        const randomEmail = faker.internet.email()
+        await module.exports.enterUserData(data.validName, randomEmail, data.validInputDate, true)
         await nextButton.click()
+
         if(screenNum == 3) return;
         const verificationField = await SignUpPage.verificationCodeField()
         await verificationField.click()
         await verificationField.setValue(data.validVerificationCode)
         await browser.hideKeyboard()
         await nextButton.click()
+        
         if(screenNum == 4) return;
+        const passwordField = await SignUpPage.passwordField()
+        await passwordField.click()
+        await passwordField.setValue(data.validPassword)
+        await browser.hideKeyboard()
+        await nextButton.click()
+
+        if(screenNum == 5) return;
+        const skip = await SignUpPage.skipForNowButton()
+        await skip.click()
     },
     enterUserData: async(name, email, date, dateStep = true) =>{
         const emailInput = await SignUpPage.emailField()

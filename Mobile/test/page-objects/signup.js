@@ -38,9 +38,6 @@ class SignUpPage{
     async emailField(){
         return await $('//android.widget.EditText[@index="2"]')
     }
-    async nameErrorMessageCharsLimit(){
-        return await $('~Username must be between 3 and 30 characters.')
-    }
     async nameErrorMessageCharsType(){
         return await $('~Username must contain only letters and numbers.')
     }
@@ -94,8 +91,8 @@ class SignUpPage{
         //Password must be at least 8 characters long.
         return await $('~Password must contain at least one letter.')
     }
-    async profilePicField(){
-        return await $('')
+    async profilePicHeader(){
+        return await $('~Pick a profile picture')
     }
     async skipForNowButton(){
         return await $('~Skip for now')
@@ -103,12 +100,29 @@ class SignUpPage{
     async uploadPhotoButton(){
         return await $('~Upload')
     }
-    // TODO: elements of profile pic => delete pic, take pic
-    async usernameField(){
-        return await $('')
+    // this object should be on pixel 5 only i don't know 
+    // if it will pass on another devices but i don't
+    // find a way to do this on appium
+    async photoOnDevice(){ 
+        return await $('//android.widget.ImageView[@index="0"]')
     }
-    async usernameSuggestions(){
-        return await $('');
+    async userNameHeader(){
+        return await $('~What should we call you?')
+    }
+    async usernameField(){
+        return await $('//android.widget.EditText[@index="2"]')
+    }
+    async usernameSuggestionOne(){
+        return await $('//android.widget.Button[@index="0"]');
+    }
+    async usernameSuggestionTwo(){
+        return await $('//android.widget.Button[@index="1"]');
+    }
+    async userNameErrorMessage(){
+        return await $('~Invalid Twitter username. Please check the format.')
+    }
+    async suggestedPageHeader(){
+        return await $('~Suggested Follows')
     }
 }
 
