@@ -1,9 +1,17 @@
 {
   "loginPage": {
-    "dummyEmail": "dummy@example.com",
-    "dummyPassword": "dummyPassword",
-    "invalidPassword": "",
-    "invalidEmail": "invalidEmail"
+    "validEmail": "ahmedradalla2001@gmail.com",
+    "notEmail": "notEmail",
+    "validPassword": "8charslong",
+    "wrongPassword": "12345678aaa",
+    "invalidEmail": "dummy@dummy.com",
+    "invalidPasswordTooSmall": "1",
+    "invalidPasswordNoNums": "abcdefgh"
+  },
+  "changePasswordPage": {
+    "currentPassword": "8charslong",
+    "newPassword": "8charsormore",
+    "invalidPassword": "1"
   },
   "name": "Using fixtures to represent data",
   "email": "hello@cypress.io",
