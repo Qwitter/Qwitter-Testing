@@ -10,6 +10,8 @@ class LoginPagePo {
     get googleSigninButton() { return cy.get("body > div:nth-child(5) > div:nth-child(2) > div:nth-child(1) > button:nth-child(2)") }
     get forgotPasswordButtonEmailScreen() { return cy.get("button[data-testid='forgotPassword']") }
     get forgotPasswordButtonPasswordScreen() { return cy.get("span[data-testid='forgotPasswordPassword']") }
+    get xButton() { return cy.get("div[data-testid='popupHeaderButton']") }
+    get logoButton() { return cy.get("img[data-testid='logo']") }
 }
 
 export default new LoginPagePo()
