@@ -9,9 +9,9 @@
     "invalidPassword": "1234567",
     "weakPasswordNums": "12345678",
     "weakPasswordChar": "MarwanEmad",
-    "strongPassword": "12345678X",
+    "strongPassword": "12345678XXX",
     "validVerificationCode": "123456",
-    "invalidVerificationCode": "123457",
+    "invalidVerificationCode": "123456",
     "smallVerificationCode": "123",
     "longVerificationCode": "123456789"
 }

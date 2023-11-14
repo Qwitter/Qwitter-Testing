@@ -84,6 +84,16 @@ class SignUpPage{
     get usernameSuggestions(){
         return cy.get();
     }
+    get skipForNowButton(){
+        cy.get('[data-testid="skipForNow"]')
+    }
+    //This part shouldn't be here, it's of login
+    get sginIn(){
+        return cy.contains('button', 'Sign in')
+    }
+    get logIn(){
+        return cy.contains('button', 'Log in')
+    }
 }
 
 export default new SignUpPage();

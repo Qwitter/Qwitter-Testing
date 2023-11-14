@@ -23,10 +23,11 @@ module.exports.checkStepNumber= (stepNumber) =>{
     SignUpPage.signupStep.should('have.text', `Step ${stepNumber} of 5 `)
 }
 
-module.exports.goToStep = (step) =>{
+module.exports.goToStep = (step, email = "", enteredEmail = false) =>{
+    if(!enteredEmail) email = data.validEmail
     // Step 2
     SignUpPage.nameField.clear().type(data.name)
-    SignUpPage.emailField.clear().type(data.validEmail)
+    SignUpPage.emailField.clear().type(email)
     module.exports.selecDateOfBirth(data.validBirthDate)
     SignUpPage.nextButton.click();
     if(step == 2) return ;
@@ -37,9 +38,25 @@ module.exports.goToStep = (step) =>{
     SignUpPage.signUpButton.click()
     if(step == 4) return;
     
-    SignUpPage.verficationCodeField.type(data.validVerificationCode)
+    module.exports.verifyEmail(email).then((code) => {
+        SignUpPage.verficationCodeField.type(code)
+    })
     SignUpPage.nextButton.click()
 
+}
+
+module.exports.verifyEmail = (email) => {
+
+    return cy.mailiskSearchInbox(Cypress.env("MAILISK_NAMESPACE"), 
+    { to_addr_prefix: email }).then((response) => {
+        const emails = response.data;
+        const email = emails[0];
+        // we know that the code is the only number in the email, so we easily filter it out
+        let code = email.text.match(/\d+/)[0]
+        expect(code).to.not.be.undefined;
+        
+        return code.toString()
+    })
 }
 
 module.exports.checkStepOneData = (name, email, date) => {
