@@ -1,6 +1,6 @@
 const projectPath = require('path')
 const { cwd } = require('process')
-const androidAppPath = projectPath.join(process.cwd(), 'app/android/app-release.apk')
+const androidAppPath = projectPath.join(process.cwd(), 'app/android/app-release-SignUp.apk')
 exports.config = {
     //
     // ====================
@@ -132,7 +132,11 @@ exports.config = {
     // Test reporter for stdout.
     // The only one supported by default is 'dot'
     // see also: https://webdriver.io/docs/dot-reporter
-    reporters: ['spec'],
+    reporters: ['spec',['allure', {
+        outputDir: 'allure-results',
+        disableWebdriverStepsReporting: true,
+        disableWebdriverScreenshotsReporting: true,
+    }]],
 
     // Options to be passed to Mocha.
     // See the full list at http://mochajs.org/

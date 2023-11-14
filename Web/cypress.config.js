@@ -14,5 +14,7 @@ module.exports = defineConfig({
       //for generating html reports
       require('cypress-mochawesome-reporter/plugin')(on);
     },
+    baseUrl: "http://localhost:5173/",
+    video: true
   },
 });
