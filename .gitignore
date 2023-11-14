@@ -2,5 +2,11 @@ node_modules
 screenshots
 videos
 downloads
+*.apk
+*.bat
+Mobile\app\android\app-release.apk
+allure-results
+allure-report
+reports
 bin
 kill-port.bat
