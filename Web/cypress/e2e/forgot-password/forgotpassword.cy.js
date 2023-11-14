@@ -1,6 +1,7 @@
 import SignUpPage from '../../support/page-objects/signup'
 import ForgotPasswordPage from '../../support/page-objects/forgotpassword'
 import { verifyEmail } from '../../utils/signup/signup'
+import { openPasswordPage } from '../../utils/forgotpassword/forgotpassword'
 const data = require('../../fixtures/forgotpassword-data.json')
 
 describe('Forgot password test suite', () => {
@@ -67,27 +68,14 @@ describe('Forgot password test suite', () => {
 
         SignUpPage.verficationCodeField.clear().type(data.invalidVerificationCode)
         SignUpPage.nextButton.click()
-        cy.contains('Invalid token').should('be.visible')
+        cy.contains('Wrong Token. Please check again').should('be.visible')
     })
-    
-    it('enter valid verification code and proceed to next step', () => {
-        SignUpPage.emailField.type(data.validEmail)
-        SignUpPage.nextButton.click()
 
-        SignUpPage.verficationCodeField.clear().type(data.verificationCode)
-        SignUpPage.nextButton.click()
-        cy.contains('Choose a new Password')
+    it('enter invalid password and check its password page', ()=>{
+        openPasswordPage()
+        cy.contains('Choose a new password')
         .should('be.visible')
-
-        // TODO: check resend email link
-    })
-
-    it('enter invalid password', ()=>{
-        SignUpPage.emailField.type(data.validEmail)
-        SignUpPage.nextButton.click()
-        SignUpPage.verficationCodeField.type(data.verificationCode)
-        SignUpPage.nextButton.click()
-
+        
         ForgotPasswordPage.newPasswordField.type(data.invalidPassword)
         cy.contains('Your password needs to be at least 8 characters. Please enter a longer one.')
         .should('be.visible')
@@ -101,12 +89,7 @@ describe('Forgot password test suite', () => {
     })
 
     it('enter different confirm password and check show password', () => {
-        SignUpPage.emailField.type(data.email)
-        SignUpPage.nextButton.click()
-        verifyEmail(email).then((code) => {
-            SignUpPage.verficationCodeField.type(code)
-        })
-        SignUpPage.nextButton.click()
+        openPasswordPage()
 
         ForgotPasswordPage.newPasswordField.type(data.strongPassword)
         ForgotPasswordPage.changePasswordButton.should('be.disabled')
@@ -130,12 +113,7 @@ describe('Forgot password test suite', () => {
     })
 
     it('enter valid password and check show password then proceed', () => {
-        SignUpPage.emailField.type(data.email)
-        SignUpPage.nextButton.click()
-        verifyEmail(data.email, false).then((code) => {
-            SignUpPage.verficationCodeField.type(code)
-        })
-        SignUpPage.nextButton.click()
+        openPasswordPage()
 
         ForgotPasswordPage.newPasswordField.type(data.strongPassword)
         ForgotPasswordPage.changePasswordButton.should('be.disabled')

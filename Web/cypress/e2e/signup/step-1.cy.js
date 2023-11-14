@@ -56,7 +56,7 @@ describe('Signup test suite for step one', ()=>{
         SignUpPage.nextButton.should('be.visible').should('be.disabled')
     })
 
-    it.skip('enter valid name, existing email and valid date', ()=>{
+    it('enter valid name, existing email and valid date', ()=>{
         SignUpPage.nameField.type(data.name).should('have.value', data.name)
         selecDateOfBirth(data.validBirthDate)
 
