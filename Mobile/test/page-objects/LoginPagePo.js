@@ -12,6 +12,7 @@ class LoginPagePo {
     async wrongPassword() { return await $('//android.widget.Toast[@text="Wrong password" and @class="android.widget.Toast"]') }
     async feed() { return await $('//android.widget.Toast[@text="Into the feed" and @class="android.widget.Toast"]') }
     async fogotPassword() { return await $('~Fogot password?') }
+    async backButton() { return await $('~Back') }
 }
 
 module.exports = new LoginPagePo()

@@ -2,5 +2,7 @@
     "validEmail": "ahmedradalla2001@gmail.com",
     "validPassword": "8charslong",
     "invalidEmail": "invalid@invalid.com",
-    "invalidPassword": "invalidpassword"
+    "invalidPassword": "invalidpassword",
+    "validUsername": "ahmed09c8a8",
+    "invalidUsername": "ahmedradalla2001"
 }
