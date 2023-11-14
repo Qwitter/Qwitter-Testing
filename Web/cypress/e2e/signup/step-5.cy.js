@@ -45,22 +45,24 @@ describe('Signup test suite for step five', ()=>{
         .should('be.disabled')
     })
     
-    it.only('password must be hidden at first then proceed with strong password and signin', ()=>{
+    it('password must be hidden at first then proceed with strong password and signin', ()=>{
         SignUpPage.passwordField.type(data.strongPassword)
         SignUpPage.nextButton.click()
         cy.url().should('include', 'profile')
         cy.contains('Pick a profile picture')
         .should('be.visible')
 
+        cy.clearCookies()
+        cy.clearLocalStorage()
         cy.visit('')
-        // here i should use a module of login but the teammate did it in his code
+        // here i should use a module of login but the teammate didn't push it yet
         SignUpPage.sginIn.click()
         SignUpPage.emailField.type(testEmail)
         SignUpPage.nextButton.click()
         SignUpPage.passwordField.type(data.strongPassword)
         SignUpPage.logIn.click()
 
-        cy.url().should('include', 'account')
+        cy.url().should('include', '/account')
     })
     
 })

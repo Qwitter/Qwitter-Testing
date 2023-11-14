@@ -77,7 +77,6 @@ class SignUpPage{
     get profilePicField(){
         return cy.get('')
     }
-    // TODO: elements of profile pic => delete pic, next, skip for now, take pic
     get usernameField(){
         return cy.get('[data-testid="username"]')
     }
@@ -86,6 +85,9 @@ class SignUpPage{
     }
     get skipForNowButton(){
         cy.get('[data-testid="skipForNow"]')
+    }
+    get signupLink(){
+        return cy.get('[data-testid="signupLink"]')
     }
     //This part shouldn't be here, it's of login
     get sginIn(){
