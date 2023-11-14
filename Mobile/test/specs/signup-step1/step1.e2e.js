@@ -8,7 +8,7 @@ const { faker, sk, fa } = require('@faker-js/faker')
 
 describe('Sign up test suite - selecting language', ()=>{
     afterEach( async ()=>{
-        await commands.retsatrtApp()
+        await commands.restartApp()
     })
     beforeEach( async ()=>{
         const pageTitle = await SignUpPage.loginPagetitle()

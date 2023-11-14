@@ -9,7 +9,7 @@ const { log } = require('console')
 
 describe('Forgot password test suite', ()=>{
     afterEach( async ()=>{
-        await commands.retsatrtApp()
+        await commands.restartApp()
     })
     beforeEach( async ()=>{
         const pageTitle = await SignUpPage.loginPagetitle()

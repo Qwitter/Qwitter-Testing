@@ -7,7 +7,7 @@ const { faker, sk, fa } = require('@faker-js/faker')
 
 describe('Sign up test suite - profile picture step', ()=>{
     afterEach( async ()=>{
-        await commands.retsatrtApp()
+        await commands.restartApp()
     })
     beforeEach( async ()=>{
         const signUpButton = await SignUpPage.createAccount()

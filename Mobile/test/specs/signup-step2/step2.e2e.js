@@ -8,7 +8,7 @@ const exp = require('constants')
 
 describe('Sign up test suite', ()=>{
     afterEach( async ()=>{
-        await commands.retsatrtApp()
+        await commands.restartApp()
     })
     beforeEach( async ()=>{
         const signUpButton = await SignUpPage.createAccount()
