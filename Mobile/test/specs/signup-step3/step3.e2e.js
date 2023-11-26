@@ -6,13 +6,14 @@ const signUpUtils = require('../../utils/signup.js')
 const { faker, sk, fa } = require('@faker-js/faker')
 
 describe('Sign up test suite - verification code step', ()=>{
+    let emailToken = "X"
     afterEach( async ()=>{
         await commands.restartApp()
     })
     beforeEach( async ()=>{
         const signUpButton = await SignUpPage.createAccount()
         await signUpButton.click()
-        await signUpUtils.goToPageOfSignUp(3)
+        emailToken = await signUpUtils.goToPageOfSignUp(3)
     })
 
     it('back button should be unvisible', async() => {
@@ -23,7 +24,7 @@ describe('Sign up test suite - verification code step', ()=>{
         expect(await back.isDisplayed()).toBe(false)
     })
 
-    it('enter invalid verification code and back button should be unvisible', async ()=>{
+    it('enter invalid verification code', async ()=>{
         const next = await SignUpPage.nextButton()
         expect(next).toBeDisabled()
 
@@ -43,7 +44,8 @@ describe('Sign up test suite - verification code step', ()=>{
         
         const verificationField = await SignUpPage.verificationCodeField()
         await verificationField.click()
-        await verificationField.setValue(data.validVerificationCode)
+        const code = await signUpUtils.getVerificationCode(emailToken)
+        await verificationField.setValue(code)
         await browser.hideKeyboard()
 
         expect(await next.isEnabled()).toBe(true)

@@ -82,7 +82,8 @@ class SignUpPage{
         return await $('//android.widget.EditText[@index="2"]')
     }
     async showPasswordButton(){
-        return await $('//android.widget.Button[@index="0"]')
+        const buttons = await $$('//android.widget.Button[@index="0"]') 
+        return buttons[buttons.length - 1]
     }
     async passwordErrorMessageLessChars(){
         return await $('~Password must be at least 8 characters long.')

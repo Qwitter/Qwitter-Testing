@@ -36,7 +36,7 @@ describe('Sign up test suite - password step', ()=>{
         expect(await next.isEnabled()).toBe(false)
 
         expect(await passwordField.getAttribute('password')).toBe("true")
-
+        const showPasswordButton = await SignUpPage.showPasswordButton()
         await showPasswordButton.click()
         expect(await passwordField.getText()).toBe(data.invalidPasswordNums)
         expect(await passwordField.getAttribute('password')).toBe("false")
@@ -62,17 +62,17 @@ describe('Sign up test suite - password step', ()=>{
         const passwordField = await SignUpPage.passwordField()
         await passwordField.click()
         await passwordField.setValue(data.validPassword)
+        await browser.hideKeyboard()
 
         const errorMessage = await SignUpPage.passwordErrorMessageLessChars()
         expect(await errorMessage.isDisplayed()).toBe(false)
         expect(await next.isEnabled()).toBe(true)
 
         const showPasswordButton = await SignUpPage.showPasswordButton()
-        expect(await showPasswordButton.isEnabled()).toBe(false) 
+        expect(await showPasswordButton.isEnabled()).toBe(true) 
         await showPasswordButton.click()
         expect(await passwordField.getText()).toBe(data.validPassword) 
 
-        await browser.hideKeyboard()
         await next.click()
         const prorileHeader = await SignUpPage.profilePicHeader()
         expect(await prorileHeader.isDisplayed()).toBe(true)
