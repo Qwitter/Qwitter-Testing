@@ -45,7 +45,8 @@ class SignUpPage{
         return await $('~Invalid email format.')
     }
     async dateOfBirthField(){
-        return await $('//android.view.View[@hint="Date of birth"]')
+        const screen = await $$('//android.view.View[@index="0"]')
+        return screen[screen.length - 1]
     }
     async editDateOfBirthButton(){
         return await $('//android.widget.Button[@index="0"]')
@@ -60,7 +61,7 @@ class SignUpPage{
         return await $('//android.widget.EditText[@index="1"]')
     }
     async verificationCodeTitle(){
-        return await $('~We sent you a code')
+        return await $('//android.view.View[@content-desc="We sent you a code"]')
     }
     async verificationCodeField(){
         return await $('//android.widget.EditText[@index="2"]')
@@ -84,11 +85,9 @@ class SignUpPage{
         return await $('//android.widget.Button[@index="0"]')
     }
     async passwordErrorMessageLessChars(){
-        //Password must be at least 8 characters long.
         return await $('~Password must be at least 8 characters long.')
     }
     async passwordErrorMessageLongNums(){
-        //Password must be at least 8 characters long.
         return await $('~Password must contain at least one letter.')
     }
     async profilePicHeader(){
