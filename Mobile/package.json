@@ -12,6 +12,7 @@
   "dependencies": {
     "@wdio/cli": "^8.21.0",
     "@wdio/globals": "^8.22.1",
+    "axios": "^1.6.2",
     "faker": "^6.6.6"
   },
   "devDependencies": {

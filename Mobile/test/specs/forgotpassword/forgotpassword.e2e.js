@@ -4,15 +4,26 @@ const SignUpPage = require('../../page-objects/signup.js')
 const ForgotPasswordPage = require('../../page-objects/forgotpassword.js')
 const data  = require('../../fixtures/forgotpassword-data.json')
 const forgotUtils = require('../../utils/forgotpassword.js')
-const exp = require('constants')
-const { log } = require('console')
+const signUpUtils = require('../../utils/signup.js')
+const emailEnv = require('../../fixtures/email-env.json') 
 
 describe('Forgot password test suite', ()=>{
-    afterEach( async ()=>{
+    let emailToken
+    before( async () => {
+        const creatAccountBtn = await SignUpPage.createAccount()
+        await creatAccountBtn.click()
+        emailToken = await signUpUtils.goToPageOfSignUp(6)
+        data.validEmail = `${emailToken}${emailEnv.emailNameSpace}`
         await commands.restartApp()
     })
+
+    afterEach(async () => {
+        await commands.restartApp()
+    })
+
     beforeEach( async ()=>{
         const pageTitle = await SignUpPage.loginPagetitle()
+        await pageTitle.waitForExist({timeout : 5000})
         expect(await pageTitle.isDisplayed()).toBe(true)
         const signInBtn = await ForgotPasswordPage.signInButton()
         await signInBtn.click()
@@ -44,7 +55,7 @@ describe('Forgot password test suite', ()=>{
         const next = await SignUpPage.nextButton()
         await next.click()
 
-        const verificationCodeHeader = await ForgotPasswordPage.verificationCodeHeader()
+        const verificationCodeHeader = await SignUpPage.verificationCodeTitle()
         expect(await verificationCodeHeader.isDisplayed()).toBe(true)
     })
 
@@ -54,8 +65,13 @@ describe('Forgot password test suite', ()=>{
         const next = await SignUpPage.nextButton()
         await next.click()
 
-        await forgotUtils.enterVerificationCode(data.invalidVerificationCode)
+        const verificationField = await ForgotPasswordPage.verificationCodeField()
+        await verificationField.click()
+        await verificationField.setValue(data.invalidVerificationCode)
+        await browser.hideKeyboard()
         expect(await next.isEnabled()).toBe(false)
+        const errorMessage = await ForgotPasswordPage.verificationCodeErrorMessage()
+        expect(await errorMessage.isDisplayed()).toBe(true)
     })
 
     it('enter valid verification code then proceed', async () => {
@@ -63,16 +79,18 @@ describe('Forgot password test suite', ()=>{
         const next = await SignUpPage.nextButton()
         await next.click()
 
-        await forgotUtils.enterVerificationCode(data.validVerificationCode)
+        await forgotUtils.enterVerificationCode(emailToken)
         expect(await next.isEnabled()).toBe(true)
         await next.click()
 
         const changePasswordHeader = await ForgotPasswordPage.chooseNewPasswordHeader()
         expect(await changePasswordHeader.isDisplayed()).toBe(true)
+        const back = await SignUpPage.backButton()
+        expect(await back.isDisplayed()).toBe(false)
     })
 
     it('enter less than 8 chars password and check visibility of password' , async() => {
-        await forgotUtils.passwordStep(data.validEmail, data.validVerificationCode)
+        await forgotUtils.passwordStep(data.validEmail, emailToken)
 
         const newPassword = await ForgotPasswordPage.newPasswordField()
         await newPassword.click()
@@ -84,8 +102,8 @@ describe('Forgot password test suite', ()=>{
     })
 
     it('enter 8 numbers password', async() => {
-        await forgotUtils.passwordStep(data.validEmail, data.validVerificationCode)
-
+        await forgotUtils.passwordStep(data.validEmail, emailToken)
+        
         const newPassword = await ForgotPasswordPage.newPasswordField()
         await newPassword.click()
         await newPassword.setValue(data.invalidPassword)
@@ -97,7 +115,7 @@ describe('Forgot password test suite', ()=>{
     })
 
     it('enter valid password and different confirm password', async() => {
-        await forgotUtils.passwordStep(data.validEmail, data.validVerificationCode)
+        await forgotUtils.passwordStep(data.validEmail, emailToken)
 
         const newPassword = await ForgotPasswordPage.newPasswordField()
         await newPassword.click()
@@ -106,7 +124,7 @@ describe('Forgot password test suite', ()=>{
 
         const confirmPassword = await ForgotPasswordPage.confirmPasswordField()
         await confirmPassword.click()
-        await confirmPassword.setValue("1")
+        await confirmPassword.setValue("marwanemad9")
         await browser.hideKeyboard()
 
         const errorMessage = await ForgotPasswordPage.passwordsDontMatch()
@@ -116,7 +134,7 @@ describe('Forgot password test suite', ()=>{
     })
 
     it('enter valid password and change it', async() => {
-        await forgotUtils.passwordStep(data.validEmail, data.validVerificationCode)
+        await forgotUtils.passwordStep(data.validEmail, emailToken)
 
         const newPassword = await ForgotPasswordPage.newPasswordField()
         await newPassword.click()
