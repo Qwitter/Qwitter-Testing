@@ -1,5 +1,6 @@
 import AccountSettingsPage from '../../support/page-objects/account-settings'
 import { login } from '../../utils/login'
+import { chooseRandomeUserName } from '../../utils/signup/signup'
 const data = require('../../fixtures/data.json')
 
 describe('Testing username', () => {
@@ -22,8 +23,9 @@ describe('Testing username', () => {
 
     it('enter valid username', () => {
         AccountSettingsPage.userNameSettings.should('be.visible').click()
-        AccountSettingsPage.usernameField.should('be.visible').clear().type(data.accountSettingsPage.validUsername)
-        AccountSettingsPage.usernameField.should('have.value', data.accountSettingsPage.validUsername)
+        let username = `X${new Date().getTime()}`
+        AccountSettingsPage.usernameField.should('be.visible').clear().type(username)
+        AccountSettingsPage.usernameField.should('have.value', username)
         AccountSettingsPage.errorMessage.should('not.exist')
         AccountSettingsPage.save.should('be.visible').click()
     })
@@ -37,21 +39,7 @@ describe('Testing username', () => {
 
     it('choose random suggested username', () => {
         AccountSettingsPage.userNameSettings.should('be.visible').click()
-        const randomIndex = Math.floor(Math.random() * 5)
-        let username
-        AccountSettingsPage.usernameSuggestions.should('have.length', 5)
-        .each(($el, index, $list) => {
-            if(index == randomIndex){
-                cy.wrap($el).should('be.visible').click()
-                cy.wrap($el).invoke('text').then((text) => {
-                    cy.log(text)
-                    username = text.substring(1, text.length-1)
-                }).then(()=>{
-                    cy.log(username)
-                    AccountSettingsPage.usernameField.should('have.value', username)
-                })
-            }
-        })
+        chooseRandomeUserName()
         AccountSettingsPage.errorMessage.should('not.exist')
         AccountSettingsPage.save.should('be.visible').click()
     })
