@@ -7,6 +7,11 @@ class TweetPo {
     get tweetInput() { return cy.get("textarea[data-testid='tweetInput']") }
     get charsleft() { return cy.get("text.CircularProgressbar-text") }
     get postTweet() { return cy.get("button[data-testid='postTweet']") }
+    get emojiButton() { return cy.get("div[data-testid='Emoji']") }
+    get mediaButton() { return cy.get("input[data-testid='uploadImage']")}
+    get replyOptions() { return cy.get("span[data-testid='whoCanReply']")}
+    get replyOptionsPopup() { return cy.get("div[data-testid='whoCanReplyPopup']")}
+    get tweetProfileImg() { return cy.get("img[data-testid='tweetProfileImg']")}
 }
 
 export default new TweetPo()

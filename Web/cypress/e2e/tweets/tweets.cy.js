@@ -1,10 +1,15 @@
+import 'cypress-file-upload'
+
 import { login } from '../../utils'
 import { TweetPo } from '../../support/page-objects'
 import { 
     testCharLimitPopup, 
     testCharLimitTimeline, 
     tweetPlainTextPopup, 
-    tweetPlainTextTimeline 
+    tweetPlainTextTimeline,
+    tweetMediaPopup,
+    tweetMediaTimeline,
+    testReplyOptions
 } from '../../utils'
 
 describe('Tweets', () => {
@@ -50,23 +55,36 @@ describe('Tweets', () => {
         TweetPo.tweetDivText.eq(0).should('contain.text', text)
     })
 
+    // needs revisiting
     it('can post emojis', () => {
-
+        TweetPo.emojiButton.eq(0).should('be.visible')
+        TweetPo.composeTweet.click()
+        TweetPo.emojiButton.eq(1).should('be.visible')
     })
 
     it('can post media', () => {
-
+        const img = 'quexit.png'
+        tweetMediaPopup(img)
+        tweetMediaTimeline(img)
     })
 
     it('can change who can reply to the post', () => {
-
+        TweetPo.composeTweet.click()
+        testReplyOptions()
+        TweetPo.createTweetPopup.click()
+        TweetPo.replyOptions.should('not.exist')
+        TweetPo.tweetInput.eq(0).type('Hello World!')
+        testReplyOptions()
     })
 
     it('can click profile picture and go to profile', () => {
-
-    })
-
-    it('updates timeline with new tweet', () => {
-
+        TweetPo.tweetProfileImg.eq(0).should('be.visible')
+        TweetPo.tweetProfileImg.eq(0).click()
+        TweetPo.composeTweet.click()
+        TweetPo.tweetProfileImg.should('have.length', 2)
+        TweetPo.tweetProfileImg.eq(1).should('be.visible')
+        TweetPo.tweetProfileImg.eq(1).click()
+        TweetPo.createTweetPopup.click()
+        TweetPo.tweetProfileImg.should('have.length', 1)
     })
 })

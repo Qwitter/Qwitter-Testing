@@ -8,6 +8,7 @@ export function tweetPlainTextPopup(text){
     TweetPo.tweetInput.eq(1).type(text)
     TweetPo.postTweet.eq(1).should('be.enabled')
     TweetPo.postTweet.eq(1).click()
+    TweetPo.homeButton.click()
 }
 
 export function tweetPlainTextTimeline(text){
@@ -15,4 +16,5 @@ export function tweetPlainTextTimeline(text){
     TweetPo.tweetInput.eq(0).type(text)
     TweetPo.postTweet.eq(0).should('be.enabled')
     TweetPo.postTweet.eq(0).click()
+    TweetPo.homeButton.click()
 }
