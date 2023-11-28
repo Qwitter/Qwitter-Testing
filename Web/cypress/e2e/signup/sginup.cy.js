@@ -2,7 +2,7 @@ import SignUpPage from '../../support/page-objects/signup'
 import { goToStep } from '../../utils/signup/signup'
 const data = require('../../fixtures/signup-data.json')
 
-describe('Sign up form anther endpoints', () => {
+describe('Sign up form another endpoints', () => {
     beforeEach('open login page', () => {
         cy.clearCookies()
         cy.clearLocalStorage()
