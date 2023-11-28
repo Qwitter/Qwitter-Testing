@@ -74,17 +74,41 @@ class SignUpPage{
     get showPasswordButton(){
         return cy.get('[data-testid="passwordEye"]')
     }
+    get profilePicHeader(){
+        return cy.contains('h2', 'Pick a profile picture')
+    }
     get profilePicField(){
-        return cy.get('')
+        return cy.get('[data-testid="imageBtn"]')
+    }
+    get skipForNowButton(){
+        cy.get('[data-testid="skipForNow"]')
+    }
+    get nextButtonOfProfilePic(){
+        cy.get('[data-testid="skipForNow"]')
+    }
+    get usernameHeader(){
+        return cy.contains('h2', 'What should we call you?')
     }
     get usernameField(){
         return cy.get('[data-testid="username"]')
     }
+    get showMoreUsername(){
+        return cy.contains('button', 'Show more')
+    }
     get usernameSuggestions(){
         return cy.get();
     }
-    get skipForNowButton(){
-        cy.get('[data-testid="skipForNow"]')
+    get nextButtonOfUsername(){
+        return cy.get('button[role="submitButton"]')
+    }
+    get notificationHeader(){
+        return cy.contains('h2', 'Turn on notification')
+    }
+    get allowNotifiacton(){
+        return cy.get()
+    }
+    get skipNotification(){
+        return cy.get()
     }
     get signupLink(){
         return cy.get('[data-testid="signupLink"]')

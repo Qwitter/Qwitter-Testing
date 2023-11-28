@@ -49,7 +49,10 @@ module.exports.goToStep = (step, email = "", enteredEmail = false) =>{
     
     SignUpPage.passwordField.type(data.strongPassword)
     SignUpPage.nextButton.click()
-    if(step == 6) return
+    if(step == 6) return;
+    
+    SignUpPage.skipForNowButton.click()
+    if(step == 7) return;
 }
 
 module.exports.verifyEmail = (email, signUp = true) => {
@@ -85,4 +88,8 @@ module.exports.checkStepOneData = (name, email, date) => {
     SignUpPage.birthYearField.within(()=>{
         cy.get('select').should('have.text', data.validBirthDate.year)
     })
+}
+
+module.exports.createEmail = () => {
+    return `test.${new Date().getTime()}@${Cypress.env("MAILISK_NAMESPACE")}.mailisk.net`
 }
