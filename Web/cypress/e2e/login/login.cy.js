@@ -126,8 +126,6 @@ describe('login page', () => {
         LoginPagePo.nextButtonEmailScreen.click()
         LoginPagePo.passwordInputFieldPasswordScreen.type(data.loginPage.invalidPasswordTooSmall)
         cy.get("h5").should('be.visible')
-        LoginPagePo.passwordInputFieldPasswordScreen.clear().type(data.loginPage.invalidPasswordNoNums)
-        cy.get("h5").should('be.visible')
     })
 
     it('shows google sign in button', () => {

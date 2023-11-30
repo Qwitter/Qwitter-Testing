@@ -6,7 +6,6 @@ describe('Signup test suite for step four', ()=>{
     let cnt = 0;
     let testEmail;
     beforeEach('sign up page - step four', ()=>{
-        // check the current step 2 of 5
         //checkStepNumber(4) // skip for now because of recaptcha
         cy.clearCookies()
         cy.clearLocalStorage()
@@ -16,6 +15,7 @@ describe('Signup test suite for step four', ()=>{
 
         testEmail = createEmail()
         goToStep(4, testEmail, true)
+        cy.wait(3000)
         SignUpPage.verficationCodeField.should('be.visible')
         SignUpPage.nextButton.should('be.visible').should('not.be.enabled')
     })
@@ -25,6 +25,7 @@ describe('Signup test suite for step four', ()=>{
         SignUpPage.verficationCodeField.should('have.value', data.invalidVerificationCode)
 
         SignUpPage.nextButton.click()
+        cy.wait(1000)
         cy.contains('Wrong Token. Please check again')
         .should('be.visible')
     })
@@ -41,10 +42,8 @@ describe('Signup test suite for step four', ()=>{
         SignUpPage.nextButton.should('be.disabled')
     })
 
-    it.skip('try to go back to step three', ()=>{ // doesn't implemented
-        SignUpPage.backButton.should('be.visible')
-        SignUpPage.backButton.click()
-        checkStepNumber(4) // you can't return to test 3
+    it('can not back to step three', ()=>{ 
+        SignUpPage.backButton.should('not.exist')
     })
 
     it('enter valid verification code and proceed', ()=>{

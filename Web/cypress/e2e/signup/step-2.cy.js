@@ -31,7 +31,7 @@ describe('Signup test suite for step two', ()=>{
     })
 
     it('go to step three without approving to X content be tracked and then get back', ()=>{
-        SignUpPage.xContentCheckBox.uncheck().should('not.be.checked')
+        SignUpPage.xContentCheckBox.click().should('not.be.checked')
         SignUpPage.nextButton.click()
         checkStepNumber(3)
 

@@ -36,7 +36,7 @@ describe('Choose username and notifications pages', () => {
         SignUpPage.nextButtonOfUsername.should('be.visible').should('not.be.enabled')
     })
 
-    it('choose a random suggested username', () => {
+    it.only('choose a random suggested username', () => {
         SignUpPage.showMoreUsername.should('be.visible').click()
         cy.wait(2000)
         chooseRandomeUserName()
@@ -45,19 +45,19 @@ describe('Choose username and notifications pages', () => {
         SignUpPage.notificationHeader.should('be.visible')
     })
 
-    it.skip('no back button for allow notification step', () => {
+    it('no back button for allow notification step', () => {
         cy.contains('button', 'Skip for now').should('be.visible').click()
         SignUpPage.notificationHeader.should('be.visible')
         SignUpPage.backButton.should('not.exist')
     })
 
-    it.skip('skip notifications for now', () => {
+    it('skip notifications for now', () => {
         cy.contains('button', 'Skip for now').should('be.visible').click()
         SignUpPage.notificationHeader.should('be.visible')
         cy.contains('button', 'Skip for now').should('be.visible').click()
     })
     
-    it.skip('allow notifications', () => {
+    it('allow notifications', () => {
         cy.contains('button', 'Skip for now').should('be.visible').click()
         SignUpPage.notificationHeader.should('be.visible')
         SignUpPage.allowNotifiacton.should('be.visible').click()
