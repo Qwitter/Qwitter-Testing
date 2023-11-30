@@ -13,6 +13,11 @@
     "newPassword": "8charsormore",
     "invalidPassword": "1"
   },
+  "accountSettingsPage":{
+    "validUsername": "marwanemad",
+    "invalidUsername": "Marwan Emad"
+  }
+  ,
   "name": "Using fixtures to represent data",
   "email": "hello@cypress.io",
   "body": "Fixtures are a great way to mock data for responses to routes"

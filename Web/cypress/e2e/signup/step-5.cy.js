@@ -1,5 +1,5 @@
 import SignUpPage from '../../support/page-objects/signup'
-import {checkStepNumber,  goToStep} from '../../utils/signup/signup'
+import {checkStepNumber,  goToStep, createEmail} from '../../utils/signup/signup'
 const data = require('../../fixtures/signup-data.json')
 
 describe('Signup test suite for step five', ()=>{
@@ -12,7 +12,7 @@ describe('Signup test suite for step five', ()=>{
 
         SignUpPage.signUpPageHeader.should('have.text', 'Create your account')
         cy.url().should('include', 'signup')
-        testEmail = `test${cnt++}.${new Date().getTime()}@${Cypress.env("MAILISK_NAMESPACE")}.mailisk.net`;
+        testEmail = createEmail();
         goToStep(5, testEmail, true)
         // check the current step 5 of 5
         //checkStepNumber(5) skip for now because of recaptch

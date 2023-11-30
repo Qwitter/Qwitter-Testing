@@ -1,5 +1,5 @@
 import SignUpPage from '../../support/page-objects/signup'
-import {checkStepNumber,  goToStep, verifyEmail} from '../../utils/signup/signup'
+import {checkStepNumber,  goToStep, verifyEmail, createEmail} from '../../utils/signup/signup'
 const data = require('../../fixtures/signup-data.json')
 
 describe('Signup test suite for step four', ()=>{
@@ -14,7 +14,7 @@ describe('Signup test suite for step four', ()=>{
         SignUpPage.signUpPageHeader.should('have.text', 'Create your account')
         cy.url().should('include', 'signup')
 
-        testEmail = `test${cnt++}.${new Date().getTime()}@${Cypress.env("MAILISK_NAMESPACE")}.mailisk.net`;
+        testEmail = createEmail()
         goToStep(4, testEmail, true)
         SignUpPage.verficationCodeField.should('be.visible')
         SignUpPage.nextButton.should('be.visible').should('not.be.enabled')
