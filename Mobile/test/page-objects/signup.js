@@ -89,7 +89,7 @@ class SignUpPage{
         return await $('~Password must be at least 8 characters long.')
     }
     async passwordErrorMessageLongNums(){
-        return await $('~Password must contain at least one letter.')
+        return await $('~Password must contain at least one letter and no spaces.')
     }
     async profilePicHeader(){
         return await $('~Pick a profile picture')

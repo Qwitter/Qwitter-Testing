@@ -30,7 +30,7 @@ describe('Sign up test suite - password step', ()=>{
         const passwordField = await SignUpPage.passwordField()
         await passwordField.click()
         await passwordField.setValue(data.invalidPasswordNums)
-
+        await browser.hideKeyboard()
         const errorMessage = await SignUpPage.passwordErrorMessageLessChars()
         expect(await errorMessage.isDisplayed()).toBe(true)
         expect(await next.isEnabled()).toBe(false)
@@ -49,7 +49,7 @@ describe('Sign up test suite - password step', ()=>{
         const passwordField = await SignUpPage.passwordField()
         await passwordField.click()
         await passwordField.setValue(data.invalidLongPassword)
-
+        await browser.hideKeyboard()
         const errorMessage = await SignUpPage.passwordErrorMessageLongNums()
         expect(await errorMessage.isDisplayed()).toBe(true)
         expect(await next.isEnabled()).toBe(false)
