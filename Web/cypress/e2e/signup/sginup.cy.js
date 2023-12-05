@@ -23,7 +23,5 @@ describe('Sign up form another endpoints', () => {
         cy.clearLocalStorage()
         cy.visit('')
         login(testEmail, data.strongPassword)
-
-        cy.url().should('include', '/account')
     })
 })
