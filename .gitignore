@@ -21,3 +21,4 @@ bin
 kill-port.bat
 android
 *.jpg
+config.js
