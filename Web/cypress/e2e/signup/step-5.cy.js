@@ -22,13 +22,12 @@ describe('Signup test suite for step five', ()=>{
     })
     
     it('enter smaller password and check back button', ()=>{
-        //GO to Passord Step (at this time there's no verification code step)
         SignUpPage.passwordField.type(data.invalidPassword)
         cy.contains('Your password needs to be at least 8 characters. Please enter a longer one.')
         .should('be.visible')
         SignUpPage.nextButton.should('be.visible')
         .should('be.disabled')
-        //SignUpPage.backButton.should('not.exist') // skip untill I pass reCAPTCHA
+        //SignUpPage.backButton.should('not.be.visible') // skip untill I pass reCAPTCHA
     })
 
     it('enter weak password only numbers and try to proceed', ()=>{

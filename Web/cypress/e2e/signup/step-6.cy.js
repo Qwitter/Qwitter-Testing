@@ -11,7 +11,7 @@ describe('Upload photo step', () => {
         cy.visit('i/flow/signup')
         testEmail = createEmail()
         goToStep(6, testEmail, true)
-        SignUpPage.backButton.should('not.exist')
+        SignUpPage.backButton.should('not.be.visible')
         SignUpPage.profilePicHeader.should('be.visible')
     })
 

@@ -28,7 +28,7 @@ module.exports.doStepOne = (name, email, date) => {
     SignUpPage.nameField.clear().type(data.name)
     SignUpPage.emailField.clear().type(email)
     module.exports.selecDateOfBirth(data.validBirthDate)
-    cy.wait(500)
+    cy.wait(1000)
     SignUpPage.nextButton.click()
 }
 
