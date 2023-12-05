@@ -15,8 +15,9 @@ describe('Testing username', () => {
 
     it('open change username page', () => {
         AccountSettingsPage.userNameSettings.should('be.visible').click()
+        cy.wait(2000)
         AccountSettingsPage.save.should('be.visible').and('be.disabled')
-        AccountSettingsPage.errorMessage.should('not.be.visible')
+        AccountSettingsPage.errorMessage.should('not.exist')
         AccountSettingsPage.back.should('be.visible').click()
         cy.url().should('include', '/account')
     })
