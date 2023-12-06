@@ -12,10 +12,20 @@ export let options = {
     insecureSkipTLSVerify: true,
     noconnectionReuse: false,
     stages: [
+        { duration: '1m', target: 10 },
+        { duration: '2m', target: 10 },
         { duration: '1m', target: 20 },
+        { duration: '2m', target: 20 },
         { duration: '1m', target: 30 },
-        { duration: '1m', target: 0 },
+        { duration: '2m', target: 30 },
+        { duration: '1m', target: 40 },
+        { duration: '2m', target: 40 },
+        { duration: '5m', target: 0 },
     ],
+    thresholds: {
+        http_req_duration: ['p(95)<5500'],
+        http_req_failed: ['rate<0.31'],
+    },
 };
 
 export default function () {
