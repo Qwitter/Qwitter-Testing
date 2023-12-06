@@ -7,7 +7,7 @@ const { faker, sk, fa } = require('@faker-js/faker')
 
 describe('Sign up test suite - verification code step', ()=>{
     afterEach( async ()=>{
-        await commands.restartApp()
+        await commands.restartApp(true)
     })
     beforeEach( async ()=>{
         const signUpButton = await SignUpPage.createAccount()
@@ -37,7 +37,7 @@ describe('Sign up test suite - verification code step', ()=>{
     it('enter valid username', async() => {
         const usernameField = await SignUpPage.usernameField()
         await usernameField.click()
-        const randomUsername = faker.internet.userName()
+        const randomUsername = `X${new Date().getTime()}`
         await usernameField.setValue(randomUsername)
         
         await browser.hideKeyboard()

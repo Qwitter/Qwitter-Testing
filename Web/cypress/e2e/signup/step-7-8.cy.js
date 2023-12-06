@@ -12,7 +12,9 @@ describe('Choose username and notifications pages', () => {
         cy.visit('i/flow/signup')
         testEmail = createEmail()
         goToStep(7, testEmail, true)
-        //SignUpPage.backButton.should('not.exist')
+        SignUpPage.backButton.within(()=>{
+            cy.get('span').should('be.visible')
+        })
         SignUpPage.usernameHeader.should('be.visible')
     })
 
@@ -37,7 +39,8 @@ describe('Choose username and notifications pages', () => {
     })
 
     it('choose a random suggested username', () => {
-        SignUpPage.showMoreUsername.should('be.visible').click()
+        SignUpPage.showMoreUsername.should('be.visible')
+        SignUpPage.showMoreUsername.trigger('click')
         cy.wait(2000)
         chooseRandomeUserName()
         AccountSettingsPage.errorMessage.should('not.exist')
@@ -45,21 +48,25 @@ describe('Choose username and notifications pages', () => {
         SignUpPage.notificationHeader.should('be.visible')
     })
 
-    it.skip('no back button for allow notification step', () => {
+    it('no back button for allow notification step', () => {
         cy.contains('button', 'Skip for now').should('be.visible').click()
         SignUpPage.notificationHeader.should('be.visible')
-        SignUpPage.backButton.should('not.exist')
+        SignUpPage.backButton.within(()=>{
+            cy.get('span').should('be.visible')
+        })
     })
 
-    it.skip('skip notifications for now', () => {
+    it('skip notifications for now', () => {
         cy.contains('button', 'Skip for now').should('be.visible').click()
         SignUpPage.notificationHeader.should('be.visible')
         cy.contains('button', 'Skip for now').should('be.visible').click()
+        cy.url().should('include', '/home')
     })
     
-    it.skip('allow notifications', () => {
+    it('allow notifications', () => {
         cy.contains('button', 'Skip for now').should('be.visible').click()
         SignUpPage.notificationHeader.should('be.visible')
         SignUpPage.allowNotifiacton.should('be.visible').click()
+        cy.url().should('include', '/home')
     })
 })

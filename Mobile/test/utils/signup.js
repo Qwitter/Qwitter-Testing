@@ -91,7 +91,7 @@ module.exports = {
     },
     getVerificationCode: async (emailToken, isSignUp = true) => {
         try{
-            await new Promise(resolve => setTimeout(resolve, 30000))
+            await new Promise(resolve => setTimeout(resolve, 35000))
             const response = await axios.get(`https://webhook.site/token/${emailToken}/requests`, {
                 headers: {
                     'api-key': emailEnv.api_key,

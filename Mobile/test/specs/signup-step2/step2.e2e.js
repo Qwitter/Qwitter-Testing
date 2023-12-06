@@ -6,7 +6,7 @@ const signUpUtils = require('../../utils/signup.js')
 const { faker, sk, fa } = require('@faker-js/faker')
 const exp = require('constants')
 
-describe('Sign up test suite', ()=>{
+describe('Sign up test suite - user data step', ()=>{
     afterEach( async ()=>{
         await commands.restartApp()
     })

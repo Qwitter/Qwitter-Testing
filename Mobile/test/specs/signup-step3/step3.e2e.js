@@ -16,12 +16,12 @@ describe('Sign up test suite - verification code step', ()=>{
         emailToken = await signUpUtils.goToPageOfSignUp(3)
     })
 
-    it('back button should be unvisible', async() => {
+    it('back button should be visible', async() => {
         const next = await SignUpPage.nextButton()
         expect(next).toBeDisabled()
 
         const back = await SignUpPage.backButton()
-        expect(await back.isDisplayed()).toBe(false)
+        expect(await back.isDisplayed()).toBe(true)
     })
 
     it('enter invalid verification code', async ()=>{

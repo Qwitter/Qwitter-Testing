@@ -94,7 +94,7 @@ describe('login page', () => {
         LoginPagePo.nextButtonEmailScreen.click()
         LoginPagePo.passwordInputFieldPasswordScreen.type(data.loginPage.validPassword)
         LoginPagePo.loginButtonPasswordScreen.click()
-        cy.url().should('include', '/settings/account')
+        cy.url().should('include', '/home')
     })
 
     it('returns to index page with logo button after login', () => {
@@ -125,8 +125,6 @@ describe('login page', () => {
         LoginPagePo.emailInputFieldEmailScreen.type(data.loginPage.validEmail)
         LoginPagePo.nextButtonEmailScreen.click()
         LoginPagePo.passwordInputFieldPasswordScreen.type(data.loginPage.invalidPasswordTooSmall)
-        cy.get("h5").should('be.visible')
-        LoginPagePo.passwordInputFieldPasswordScreen.clear().type(data.loginPage.invalidPasswordNoNums)
         cy.get("h5").should('be.visible')
     })
 

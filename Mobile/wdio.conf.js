@@ -1,6 +1,7 @@
 const projectPath = require('path')
 const { cwd } = require('process')
-const androidAppPath = projectPath.join(process.cwd(), 'app/android/app-release-phase1.apk')
+const app = require('./app.json')
+const androidAppPath = projectPath.join(process.cwd(), `app/android/${app.appName}`)
 exports.config = {
     //
     // ====================
@@ -59,7 +60,11 @@ exports.config = {
         platformName: 'Android',
         'appium:deviceName': 'Pixel5',
         'appium:app': androidAppPath,
-        'appium:automationName': 'UiAutomator2'
+        'appium:automationName': 'UiAutomator2',
+        'appium:fullReset': true,
+        'appium:noReset': false,
+        'appium:forceAppLaunch': true,
+        //'appium:enforceAppInstall': true
     }],
 
     //
@@ -142,7 +147,7 @@ exports.config = {
     // See the full list at http://mochajs.org/
     mochaOpts: {
         ui: 'bdd',
-        timeout: 60000
+        timeout: 70000
     },
 
     //

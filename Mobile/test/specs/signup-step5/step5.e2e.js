@@ -3,22 +3,23 @@ const commands = require('../../../commands.js')
 const SignUpPage = require('../../page-objects/signup.js')
 const data  = require('../../fixtures/signup-data.json')
 const signUpUtils = require('../../utils/signup.js')
-const { faker, sk, fa } = require('@faker-js/faker')
+
 
 describe('Sign up test suite - profile picture step', ()=>{
     afterEach( async ()=>{
-        await commands.restartApp()
+        await commands.restartApp(true)      
     })
     beforeEach( async ()=>{
         const signUpButton = await SignUpPage.createAccount()
         await signUpButton.click()
         await signUpUtils.goToPageOfSignUp(5)
     })
+
     it('check back button in profile pic screen', async() => {
         const back = await SignUpPage.backButton()
-        expect(await back.isDisplayed()).toBe(false)
+        expect(await back.isExisting()).toBe(false)
     })
-
+    
     it('open pick profile photo screen and skip photo', async() => {
         const photoPageHeader = await SignUpPage.profilePicHeader()
         expect(await photoPageHeader.isDisplayed()).toBe(true)

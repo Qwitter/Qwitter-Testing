@@ -81,7 +81,7 @@ class SignUpPage{
         return cy.get('input[name="username"]')
     }
     get showMoreUsername(){
-        return cy.contains('Show more')
+        return cy.get('[data-testid="ShowMore"]')
     }
     get nextButtonOfUsername(){
         return cy.contains('button', 'Next')
@@ -95,12 +95,8 @@ class SignUpPage{
     get signupLink(){
         return cy.get('[data-testid="signupLink"]')
     }
-    //This part shouldn't be here, it's of login
     get sginIn(){
         return cy.contains('button', 'Sign in')
-    }
-    get logIn(){
-        return cy.contains('button', 'Log in')
     }
 }
 

@@ -5,7 +5,7 @@
     "validEmail": "dummy_dummy@gmail.com",
     "validInputDate": "10/14/2001", 
     "validTextDate": "2001-10-14",
-    "invalidVerificationCode": "123457",
+    "invalidVerificationCode": "12345",
     "validVerificationCode": "123456",
     "invalidPasswordNums": "123456",
     "invalidLongPassword":"12313421414",

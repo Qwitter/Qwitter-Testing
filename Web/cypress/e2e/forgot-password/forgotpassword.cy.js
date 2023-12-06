@@ -1,10 +1,21 @@
 import SignUpPage from '../../support/page-objects/signup'
 import ForgotPasswordPage from '../../support/page-objects/forgotpassword'
-import { verifyEmail } from '../../utils/signup/signup'
+import { goToStep, createEmail } from '../../utils/signup/signup'
+import { login } from '../../utils/login'
 import { openPasswordPage } from '../../utils/forgotpassword/forgotpassword'
 const data = require('../../fixtures/forgotpassword-data.json')
 
 describe('Forgot password test suite', () => {
+    let email
+    before('create a new email', () => {
+        email = createEmail()
+        cy.clearCookies()
+        cy.clearLocalStorage()
+        cy.visit('')
+        SignUpPage.createAccount.click()
+        goToStep(7, email, true)
+    })
+
     beforeEach('Open forget password page', () => {
         cy.clearCookies()
         cy.clearLocalStorage()
@@ -72,8 +83,8 @@ describe('Forgot password test suite', () => {
     })
 
     it('enter invalid password and check its password page', ()=>{
-        openPasswordPage()
-        cy.contains('Choose a new password')
+        openPasswordPage(email)
+        cy.contains('Choose a new Password')
         .should('be.visible')
         
         ForgotPasswordPage.newPasswordField.type(data.invalidPassword)
@@ -82,14 +93,15 @@ describe('Forgot password test suite', () => {
         ForgotPasswordPage.changePasswordButton.should('be.disabled')
 
         ForgotPasswordPage.newPasswordField.clear().type(data.weakPassword)
+
         cy.contains('Password must contain at least one letter')
-        .should('have.text', 'Password must contain at least one letter')
+        .should('be.visible')
         .should('be.visible')
         ForgotPasswordPage.changePasswordButton.should('be.disabled')
     })
 
     it('enter different confirm password and check show password', () => {
-        openPasswordPage()
+        openPasswordPage(email)
 
         ForgotPasswordPage.newPasswordField.type(data.strongPassword)
         ForgotPasswordPage.changePasswordButton.should('be.disabled')
@@ -98,39 +110,27 @@ describe('Forgot password test suite', () => {
         cy.contains("Passwords do not match").should('be.visible')
 
         ForgotPasswordPage.newPasswordField.should('have.attr', 'type', 'password')
-        ForgotPasswordPage.passwordEyeButton.eq(0).should('be.visible')
-        ForgotPasswordPage.passwordEyeButton.eq(0).click()
+        ForgotPasswordPage.passwordEyeButton.first().should('be.visible')
+        ForgotPasswordPage.passwordEyeButton.first().click()
         ForgotPasswordPage.newPasswordField.should('have.attr', 'type', 'text')
         ForgotPasswordPage.newPasswordField
         .should('have.value', data.strongPassword)
-
+        
         ForgotPasswordPage.confirmNewPasswordField.should('have.attr', 'type', 'password')
-        ForgotPasswordPage.passwordEyeButton.eq(1).should('be.visible')
-        ForgotPasswordPage.passwordEyeButton.eq(1).click()
+        ForgotPasswordPage.passwordEyeButton.last().should('be.visible')
+        ForgotPasswordPage.passwordEyeButton.last().click()
         ForgotPasswordPage.confirmNewPasswordField.should('have.attr', 'type', 'text')
         ForgotPasswordPage.confirmNewPasswordField
-        .should('have.value', data.strongPassword)
+        .should('have.value', data.weakPassword)
     })
 
-    it('enter valid password and check show password then proceed', () => {
-        openPasswordPage()
-
+    it('enter valid password and check show password then login', () => {
+        openPasswordPage(email)
         ForgotPasswordPage.newPasswordField.type(data.strongPassword)
         ForgotPasswordPage.changePasswordButton.should('be.disabled')
         ForgotPasswordPage.confirmNewPasswordField.type(data.strongPassword)
         ForgotPasswordPage.changePasswordButton.click()
         cy.url().should('include', '/login')
-    })
-
-    it('log in with the new data', () => {``
-        cy.visit('')
-         // here i should use a module of login but the teammate didn't push it yet
-        SignUpPage.sginIn.click()
-        SignUpPage.emailField.type(data.email)
-        SignUpPage.nextButton.click()
-        SignUpPage.passwordField.type(data.strongPassword)
-        SignUpPage.logIn.click()
-
-        cy.url().should('include', '/account')
+        login(email, data.strongPassword)
     })
 })

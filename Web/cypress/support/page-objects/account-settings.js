@@ -21,7 +21,7 @@ class AccountSettingsPage{
         return cy.get('[role="save"]')
     }
     get usernameField(){
-        return cy.get('[role="usernameInput"]')
+        return cy.get('[data-testid="username"]')
     }
     get usernameSuggestions(){
         return cy.get('[data-testid="UsernameSuggestions"] > li')

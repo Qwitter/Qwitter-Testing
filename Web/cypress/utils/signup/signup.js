@@ -21,19 +21,21 @@ module.exports.selecDateOfBirth = (date) => {
 
 module.exports.checkStepNumber = (stepNumber) => {
     SignUpPage.signupStep.should('be.visible')
-    SignUpPage.signupStep.should('have.text', `Step ${stepNumber} of 5 `)
+    SignUpPage.signupStep.should('have.text', `Step ${stepNumber} of 5`)
 }
 
 module.exports.doStepOne = (name, email, date) => {
     SignUpPage.nameField.clear().type(data.name)
     SignUpPage.emailField.clear().type(email)
     module.exports.selecDateOfBirth(data.validBirthDate)
-    SignUpPage.nextButton.click();
+    cy.wait(1000)
+    SignUpPage.nextButton.click()
 }
 
 module.exports.goToStep = (step, email = "", enteredEmail = false) => {
     if (!enteredEmail) email = data.validEmail
     module.exports.doStepOne(data.name, email, data.validBirthDate)
+    cy.wait(500)
     if (step == 2) return;
 
     SignUpPage.nextButton.click()
@@ -41,7 +43,7 @@ module.exports.goToStep = (step, email = "", enteredEmail = false) => {
 
     SignUpPage.signUpButton.click()
     if (step == 4) return;
-
+    cy.wait(3000)
     module.exports.verifyEmail(email).then((code) => {
         SignUpPage.verficationCodeField.type(code)
     })
@@ -81,13 +83,13 @@ module.exports.checkStepOneData = (name, email, date) => {
         .should('have.value', email)
 
     SignUpPage.birthDayField.within(() => {
-        cy.get('select').should('have.text', data.validBirthDate.day)
+        cy.get('select option:selected').should('have.value', data.validBirthDate.day)
     })
     SignUpPage.birthMonthField.within(() => {
-        cy.get('select').should('have.text', data.validBirthDate.month)
+        cy.get('select option:selected').should('have.value', data.validBirthDate.month)
     })
     SignUpPage.birthYearField.within(() => {
-        cy.get('select').should('have.text', data.validBirthDate.year)
+        cy.get('select option:selected').should('have.value', data.validBirthDate.year)
     })
 }
 

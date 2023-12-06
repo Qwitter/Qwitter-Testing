@@ -12,6 +12,7 @@ class LoginPagePo {
     get forgotPasswordButtonPasswordScreen() { return cy.get("span[data-testid='forgotPasswordPassword']") }
     get xButton() { return cy.get("div[data-testid='popupHeaderButton']") }
     get logoButton() { return cy.get("img[data-testid='logo']") }
+    get settingsButton() { return cy.get("div[data-testid='Settings']") }
 }
 
 export default new LoginPagePo()

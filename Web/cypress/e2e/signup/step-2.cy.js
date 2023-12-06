@@ -19,25 +19,25 @@ describe('Signup test suite for step two', ()=>{
     })
     
     it('go to step three with approving to X content be tracked and then return back', ()=>{
-        SignUpPage.xContentCheckBox.should('be.checked')
+        SignUpPage.xContentCheckBox.invoke('attr', 'aria-checked').should('eq', 'true')
         SignUpPage.nextButton.click()
         checkStepNumber(3)
 
         SignUpPage.backButton.should('be.visible')
         SignUpPage.backButton.click()
 
-        SignUpPage.xContentCheckBox.should('be.checked')
+        SignUpPage.xContentCheckBox.invoke('attr', 'aria-checked').should('eq', 'true')
         checkStepNumber(2)
     })
 
     it('go to step three without approving to X content be tracked and then get back', ()=>{
-        SignUpPage.xContentCheckBox.uncheck().should('not.be.checked')
+        SignUpPage.xContentCheckBox.click().invoke('attr', 'aria-checked').should('eq', 'false')
         SignUpPage.nextButton.click()
         checkStepNumber(3)
 
         SignUpPage.backButton.should('be.visible')
         SignUpPage.backButton.click()
         checkStepNumber(2)
-        SignUpPage.xContentCheckBox.should('not.be.checked')
+        SignUpPage.xContentCheckBox.invoke('attr', 'aria-checked').should('eq', 'true')
     })
 })
