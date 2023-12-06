@@ -7,6 +7,7 @@ export function tweetMediaPopup(img) {
     // TweetPo.tweetInput.eq(1).type('Hello World!')
     TweetPo.postTweet.eq(1).should('be.enabled')
     TweetPo.postTweet.eq(1).click()
+    TweetPo.createTweetPopup.click()
     TweetPo.tweetDiv.eq(0).should('be.visible')
     TweetPo.tweetDiv.eq(0).find('> article > div > div > div > img').should('be.visible')
 }

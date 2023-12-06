@@ -14,6 +14,8 @@ module.exports = defineConfig({
       //for generating html reports
       require('cypress-mochawesome-reporter/plugin')(on);
     },
+    viewportWidth: 1920,
+    viewportHeight: 1080,
     video: true,
   },
 });
