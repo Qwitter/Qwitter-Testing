@@ -8,13 +8,14 @@ module.exports = defineConfig({
     MAILISK_NAMESPACE: "v3rzvekshyl8"
   },
   e2e: {
-    baseUrl: 'http://localhost:5173',
+    baseUrl: 'http://192.168.56.1:3000',
     setupNodeEvents(on, config) {
       // implement node event listeners here
       //for generating html reports
       require('cypress-mochawesome-reporter/plugin')(on);
     },
-    baseUrl: "http://localhost:5173/",
-    video: true
+    viewportWidth: 1920,
+    viewportHeight: 1080,
+    video: true,
   },
 });

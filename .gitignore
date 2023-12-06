@@ -20,5 +20,8 @@ reports
 bin
 kill-port.bat
 android
+fixtures
+config.js
+*.jpg
 *.jpg
 config.js

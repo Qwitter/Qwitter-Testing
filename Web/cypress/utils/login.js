@@ -6,5 +6,5 @@ export function login(email, password) {
     LoginPagePo.nextButtonEmailScreen.click()
     LoginPagePo.passwordInputFieldPasswordScreen.type(password)
     LoginPagePo.loginButtonPasswordScreen.click()
-    cy.url().should('include', '/settings/account')
+    cy.url().should('include', '/home')
 }
