@@ -1,4 +1,4 @@
-import { SettingsPagePo, ChangePasswordPo } from "../../support/page-objects";
+import { SettingsPagePo, ChangePasswordPo, LoginPagePo } from "../../support/page-objects";
 import { login } from "../../utils";
 
 describe('change password', () => {
@@ -10,6 +10,7 @@ describe('change password', () => {
 
     beforeEach('login', () => {
         login(data.loginPage.validEmail, data.changePasswordPage.currentPassword)
+        LoginPagePo.settingsButton.click()
         SettingsPagePo.changePasswordLink.click()
     })
 
@@ -19,7 +20,7 @@ describe('change password', () => {
         ChangePasswordPo.confirmPasswordInputField.type(data.changePasswordPage.newPassword)
         ChangePasswordPo.saveButton.click()
         cy.wait(1000)
-        cy.get("li[role='status']").should('not.be.visible')
+        cy.get("li[role='status']").should('not.exist')
     })
 
     it('requires new password', () => {
@@ -38,20 +39,33 @@ describe('change password', () => {
         ChangePasswordPo.currentPasswordInputField.type(data.changePasswordPage.currentPassword)
         ChangePasswordPo.newPasswordInputField.type(data.changePasswordPage.newPassword)
         ChangePasswordPo.confirmPasswordInputField.type(data.changePasswordPage.invalidPassword)
-        ChangePasswordPo.saveButton.should('be.disabled')
+        ChangePasswordPo.saveButton.click()
+        cy.wait(1000)
+        cy.get("li[role='status']").should('not.exist')
     })
 
     it('validates all passwords', () => {
         ChangePasswordPo.currentPasswordInputField.type(data.changePasswordPage.invalidPassword)
         ChangePasswordPo.newPasswordInputField.type(data.changePasswordPage.invalidPassword)
         ChangePasswordPo.confirmPasswordInputField.type(data.changePasswordPage.invalidPassword)
-        ChangePasswordPo.saveButton.should('be.disabled')
+        ChangePasswordPo.saveButton.click()
+        cy.wait(1000)
+        cy.get("li[role='status']").should('not.exist')
     })
 
     it('works with valid passwords', () => {
         ChangePasswordPo.currentPasswordInputField.type(data.changePasswordPage.currentPassword)
         ChangePasswordPo.newPasswordInputField.type(data.changePasswordPage.newPassword)
         ChangePasswordPo.confirmPasswordInputField.type(data.changePasswordPage.newPassword)
+        ChangePasswordPo.saveButton.click()
+        cy.wait(1000)
+        cy.get("li[role='status']").should('be.visible')
+        login(data.loginPage.validEmail, data.changePasswordPage.newPassword)
+        LoginPagePo.settingsButton.click()
+        SettingsPagePo.changePasswordLink.click()
+        ChangePasswordPo.currentPasswordInputField.type(data.changePasswordPage.newPassword)
+        ChangePasswordPo.newPasswordInputField.type(data.changePasswordPage.currentPassword)
+        ChangePasswordPo.confirmPasswordInputField.type(data.changePasswordPage.currentPassword)
         ChangePasswordPo.saveButton.click()
         cy.wait(1000)
         cy.get("li[role='status']").should('be.visible')
@@ -62,10 +76,20 @@ describe('change password', () => {
         ChangePasswordPo.newPasswordInputField.type(data.changePasswordPage.newPassword)
         ChangePasswordPo.confirmPasswordInputField.type(data.changePasswordPage.newPassword)
         ChangePasswordPo.saveButton.click()
-        let temp = data.changePasswordPage.currentPassword
-        data.changePasswordPage.currentPassword = data.changePasswordPage.newPassword
-        data.loginPage.validPassword = data.changePasswordPage.newPassword
-        data.changePasswordPage.newPassword = temp
+        cy.wait(1000)
+        cy.get("li[role='status']").should('be.visible')
+        login(data.loginPage.validEmail, data.changePasswordPage.newPassword)
+        LoginPagePo.settingsButton.click()
+        SettingsPagePo.changePasswordLink.click()
+        ChangePasswordPo.currentPasswordInputField.clear()
+        ChangePasswordPo.newPasswordInputField.clear()
+        ChangePasswordPo.confirmPasswordInputField.clear()
+        ChangePasswordPo.currentPasswordInputField.type(data.changePasswordPage.newPassword)
+        ChangePasswordPo.newPasswordInputField.type(data.changePasswordPage.currentPassword)
+        ChangePasswordPo.confirmPasswordInputField.type(data.changePasswordPage.currentPassword)
+        ChangePasswordPo.saveButton.click()
+        cy.wait(1000)
+        cy.get("li[role='status']").should('be.visible')
         login(data.loginPage.validEmail, data.changePasswordPage.currentPassword)
     })
 })
