@@ -8,9 +8,6 @@ class SignUpPage{
     get signUpWithGoogle(){
         return cy.get('[data-testid="google-signup"]')
     }
-    get signUpWithApple(){
-        return cy.contains('button', 'Sign up with Apple')
-    }
     get createAccount(){
         return cy.contains('button', 'Create account')
     }
@@ -31,9 +28,6 @@ class SignUpPage{
     }
     get dateOfBirthAssertion(){
         return cy.get('[data-testid="dateOfBirthAssert"]')
-    }
-    get nameErrorMessage(){
-        return cy.get('')
     }
     get emailErrorMessage(){
         return cy.get('h5[class="text-danger text-[15px] pb-3 px-2"]')
@@ -74,17 +68,29 @@ class SignUpPage{
     get showPasswordButton(){
         return cy.get('[data-testid="passwordEye"]')
     }
+    get profilePicHeader(){
+        return cy.contains('h2', 'Pick a profile picture')
+    }
     get profilePicField(){
-        return cy.get('')
+        return cy.get('[data-testid="imageBtn"]')
+    }
+    get usernameHeader(){
+        return cy.contains('h2', 'What should we call you?')
     }
     get usernameField(){
-        return cy.get('[data-testid="username"]')
+        return cy.get('input[name="username"]')
     }
-    get usernameSuggestions(){
-        return cy.get();
+    get showMoreUsername(){
+        return cy.contains('Show more')
     }
-    get skipForNowButton(){
-        cy.get('[data-testid="skipForNow"]')
+    get nextButtonOfUsername(){
+        return cy.contains('button', 'Next')
+    }
+    get notificationHeader(){
+        return cy.contains('h2', 'Turn on notifications')
+    }
+    get allowNotifiacton(){
+        return cy.contains('button', 'Allow notifications')
     }
     get signupLink(){
         return cy.get('[data-testid="signupLink"]')
