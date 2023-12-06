@@ -23,3 +23,5 @@ android
 fixtures
 config.js
 *.jpg
+*.jpg
+config.js
