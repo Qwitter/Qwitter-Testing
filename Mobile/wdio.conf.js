@@ -1,6 +1,7 @@
 const projectPath = require('path')
 const { cwd } = require('process')
-const androidAppPath = projectPath.join(process.cwd(), 'app/android/app-release.apk')
+const app = require('./app.json')
+const androidAppPath = projectPath.join(process.cwd(), `app/android/${app.appName}`)
 exports.config = {
     //
     // ====================
@@ -59,7 +60,11 @@ exports.config = {
         platformName: 'Android',
         'appium:deviceName': 'Pixel5',
         'appium:app': androidAppPath,
-        'appium:automationName': 'UiAutomator2'
+        'appium:automationName': 'UiAutomator2',
+        'appium:fullReset': true,
+        'appium:noReset': false,
+        'appium:forceAppLaunch': true,
+        //'appium:enforceAppInstall': true
     }],
 
     //
@@ -132,13 +137,17 @@ exports.config = {
     // Test reporter for stdout.
     // The only one supported by default is 'dot'
     // see also: https://webdriver.io/docs/dot-reporter
-    reporters: ['spec'],
+    reporters: ['spec',['allure', {
+        outputDir: 'allure-results',
+        disableWebdriverStepsReporting: true,
+        disableWebdriverScreenshotsReporting: true,
+    }]],
 
     // Options to be passed to Mocha.
     // See the full list at http://mochajs.org/
     mochaOpts: {
         ui: 'bdd',
-        timeout: 60000
+        timeout: 70000
     },
 
     //

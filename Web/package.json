@@ -12,6 +12,7 @@
     "cypress": "^13.4.0",
     "cypress-file-upload": "^5.0.8",
     "cypress-iframe": "^1.0.1",
+    "cypress-mailisk": "^1.0.7",
     "cypress-mochawesome-reporter": "^3.6.1"
   }
 }
