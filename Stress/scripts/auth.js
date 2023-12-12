@@ -1,12 +1,12 @@
 import http from 'k6/http';
-import { check } from 'k6';
+import { check, sleep } from 'k6';
 import { config } from '../config.js';
 
 const baseUrl = config.authentication.baseUrl;
-const authToken = config.authentication.authToken;
-const email = config.authentication.email;
-const password = config.authentication.password;
-const username = config.authentication.username;
+const authToken = config.authToken;
+const email = config.email;
+const password = config.password;
+const username = config.username;
 
 export let options = {
     insecureSkipTLSVerify: true,
@@ -61,20 +61,6 @@ export default function () {
                 password: password,
             }
         },
-        // {
-        //     method: 'POST',
-        //     url: `${baseUrl}/send-verification-email`,
-        //     body: {
-        //         email: email,
-        //     }
-        // },
-        // {
-        //     method: 'POST',
-        //     url: `${baseUrl}/forgot-password`,
-        //     body: {
-        //         email: email,
-        //     }
-        // },
         {
             method: 'POST',
             url: `${baseUrl}/change-password`,
@@ -129,6 +115,7 @@ export default function () {
     const responses = http.batch([
         ...requests
     ]);
+    sleep(1);
     check(responses[0], {
         'is status 200': (res) => res.status === 200,
     });
