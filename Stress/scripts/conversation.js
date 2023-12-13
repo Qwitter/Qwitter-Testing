@@ -5,7 +5,10 @@ import { config } from '../config.js';
 const username = config.username;
 const otherUsername = config.conversation.otherUsername;
 const anotherUsername = config.conversation.anotherUsername;
+const engUsername = config.conversation.engUsername;
+const testerUsername = config.conversation.testerUsername;
 const baseUrl = config.conversation.baseUrl;
+const conversationId = config.conversation.conversationId;
 const authToken = config.authToken;
 
 export let options = {
@@ -32,7 +35,7 @@ export default function () {
     const params = {
         headers: {
             'Authorization': `Bearer ${authToken}`,
-        }
+        },
     };
     const requests = [
         {
@@ -44,9 +47,52 @@ export default function () {
                     anotherUsername,
                     otherUsername,
                 ]
+            },
+        },
+        {
+            method: 'GET',
+            url: `${baseUrl}`,
+        },
+        {
+            method: 'POST',
+            url: `${baseUrl}/${conversationId}/user`,
+            body: {
+                users: [
+                    engUsername,
+                    testerUsername,
+                ]
+            },
+        },
+        {
+            method: 'GET',
+            url: `${baseUrl}/${conversationId}/user/?q=${testerUsername}`,
+        },
+        {
+            method: 'GET',
+            url: `${baseUrl}/user/?q=${testerUsername}`,
+        },
+        {
+            method: 'GET',
+            url: `${baseUrl}/${conversationId}`,
+        },
+        {
+            method: 'GET',
+            url: `${baseUrl}/search?q=test`,
+        },
+        {
+            method: 'PUT',
+            url: `${baseUrl}/${conversationId}`,
+            body: {
+                name: 'put test conversation',
             }
         },
-        // GET /conversation goes here
+        {
+            method: 'POST',
+            url: `${baseUrl}/${conversationId}/message`,
+            body: {
+                text: 'test message',
+            }
+        }
     ];
     for (let req of requests) {
         let res = http.request(req.method, req.url, req.body, params);
