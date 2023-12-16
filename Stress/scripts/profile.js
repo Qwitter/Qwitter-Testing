@@ -3,6 +3,7 @@ import { check, sleep } from 'k6';
 import { config } from '../config.js';
 
 const username = config.username;
+const name = config.profile.name;
 const otherUsername = config.conversation.otherUsername;
 const anotherUsername = config.conversation.anotherUsername;
 const engUsername = config.conversation.engUsername;
@@ -34,8 +35,31 @@ export let options = {
 export default function () {
     const requests = [
         {
-
+            method: 'GET',
+            url: `${baseUrl}`,
         },
+        // {
+        //     method: 'POST',
+        //     url: `${baseUrl}/profile_picture`,
+        // },
+        {
+            method: 'PUT',
+            url: `${baseUrl}/profile`,
+            body: {
+                name: name,
+                description: '',
+                Location: '',
+                url: '',
+                birth_date: '2000-03-09T22:18:26.625Z',
+            },
+        },
+        {
+            method: 'PATCH',
+            url: `${baseUrl}/username`,
+            body: {
+                userName: username,
+            },
+        }
     ];
     requests.forEach((request) => {
         const res = http.request(request.method, request.url, request.body, params);
