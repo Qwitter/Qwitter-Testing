@@ -2,11 +2,12 @@ import http from 'k6/http';
 import { check, sleep } from 'k6';
 import { config } from '../config.js';
 
+const username = config.username;
 const otherUsername = config.conversation.otherUsername;
 const anotherUsername = config.conversation.anotherUsername;
 const engUsername = config.conversation.engUsername;
 const testerUsername = config.conversation.testerUsername;
-const baseUrl = config.conversation.baseUrl;
+const baseUrl = config.trends.baseUrl;
 const conversationId = config.conversation.conversationId;
 const params = config.params;
 
@@ -33,61 +34,10 @@ export let options = {
 export default function () {
     const requests = [
         {
-            method: 'POST',
-            url: `${baseUrl}`,
-            body: {
-                conversation_name: 'test conversation',
-                users: [
-                    anotherUsername,
-                    otherUsername,
-                ]
-            },
-        },
-        {
             method: 'GET',
             url: `${baseUrl}`,
         },
-        {
-            method: 'POST',
-            url: `${baseUrl}/${conversationId}/user`,
-            body: {
-                users: [
-                    engUsername,
-                    testerUsername,
-                ]
-            },
-        },
-        {
-            method: 'GET',
-            url: `${baseUrl}/${conversationId}/user/?q=${testerUsername}`,
-        },
-        {
-            method: 'GET',
-            url: `${baseUrl}/user/?q=${testerUsername}`,
-        },
-        {
-            method: 'GET',
-            url: `${baseUrl}/${conversationId}`,
-        },
-        {
-            method: 'GET',
-            url: `${baseUrl}/search?q=test`,
-        },
-        {
-            method: 'PUT',
-            url: `${baseUrl}/${conversationId}`,
-            body: {
-                name: 'put test conversation',
-            }
-        },
-        {
-            method: 'POST',
-            url: `${baseUrl}/${conversationId}/message`,
-            body: {
-                text: 'test message',
-            }
-        }
-    ];
+    ];  
     requests.forEach((request) => {
         const res = http.request(request.method, request.url, request.body, params);
         sleep(1);
@@ -99,7 +49,7 @@ export default function () {
 }
 
 export function handleSummary(data) {
-    console.log("Preparing the end-of-test summary...   ");
+    console.log('Preparing the end-of-test summary...');
     return {
         'summary.json': JSON.stringify(data),
     }

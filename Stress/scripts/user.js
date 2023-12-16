@@ -3,9 +3,9 @@ import { check, sleep } from "k6";
 import { config } from "../config.js";
 
 const baseUrl = config.user.baseUrl;
-const authToken = config.authToken;
 const username = config.username;
 const followUsername = config.user.followUsername;
+const params = config.params;
 
 export let options = {
     insecureSkipTLSVerify: true,
@@ -28,11 +28,6 @@ export let options = {
 };
 
 export default function () {
-    const params = {
-        headers: {
-            'Authorization': `Bearer ${authToken}`,
-        }
-    };
     const requests = [
         {
             method: 'GET',
@@ -83,14 +78,14 @@ export default function () {
             url: `${baseUrl}/${username}`,
         }
     ];
-    for (let req of requests) {
-        let res = http.request(req.method, req.url, req.body, params);
+    requests.forEach((request) => {
+        const res = http.request(request.method, request.url, request.body, params);
+        sleep(1);
         console.log(res.body);
         check(res, {
-            "is status code 200": (r) => r.status === 200,
+            "is status code 200: ": (r) => r.status === 200
         });
-        sleep(1);
-    }
+    });
 }
 
 export function handleSummary(data) {
