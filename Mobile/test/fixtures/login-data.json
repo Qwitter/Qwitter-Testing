@@ -4,5 +4,9 @@
     "invalidEmail": "invalid@invalid.com",
     "invalidPassword": "invalidpassword",
     "validUsername": "ahmed09c8a8",
-    "invalidUsername": "ahmedradalla2001"
+    "invalidUsername": "ahmedradalla2001",
+    "user":{
+        "email": "marwanemad910@gmail.com",
+        "password": "MarwanEmad1"
+    }
 }
