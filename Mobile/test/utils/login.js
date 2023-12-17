@@ -10,13 +10,13 @@ module.exports = {
         await emailField.setValue(email)
         const next = await LoginPagePo.nextButton()
         await next.click()
-        await browser.pause(2000)
+        await browser.pause(5000)
         const passwordField = await LoginPagePo.passwordField()
         await passwordField.click()
         await passwordField.setValue(password)
         await browser.hideKeyboard()
         const login = await LoginPagePo.loginButton()
         await login.click()
-        await browser.pause(8000)
+        await browser.pause(5000)
     }
 }

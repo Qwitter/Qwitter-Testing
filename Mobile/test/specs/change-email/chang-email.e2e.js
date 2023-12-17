@@ -15,27 +15,28 @@ const loginUtils = require('../../utils/login.js')
 */
 describe('Forgot password test suite', ()=>{
     let emailToken, currentEmail, newToken ,newEmail
-    /* before( async () => {
+    before( async () => {
         const creatAccountBtn = await SignUpPage.createAccount()
         await creatAccountBtn.click()
         emailToken = await signUpUtils.goToPageOfSignUp(6)
         currentEmail = `${emailToken}${emailEnv.emailNameSpace}`
         await commands.restartApp()
+        await browser.pause(1000) // wait to ensure the the new token diff
         newToken = await signUpUtils.createEmailToken()
         newEmail = `${newToken}${emailEnv.emailNameSpace}`
     })
 
     afterEach(async () => {
         await commands.restartApp()
-    }) */
+    })
 
     beforeEach( async ()=>{
         // open email settings
-        //await loginUtils.login('marwanemad910@gmail.com', 'MarwanEmad1')
         await accountSettingsUtils.openAccountSetting()
         const emailSettings = await AccountSettingPage.changeEmail()
         expect(emailSettings).toExist()
         await emailSettings.click()
+        await browser.pause(1000);
     })
 
     it('Enter existing email', async () => {
@@ -45,13 +46,14 @@ describe('Forgot password test suite', ()=>{
     })
 
     it('Enter invalid email', async () => {
-        await accountSettingsUtils.enterEmail(data.user.email)
+        await accountSettingsUtils.enterEmail('3omda@gmail.')
         const emailTitle = await AccountSettingPage.chnagEmailTitle()
         expect(await emailTitle.isExisting()).toBe(true)
     })
 
     it('Enter valid email then proceed', async () => {
         await accountSettingsUtils.enterEmail(newEmail)
+        await browser.pause(1000);
         const verificationCodeTitle = await AccountSettingPage.verificationCodeTitle()
         expect(await verificationCodeTitle.isDisplayed()).toBe(true)
     })
@@ -67,9 +69,8 @@ describe('Forgot password test suite', ()=>{
         await accountSettingsUtils.enterEmail(newEmail)
         const code = await signUpUtils.getVerificationCode(newToken, true) 
         await accountSettingsUtils.enterVerificationCode(code)
-        expect(await verificationCodeTitle.isDisplayed()).toBe(true)
         await browser.pause(1000)
-        await AccountSettingPage.openAccountSetting()
+        await accountSettingsUtils.openAccountSetting()
         const logout = await AccountSettingPage.logout()
         expect(logout).toBeDisplayed()
         await logout.click()

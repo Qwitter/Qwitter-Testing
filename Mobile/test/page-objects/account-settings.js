@@ -1,6 +1,6 @@
 class AccountSettingPage{
     async navigationSideBar(){
-        return await $('//android.widget.ImageView')
+        return await $('//android.widget.Button[@index="0"]')
     }
     async settingsButton(){
         return await $('~Settings & Privacy')
@@ -12,10 +12,12 @@ class AccountSettingPage{
         return await $('//android.view.View[@index="2"]')
     }
     async changeEmail(){
-        return await $('~Email Address')
+        const elements = await $$('//android.view.View[@index="1"]')
+        return elements[2]
     }
     async changeUsername(){
-        return await $('//android.view.View[@index="0"]')
+        const elements = await $$('//android.view.View[@index="0"]')
+        return elements[5]
     }
     async emailField(){
         return await $('//android.widget.EditText[@index="3"]')

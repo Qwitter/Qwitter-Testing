@@ -5,7 +5,7 @@ module.exports = {
     enterEmail: async function (email){
         const emailField = await AccountSettingPage.emailField()
         await emailField.click()
-        await emailField.setValue(data.validEmail)
+        await emailField.setValue(email)
         await browser.hideKeyboard()
         const next = await AccountSettingPage.nextButton()
         await next.click()
@@ -21,7 +21,7 @@ module.exports = {
     openAccountSetting: async function(){
         const navbar = await AccountSettingPage.navigationSideBar()
         await navbar.waitForDisplayed()
-        await navbar.click({button: 'left', x:2, y:2})
+        await navbar.click()
         await $('android=new UiScrollable(new UiSelector().scrollable(true)).scrollToEnd(1, 5)')
         await browser.pause(1000)
         const settings = await AccountSettingPage.settingsButton()
