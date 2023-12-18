@@ -22,6 +22,22 @@
     "password": "MarwanEmad1"
   }
   ,
+  "editProfile":{
+    "oldName": "Marwan Emad",
+    "newName": "it's a name",
+    "oldBio": "Bioooooooooo",
+    "newBio": "it's a bio",
+    "oldBirthData":{
+      "day": "14",
+      "month": "October",
+      "year": "2000"
+    },
+    "newBirthData":{
+      "day": "14",
+      "month": "July",
+      "year": "2000"
+    }
+  },
   "name": "Using fixtures to represent data",
   "email": "hello@cypress.io",
   "body": "Fixtures are a great way to mock data for responses to routes"
