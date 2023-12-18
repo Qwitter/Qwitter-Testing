@@ -4,12 +4,7 @@ import { config } from '../config.js';
 
 const username = config.username;
 const name = config.profile.name;
-const otherUsername = config.conversation.otherUsername;
-const anotherUsername = config.conversation.anotherUsername;
-const engUsername = config.conversation.engUsername;
-const testerUsername = config.conversation.testerUsername;
 const baseUrl = config.profile.baseUrl;
-const conversationId = config.conversation.conversationId;
 const params = config.params;
 
 export let options = {
@@ -38,10 +33,6 @@ export default function () {
             method: 'GET',
             url: `${baseUrl}`,
         },
-        // {
-        //     method: 'POST',
-        //     url: `${baseUrl}/profile_picture`,
-        // },
         {
             method: 'PUT',
             url: `${baseUrl}/profile`,

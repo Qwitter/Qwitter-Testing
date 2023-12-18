@@ -3,14 +3,8 @@ import { check, sleep } from 'k6';
 import { config } from '../config.js';
 
 const username = config.username;
-const otherUsername = config.conversation.otherUsername;
-const anotherUsername = config.conversation.anotherUsername;
-const engUsername = config.conversation.engUsername;
-const testerUsername = config.conversation.testerUsername;
 const baseUrl = config.tweets.baseUrl;
-const conversationId = config.conversation.conversationId;
 const params = config.params;
-const userId = config.userId;
 const tweetId = config.tweets.tweetId;
 
 export let options = {

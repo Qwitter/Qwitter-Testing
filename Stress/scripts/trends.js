@@ -2,13 +2,7 @@ import http from 'k6/http';
 import { check, sleep } from 'k6';
 import { config } from '../config.js';
 
-const username = config.username;
-const otherUsername = config.conversation.otherUsername;
-const anotherUsername = config.conversation.anotherUsername;
-const engUsername = config.conversation.engUsername;
-const testerUsername = config.conversation.testerUsername;
 const baseUrl = config.trends.baseUrl;
-const conversationId = config.conversation.conversationId;
 const params = config.params;
 
 export let options = {
