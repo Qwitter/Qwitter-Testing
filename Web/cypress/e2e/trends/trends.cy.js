@@ -3,7 +3,7 @@ import { login } from '../../utils/login'
 import TrendsPage from '../../support/page-objects/trends'
 
 describe('Dealing with existing tweets', () => {
-    const exploreRoute = '/explore'
+    const exploreRoute = '/Explore'
 
     beforeEach('login and open home page', () => {
         cy.clearCookies()
