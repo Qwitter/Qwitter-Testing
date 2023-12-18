@@ -37,8 +37,11 @@ class AccountSettingPage{
     async confirmPasswordField(){
         return await $('//android.widget.EditText[@index="2"]')
     }
-    async changePassword(){
+    async updatePassword(){
         return await $('~Update password')
+    }
+    async confirmPasswordErrorMessage(){
+        return await $('~Passwords do not match.')
     }
     async chnagEmailTitle(){
         return await $('~Change email')

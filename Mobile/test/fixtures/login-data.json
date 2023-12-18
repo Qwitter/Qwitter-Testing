@@ -8,5 +8,12 @@
     "user":{
         "email": "marwanemad910@gmail.com",
         "password": "MarwanEmad1"
+    },
+    "changePasswordPage": {
+        "email": "exscorpion1@gmail.com",
+        "currentPassword": "8charslong",
+        "newPassword": "8charsormore",
+        "invalidPassword": "1"
     }
+
 }

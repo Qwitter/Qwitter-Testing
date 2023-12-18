@@ -18,7 +18,7 @@ module.exports = {
         const next = await AccountSettingPage.nextButton()
         await next.click()
     },
-    openAccountSetting: async function(){
+    openSettings: async function(){
         const navbar = await AccountSettingPage.navigationSideBar()
         await navbar.waitForDisplayed()
         await navbar.click()
@@ -31,8 +31,16 @@ module.exports = {
         await browser.pause(1000)
         const settingsAndPrivacy = await AccountSettingPage.settingsAndPrivacy()
         await settingsAndPrivacy.click()
+    },
+    openAccountSetting: async function(){
+        await this.openSettings()
         const accountInformation = await AccountSettingPage.accountInformation()
-        expect(await accountInformation.isExisting()).toBe(true)
         await accountInformation.click()
+    },
+    openChangePassword: async function(){
+        await this.openSettings()
+        const changePassword = await AccountSettingPage.changePassword()
+        await changePassword.click()
     }
+
 }
