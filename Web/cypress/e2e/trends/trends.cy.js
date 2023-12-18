@@ -1,6 +1,7 @@
 import data from '../../fixtures/data.json'
 import { login } from '../../utils/login'
 import TrendsPage from '../../support/page-objects/trends'
+import ExistingTweets from '../../support/page-objects/existing-tweets'
 
 describe('Dealing with existing tweets', () => {
     const exploreRoute = '/Explore'
@@ -12,13 +13,23 @@ describe('Dealing with existing tweets', () => {
         cy.wait(1000)
     })
 
-    it('navigate to explore', () => {
+    it('Trend list should be visible', () => {
         TrendsPage.explore.should('be.visible').click()
         TrendsPage.trendList.each(($trend) => {
             cy.wrap($trend).scrollIntoView().should('be.visible')
         })
-        TrendsPage.trendList.first().scrollIntoView().click()
-        // TODO: loop over the tweets, they should have the trend keyword
+        
+    })
+
+    it('trends posts must include trend keyword', () => {
+        TrendsPage.explore.should('be.visible').click()
+        TrendsPage.trendName.first().scrollIntoView().invoke('text').then((trend) => {
+            TrendsPage.trendList.first().click().then(() => {
+                ExistingTweets.tweets.each(($div) => {
+                    cy.wrap($div).find('article').find('p').invoke('text').should('include', trend)
+                })
+            })
+        })
     })
 
     it('show more trends navigates to explore', () => {
@@ -28,7 +39,7 @@ describe('Dealing with existing tweets', () => {
 
     it('trends sidebar', () => {
         TrendsPage.trendList.first().should('be.visible').click()
-        // TODO: loop over the tweets, they should have the trend keyword
+        cy.url().should('include', exploreRoute)
     })
     
 })
