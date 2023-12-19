@@ -3,6 +3,15 @@ class ProfilePage{
         // this for photo and banner (access them using first() and last())
         return cy.get('[data-testid="imageBtn"]')
     }
+    get bannerImage(){
+        return cy.get('[alt="user banner image"]')
+    }
+    get profileImage(){
+        return cy.get('[alt="user profile image"]')
+    }
+    get removeBanner(){
+        return cy.get('[data-testid="removePic"]')
+    }
     get profilePage(){
         return cy.get('[data-testid="Profile"]')
     }

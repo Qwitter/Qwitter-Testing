@@ -5,7 +5,6 @@ const data = require('../../fixtures/signup-data.json')
 module.exports.selecDateOfBirth = (date) => {
     SignUpPage.birthDayField.should('be.visible')
     SignUpPage.birthDayField.within(() => {
-        cy.scrollTo('bottom')
         cy.get('select').select(date.day, { force: true })
     })
 

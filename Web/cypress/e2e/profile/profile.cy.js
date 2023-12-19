@@ -2,12 +2,16 @@ import data from '../../fixtures/data.json'
 import { login } from '../../utils/login'
 import ProfilePage from '../../support/page-objects/profile'
 import { selecDateOfBirth, checkBirhDateData } from '../../utils/signup/signup'
+import "cypress-file-upload"
 
-describe('Dealing with existing tweets', () => {
+describe('Profile page test suite', () => {
     const homeUrl = '/home'
     const repliesUrl = '/with_replies'
     const mediaUrl = '/media'
     const likesUrl = '/likes'
+    const profilePic = 'El3nab.jpg'
+    const bannerPic = 'quexit.png'
+
     beforeEach('open profile page', () => {
         cy.clearCookies()
         cy.clearLocalStorage()
@@ -71,6 +75,7 @@ describe('Dealing with existing tweets', () => {
         let year = data.editProfile.newBirthData.year
         let date = `${month} ${day}, ${year}`
         ProfilePage.dayField.scrollIntoView()
+        
         selecDateOfBirth(data.editProfile.newBirthData)
         ProfilePage.saveEdit.click()
         ProfilePage.birthDate.invoke('text').should('include', date)
@@ -82,6 +87,27 @@ describe('Dealing with existing tweets', () => {
         year = data.editProfile.oldBirthData.year
         date = `${month} ${day}, ${year}`
         selecDateOfBirth(data.editProfile.oldBirthData)
+    })
+
+    it('edit profile pic', () => {
+        ProfilePage.editProfile.click()
+        ProfilePage.cover.last().attachFile(profilePic)
+        cy.wait(500)
+        ProfilePage.saveEdit.click()
+    })
+
+    it('edit banner pic', () => {
+        ProfilePage.editProfile.click()
+        ProfilePage.cover.first().attachFile(bannerPic)
+        cy.wait(500)
+        ProfilePage.saveEdit.click()
+    })
+
+    it('remove banner', () => {
+        ProfilePage.editProfile.click()
+        ProfilePage.removeBanner.should('be.visible').click()
+        cy.wait(500)
+        ProfilePage.saveEdit.click()
     })
 
     it('open replies tab', () => {
