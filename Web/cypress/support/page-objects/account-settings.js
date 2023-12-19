@@ -29,6 +29,39 @@ class AccountSettingsPage{
     get errorMessage(){
         return cy.get('[data-testid="ErrorMessage"]')
     }
+    get updateEmailButton(){
+        return cy.contains('Update email address')
+    }
+    get passwordField(){
+        return cy.get('#Password')
+    }
+    get emailField(){
+        return cy.get('#email')
+    }
+    get verificationCodeField(){
+        return cy.get('#token')
+    }
+    get changeEmailHeader(){
+        return cy.contains('Change email')
+    }
+    get verificationCodeHeader(){
+        return cy.contains('We sent you a code')
+    }
+    get wrongPasswordMessage(){
+        return cy.contains('Wrong password!')
+    }
+    get next(){
+        return cy.contains('button' ,'Next')
+    }
+    get cancel(){
+        return cy.contains('button', 'Cancel')
+    }
+    get currentEmailScreen(){
+        return cy.get('#email')
+    }
+    get emailErrorMessage(){
+        return cy.get('[data-testid="ErrorMessage"]')
+    }
 }
 
 export default new AccountSettingsPage();
