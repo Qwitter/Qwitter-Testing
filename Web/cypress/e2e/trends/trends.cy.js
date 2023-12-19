@@ -3,7 +3,7 @@ import { login } from '../../utils/login'
 import TrendsPage from '../../support/page-objects/trends'
 import ExistingTweets from '../../support/page-objects/existing-tweets'
 
-describe('Dealing with existing tweets', () => {
+describe('Trends test suite', () => {
     const exploreRoute = '/Explore'
 
     beforeEach('login and open home page', () => {
