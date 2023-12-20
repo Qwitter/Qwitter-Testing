@@ -24,4 +24,5 @@ fixtures
 config.js
 *.jpg
 *.jpg
+*.jpeg
 config.js
