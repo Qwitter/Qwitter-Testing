@@ -1,13 +1,13 @@
 import 'cypress-file-upload'
 
-import { login } from "../../utils"
-import { MessagesPo } from "../../support/page-objects"
 import { 
+    login,
     createNewConvo, 
     checkConvos, 
     replyToFirstMessage, 
     deleteFirstConvo,
-    deleteMessage
+    deleteMessage,
+    sendMedia
 } from "../../utils"
 
 Cypress.on('uncaught:exception', (err, runnable) => {
@@ -29,7 +29,6 @@ describe('messages test suite', () => {
     })
 
     afterEach('delete first convo', () => {
-        // cy.wait(6000)
         cy.reload()
         cy.wait(6000)
         deleteFirstConvo()
@@ -50,16 +49,7 @@ describe('messages test suite', () => {
     it('sends a message with media', () => {
         createNewConvo(data.messages.mediaUser, data.messages.message)
         cy.reload()
-        const uploadMedia = MessagesPo.uploadMedia
-        uploadMedia.should('be.hidden')
-        uploadMedia.attachFile(data.messages.media)
-        cy.wait(1000)
-        const sendButton = MessagesPo.sendButton
-        sendButton.should('be.visible')
-        sendButton.click()
-        cy.reload()
-        const messageMedia = MessagesPo.messageMedia
-        messageMedia.find(">img").should('be.visible')
+        sendMedia(data.messages.media)
     })
 
     it('replies to a message', () => {
