@@ -6,7 +6,8 @@ import {
     createNewConvo, 
     checkConvos, 
     replyToFirstMessage, 
-    deleteFirstConvo 
+    deleteFirstConvo,
+    deleteMessage
 } from "../../utils"
 
 Cypress.on('uncaught:exception', (err, runnable) => {
@@ -69,20 +70,6 @@ describe('messages test suite', () => {
 
     it('deletes a message', () => {
         createNewConvo(data.messages.searchUser, data.messages.messageToBeDeleted)
-        // cy.reload()
-        const moreButton = MessagesPo.moreButton.eq(0)
-        moreButton.should('not.be.visible')
-        const textMessage = MessagesPo.textMessage.eq(0)
-        textMessage.should('be.visible')
-        textMessage.trigger('mouseover')
-        moreButton.find(">button").should('be.enabled').click()
-        const deleteButton = MessagesPo.deleteButton.eq(0)
-        deleteButton.should('be.visible')
-        deleteButton.click()
-        const confirmDeleteButton = MessagesPo.confirmDeleteButton.eq(0)
-        confirmDeleteButton.should('be.visible')
-        confirmDeleteButton.click()
-        cy.wait(1000)
-        cy.contains(data.messages.messageToBeDeleted).should('not.exist')
+        deleteMessage(data.messages.messageToBeDeleted)
     })
 })
