@@ -2,10 +2,9 @@ import http from 'k6/http';
 import { check, sleep } from 'k6';
 import { config } from '../config.js';
 
-const baseUrl = config.authentication.baseUrl;
-const email = config.email;
-const password = config.password;
 const username = config.username;
+const name = config.profile.name;
+const baseUrl = config.profile.baseUrl;
 const params = config.params;
 
 export let options = {
@@ -32,64 +31,25 @@ export default function () {
     const requests = [
         {
             method: 'GET',
-            url: `${baseUrl}/google`,
+            url: `${baseUrl}`,
         },
         {
-            method: 'POST',
-            url: `${baseUrl}/check-existence`,
+            method: 'PUT',
+            url: `${baseUrl}/profile`,
             body: {
-                userNameOrEmail: email,
-            }
-        },
-        {
-            method: 'POST',
-            url: `${baseUrl}/check-password`,
-            body: {
-                password: password,
+                name: name,
+                description: '',
+                Location: '',
+                url: '',
+                birth_date: '2000-03-09T22:18:26.625Z',
             },
-            
         },
         {
-            method: 'POST',
-            url: `${baseUrl}/login`,
+            method: 'PATCH',
+            url: `${baseUrl}/username`,
             body: {
-                email_or_username: email,
-                password: password,
-            }
-        },
-        {
-            method: 'POST',
-            url: `${baseUrl}/change-password`,
-            body: {
-                password: password,
-                passwordConfirmation: password,
+                userName: username,
             },
-            
-        },
-        {
-            method: 'POST',
-            url: `${baseUrl}/update-password`,
-            body: {
-                oldPassword: password,
-                newPassword: password,
-            },
-            
-        },
-        {
-            method: 'POST',
-            url: `${baseUrl}/change-email`,
-            body: {
-                email: email,
-            },
-            
-        },
-        {
-            method: 'POST',
-            url: `${baseUrl}/username-suggestions`,
-            body: {
-                username: username,
-            },
-            
         }
     ];
     requests.forEach((request) => {

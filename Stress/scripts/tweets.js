@@ -2,11 +2,10 @@ import http from 'k6/http';
 import { check, sleep } from 'k6';
 import { config } from '../config.js';
 
-const baseUrl = config.authentication.baseUrl;
-const email = config.email;
-const password = config.password;
 const username = config.username;
+const baseUrl = config.tweets.baseUrl;
 const params = config.params;
+const tweetId = config.tweets.tweetId;
 
 export let options = {
     insecureSkipTLSVerify: true,
@@ -32,65 +31,57 @@ export default function () {
     const requests = [
         {
             method: 'GET',
-            url: `${baseUrl}/google`,
+            url: `${baseUrl}/user/${username}/replies`,
+        },
+        {
+            method: 'GET',
+            url: `${baseUrl}/hashtags`,
+        },
+        {
+            method: 'GET',
+            url: `${baseUrl}/user/${username}`,
         },
         {
             method: 'POST',
-            url: `${baseUrl}/check-existence`,
-            body: {
-                userNameOrEmail: email,
-            }
+            url: `${baseUrl}/${tweetId}/like`,
+        },
+        {
+            method: 'GET',
+            url: `${baseUrl}/${tweetId}/like`,
+        },
+        {
+            method: 'GET',
+            url: `${baseUrl}/user/${username}/like`,
+        },
+        {
+            method: 'GET',
+            url: `${baseUrl}/user/${username}/media`,
+        },
+        {
+            method: 'GET',
+            url: `${baseUrl}/${tweetId}`,
+        },
+        {
+            method: 'GET',
+            url: `${baseUrl}/${tweetId}/replies`,
+        },
+        {
+            method: 'GET',
+            url: `${baseUrl}/${tweetId}/retweets`,
+        },
+        {
+            method: 'GET',
+            url: `${baseUrl}`,
         },
         {
             method: 'POST',
-            url: `${baseUrl}/check-password`,
+            url: `${baseUrl}`,
             body: {
-                password: password,
+                text: 'STRESS TEST TWEET',
+                source:  '',
+                sensitive: '',
             },
-            
         },
-        {
-            method: 'POST',
-            url: `${baseUrl}/login`,
-            body: {
-                email_or_username: email,
-                password: password,
-            }
-        },
-        {
-            method: 'POST',
-            url: `${baseUrl}/change-password`,
-            body: {
-                password: password,
-                passwordConfirmation: password,
-            },
-            
-        },
-        {
-            method: 'POST',
-            url: `${baseUrl}/update-password`,
-            body: {
-                oldPassword: password,
-                newPassword: password,
-            },
-            
-        },
-        {
-            method: 'POST',
-            url: `${baseUrl}/change-email`,
-            body: {
-                email: email,
-            },
-            
-        },
-        {
-            method: 'POST',
-            url: `${baseUrl}/username-suggestions`,
-            body: {
-                username: username,
-            },
-            
-        }
     ];
     requests.forEach((request) => {
         const res = http.request(request.method, request.url, request.body, params);
@@ -103,7 +94,7 @@ export default function () {
 }
 
 export function handleSummary(data) {
-    console.log('Preparing the end-of-test summary...')
+    console.log('Preparing the end-of-test summary...');
     return {
         'summary.json': JSON.stringify(data),
     }

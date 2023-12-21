@@ -2,10 +2,12 @@ import http from 'k6/http';
 import { check, sleep } from 'k6';
 import { config } from '../config.js';
 
-const baseUrl = config.authentication.baseUrl;
-const email = config.email;
-const password = config.password;
-const username = config.username;
+const otherUsername = config.conversation.otherUsername;
+const anotherUsername = config.conversation.anotherUsername;
+const engUsername = config.conversation.engUsername;
+const testerUsername = config.conversation.testerUsername;
+const baseUrl = config.conversation.baseUrl;
+const conversationId = config.conversation.conversationId;
 const params = config.params;
 
 export let options = {
@@ -31,65 +33,59 @@ export let options = {
 export default function () {
     const requests = [
         {
+            method: 'POST',
+            url: `${baseUrl}`,
+            body: {
+                conversation_name: 'test conversation',
+                users: [
+                    anotherUsername,
+                    otherUsername,
+                ]
+            },
+        },
+        {
             method: 'GET',
-            url: `${baseUrl}/google`,
+            url: `${baseUrl}`,
         },
         {
             method: 'POST',
-            url: `${baseUrl}/check-existence`,
+            url: `${baseUrl}/${conversationId}/user`,
             body: {
-                userNameOrEmail: email,
+                users: [
+                    engUsername,
+                    testerUsername,
+                ]
+            },
+        },
+        {
+            method: 'GET',
+            url: `${baseUrl}/${conversationId}/user/?q=${testerUsername}`,
+        },
+        {
+            method: 'GET',
+            url: `${baseUrl}/user/?q=${testerUsername}`,
+        },
+        {
+            method: 'GET',
+            url: `${baseUrl}/${conversationId}`,
+        },
+        {
+            method: 'GET',
+            url: `${baseUrl}/search?q=test`,
+        },
+        {
+            method: 'PUT',
+            url: `${baseUrl}/${conversationId}`,
+            body: {
+                name: 'put test conversation',
             }
         },
         {
             method: 'POST',
-            url: `${baseUrl}/check-password`,
+            url: `${baseUrl}/${conversationId}/message`,
             body: {
-                password: password,
-            },
-            
-        },
-        {
-            method: 'POST',
-            url: `${baseUrl}/login`,
-            body: {
-                email_or_username: email,
-                password: password,
+                text: 'test message',
             }
-        },
-        {
-            method: 'POST',
-            url: `${baseUrl}/change-password`,
-            body: {
-                password: password,
-                passwordConfirmation: password,
-            },
-            
-        },
-        {
-            method: 'POST',
-            url: `${baseUrl}/update-password`,
-            body: {
-                oldPassword: password,
-                newPassword: password,
-            },
-            
-        },
-        {
-            method: 'POST',
-            url: `${baseUrl}/change-email`,
-            body: {
-                email: email,
-            },
-            
-        },
-        {
-            method: 'POST',
-            url: `${baseUrl}/username-suggestions`,
-            body: {
-                username: username,
-            },
-            
         }
     ];
     requests.forEach((request) => {
@@ -103,7 +99,7 @@ export default function () {
 }
 
 export function handleSummary(data) {
-    console.log('Preparing the end-of-test summary...')
+    console.log("Preparing the end-of-test summary...   ");
     return {
         'summary.json': JSON.stringify(data),
     }
