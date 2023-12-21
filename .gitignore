@@ -25,4 +25,5 @@ config.js
 *.jpg
 *.jpg
 *.jpeg
+*.png
 config.js
