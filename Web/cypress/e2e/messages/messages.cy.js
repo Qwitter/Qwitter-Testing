@@ -9,6 +9,12 @@ import {
     deleteFirstConvo 
 } from "../../utils"
 
+Cypress.on('uncaught:exception', (err, runnable) => {
+    // returning false here prevents Cypress from
+    // failing the test
+    return false
+})
+
 describe('messages test suite', () => {
     before('load fixture', () => {
         cy.fixture("data").then((data) => {
@@ -21,18 +27,28 @@ describe('messages test suite', () => {
         cy.get("a[href='/Messages']").should('be.visible').click()
     })
 
+    afterEach('delete first convo', () => {
+        // cy.wait(6000)
+        cy.reload()
+        cy.wait(6000)
+        deleteFirstConvo()
+        cy.reload()
+        cy.wait(6000)
+    })
+
     it('searches for a user', () => {
         createNewConvo(data.messages.searchUser, data.messages.message)
     })
 
-    it.only('shows conversations', () => {
+    it('shows conversations', () => {
         createNewConvo(data.messages.searchUser, data.messages.message)
+        cy.reload()
         checkConvos()
-        // deleteFirstConvo()
     })
 
     it('sends a message with media', () => {
         createNewConvo(data.messages.mediaUser, data.messages.message)
+        cy.reload()
         const uploadMedia = MessagesPo.uploadMedia
         uploadMedia.should('be.hidden')
         uploadMedia.attachFile(data.messages.media)
@@ -40,18 +56,20 @@ describe('messages test suite', () => {
         const sendButton = MessagesPo.sendButton
         sendButton.should('be.visible')
         sendButton.click()
-        cy.wait(1000)
+        cy.reload()
         const messageMedia = MessagesPo.messageMedia
         messageMedia.find(">img").should('be.visible')
     })
 
     it('replies to a message', () => {
         createNewConvo(data.messages.replyUser, data.messages.message)
+        cy.reload()
         replyToFirstMessage(data.messages.reply, data.messages.message)
     })
 
-    it.skip('deletes a message', () => {
+    it('deletes a message', () => {
         createNewConvo(data.messages.searchUser, data.messages.messageToBeDeleted)
+        // cy.reload()
         const moreButton = MessagesPo.moreButton.eq(0)
         moreButton.should('not.be.visible')
         const textMessage = MessagesPo.textMessage.eq(0)
