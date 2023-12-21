@@ -1,6 +1,8 @@
 {
   "loginPage": {
     "validEmail": "ahmedradalla2001@gmail.com",
+    "username": "ahmedabdelatty",
+    "name": "Ahmed Abdelatty",
     "notEmail": "notEmail",
     "validPassword": "8charslong",
     "wrongPassword": "12345678aaa",
