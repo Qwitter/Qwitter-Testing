@@ -63,8 +63,6 @@ exports.config = {
         'appium:automationName': 'UiAutomator2',
         'appium:fullReset': true,
         'appium:noReset': false,
-        //'appium:forceAppLaunch': true,
-        //'appium:enforceAppInstall': true
     }],
 
     //

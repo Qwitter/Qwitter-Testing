@@ -9,10 +9,7 @@ const signUpUtils = require('../../utils/signup.js')
 const loginUtils = require('../../utils/login.js')
 
 
-/*
-    await $('android=new UiScrollable(new UiSelector().scrollable(true)).scrollToEnd(1, 5)')
-    await browser.pause(1000)
-*/
+
 describe('Forgot password test suite', ()=>{
     let emailToken, currentEmail, newToken ,newEmail
     before( async () => {
