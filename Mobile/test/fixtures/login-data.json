@@ -4,5 +4,16 @@
     "invalidEmail": "invalid@invalid.com",
     "invalidPassword": "invalidpassword",
     "validUsername": "ahmed09c8a8",
-    "invalidUsername": "ahmedradalla2001"
+    "invalidUsername": "ahmedradalla2001",
+    "user":{
+        "email": "marwanemad910@gmail.com",
+        "password": "MarwanEmad1"
+    },
+    "changePasswordPage": {
+        "email": "exscorpion1@gmail.com",
+        "currentPassword": "8charslong",
+        "newPassword": "8charsormore",
+        "invalidPassword": "1"
+    }
+
 }
