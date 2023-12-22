@@ -26,6 +26,9 @@ class SearchPage{
     get targetUser(){
         return cy.get('[data-testid="targetUser"]')
     }
+    get profileUsername(){
+        return cy.get('[data-testid="username"]')
+    }
 }
 
 export default new SearchPage();

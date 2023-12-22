@@ -23,6 +23,11 @@
     "email":"marwanemad910@gmail.com",
     "password": "MarwanEmad1"
   },
+  "search":{
+    "keyword": "ma",
+    "targetUser": "marwanemad",
+    "notExistingUser": "notExistingUser"
+  },
   "messages": {
     "searchUser": "eng",
     "message": "Hello",
