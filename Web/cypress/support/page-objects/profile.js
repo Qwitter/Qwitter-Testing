@@ -24,6 +24,12 @@ class ProfilePage{
     get closeEdit(){
         return cy.get('[data-testid="popupHeaderButton"]')
     }
+    get discardChanges(){
+        return cy.contains('button', 'Discard')
+    }
+    get cancelDiscardChanges(){
+        return cy.contains('button', 'Cancel')
+    }
     get name(){
         return cy.get('[data-testid="name"]')
     }

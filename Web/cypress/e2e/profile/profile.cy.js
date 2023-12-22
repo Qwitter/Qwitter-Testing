@@ -24,12 +24,6 @@ describe('Profile page test suite', () => {
         ProfilePage.backHome.should('be.visible').click()
         cy.url().should('include', homeUrl)
     })
-    // Front end make them hidden input and this test has no meaning (should be deleted)
-    it.skip('add photo and banner should be visible', () => {
-        ProfilePage.editProfile.should('be.visible').click()
-        ProfilePage.cover.first().should('be.visible')
-        ProfilePage.cover.last().should('be.visible')
-    })
 
     it('save button and cancel should be visible', () => {
         ProfilePage.editProfile.should('be.visible').click()
@@ -54,6 +48,23 @@ describe('Profile page test suite', () => {
         ProfilePage.editProfile.click()
         ProfilePage.nameField.clear().type(data.editProfile.oldName)
         ProfilePage.saveEdit.click()
+    })
+
+    it('discard changes in edit profile', () => {
+        ProfilePage.editProfile.click()
+        ProfilePage.nameField.clear().type(data.editProfile.newName)
+        ProfilePage.closeEdit.click()
+        ProfilePage.discardChanges.click()
+        cy.wait(500)
+        ProfilePage.name.invoke('text').should('not.eq', data.editProfile.newName)
+    })
+
+    it('cancel discardign changes in edit profile', () => {
+        ProfilePage.editProfile.click()
+        ProfilePage.nameField.clear().type(data.editProfile.newName)
+        ProfilePage.closeEdit.click()
+        ProfilePage.cancelDiscardChanges.click()
+        ProfilePage.nameField.should('have.value', data.editProfile.newName)
     })
 
     it('edit bio should reflect on profile', () => {
