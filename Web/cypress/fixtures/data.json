@@ -1,0 +1,30 @@
+{
+  "loginPage": {
+    "validEmail": "ahmedradalla2001@gmail.com",
+    "username": "ahmedabdelatty",
+    "name": "Ahmed Abdelatty",
+    "notEmail": "notEmail",
+    "validPassword": "8charslong",
+    "wrongPassword": "12345678aaa",
+    "invalidEmail": "dummy@dummy.com",
+    "invalidPasswordTooSmall": "1",
+    "invalidPasswordNoNums": "abcdefgh"
+  },
+  "changePasswordPage": {
+    "currentPassword": "8charslong",
+    "newPassword": "8charsormore",
+    "invalidPassword": "1"
+  },
+  "accountSettingsPage":{
+    "validUsername": "marwanemad",
+    "invalidUsername": "Marwan Emad"
+  },
+  "user":{
+    "email":"marwanemad910@gmail.com",
+    "password": "MarwanEmad1"
+  }
+  ,
+  "name": "Using fixtures to represent data",
+  "email": "hello@cypress.io",
+  "body": "Fixtures are a great way to mock data for responses to routes"
+}
