@@ -8,7 +8,7 @@ module.exports = defineConfig({
     MAILISK_NAMESPACE: "v3rzvekshyl8"
   },
   e2e: {
-    baseUrl: 'http://192.168.56.1:3000',
+    baseUrl: 'http://localhost:3000',
     setupNodeEvents(on, config) {
       // implement node event listeners here
       //for generating html reports

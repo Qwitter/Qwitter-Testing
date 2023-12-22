@@ -1,6 +1,5 @@
 import SearchPage from '../../support/page-objects/search'
 import { login } from '../../utils/login'
-import { createEmail, verifyEmail, goToStep } from '../../utils/signup/signup'
 const data = require('../../fixtures/data')
 
 describe('Search test suite', () => {
@@ -15,6 +14,7 @@ describe('Search test suite', () => {
 
     it('clear search keyword using canel button', () => {
         SearchPage.search.type(data.search.keyword)
+        cy.wait(1000)
         SearchPage.targetUser.scrollIntoView().should('be.visible')
         SearchPage.cancelSearch.should('be.visible').click()
         SearchPage.search.should('be.empty')
@@ -43,7 +43,7 @@ describe('Search test suite', () => {
         })
     })
 
-    it('search for first first user', () => {
+    it('search for first user', () => {
         SearchPage.search.type(data.search.keyword)
         SearchPage.usersParent.then(($el) => {
             if($el.find('> li').length > 1){
@@ -75,14 +75,45 @@ describe('Search test suite', () => {
             }
         })
     })
-    //need revisting
+    
+    it('search for first trend', () => {
+        SearchPage.search.should('be.empty').type(data.search.keyword)
+        SearchPage.trendsParent.then(($el) => {
+            if($el.find('> li').length > 1){
+                let trend
+                SearchPage.trendsResult.first().find('div > span').invoke('text').then((text) => {
+                    trend = text.substring(1, text.length).toLowerCase()
+                }).then(() => {
+                    SearchPage.trendsResult.first().click()
+                }).then(() => {
+                    cy.url().should('include', trend)
+                })
+                
+            }
+        })
+    })
+
     it('open a target user', () => {
         SearchPage.search.should('be.empty').type(data.search.targetUser)
+        cy.wait(1000)
         SearchPage.targetUser.should('have.length', 1)
-        SearchPage.targetUser.scrollIntoView().find('a').invoke('text').then((text) => {
+        SearchPage.targetUser.scrollIntoView().invoke('text').then((text) => {
             expect(text.toLowerCase().includes(data.search.targetUser.toLowerCase())).to.be.true
+        }).then(() => {
+            cy.wait(1000)
+            SearchPage.targetUser.scrollIntoView().should('be.visible').click({force:true}).then(() => {
+                SearchPage.profileUsername.invoke('text').should('eq', `@${data.search.targetUser}`)
+            })
+            
         })
-        // should click the user and find it exists or not 
+    })
+
+    it('search for not existing user', () => {
+        SearchPage.search.should('be.empty').type(data.search.notExistingUser)
+        cy.wait(1000)
+        SearchPage.targetUser.click({force: true})
+        cy.wait(1000)
+        cy.contains('This account doesn’t exist').should('be.visible')
     })
 
 })

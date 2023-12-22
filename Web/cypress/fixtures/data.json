@@ -22,8 +22,12 @@
   "user":{
     "email":"marwanemad910@gmail.com",
     "password": "MarwanEmad1"
-  }
-  ,
+  },
+  "search":{
+    "keyword": "ma",
+    "targetUser": "marwanemad",
+    "notExistingUser": "notExistingUser"
+  },
   "name": "Using fixtures to represent data",
   "email": "hello@cypress.io",
   "body": "Fixtures are a great way to mock data for responses to routes"
