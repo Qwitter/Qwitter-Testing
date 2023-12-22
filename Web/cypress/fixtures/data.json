@@ -28,6 +28,15 @@
     "targetUser": "marwanemad",
     "notExistingUser": "notExistingUser"
   },
+  "messages": {
+    "searchUser": "eng",
+    "message": "Hello",
+    "mediaUser": "qwittermanager",
+    "media": "quexit.png",
+    "replyUser": "qwittertester",
+    "reply": "Welcome to Qwitter",
+    "messageToBeDeleted": "messageToBeDeleted"
+  },
   "name": "Using fixtures to represent data",
   "email": "hello@cypress.io",
   "body": "Fixtures are a great way to mock data for responses to routes"
