@@ -1,79 +1,88 @@
 const commands = require('../../../commands.js')
 const { browser } = require('@wdio/globals')
 const ExistingTweetsPage = require('../../page-objects/existing-tweets.js')
-const data  = require('../../fixtures/login-data.json')
-const exp = require('constants')
+const ProfilePage = require('../../page-objects/profile.js')
+const loginUtils = require('../../utils/login.js')
+const profileUtils = require('../../utils/profile.js')
+const data = require('../../fixtures/login-data.json')
 
+describe('Tweet interactions test suite', () => {
+    before(async () => {
+        await loginUtils.login(data.emailWithManyTweets, data.passwordToEmailWithManyTweets)
+    })
 
-describe('', () => {
     afterEach(async () => {
         await commands.restartApp()
     })
 
-    beforeEach( async () => {
-
-        // This should be replaced by login utility
-        const signInBtn = await ExistingTweetsPage.signInButton()
-        await signInBtn.click()
-        const emailField = await ExistingTweetsPage.emailField()
-        await emailField.click()
-        await emailField.setValue(data.emailWithManyTweets)
-        const next = await ExistingTweetsPage.nextButton()
-        await next.click()
-        const passwordField = await ExistingTweetsPage.passwordField()
-        await passwordField.click()
-        await passwordField.setValue(data.passwordToEmailWithManyTweets)
-        await browser.hideKeyboard()
-        const login = await ExistingTweetsPage.loginButton()
-        await login.click()
-
+    beforeEach(async () => {
+        await profileUtils.openProfile()
+        await $('android=new UiScrollable(new UiSelector().scrollable(true)).scrollToEnd(1, 1)')
         await browser.pause(2000)
     })
 
-    it('delete a tweet', async () => {
-
+    it('delete a post', async () => {
+        const more = await ProfilePage.moreFromPosts()
+        await more.click()
+        const deletePost = await ProfilePage.deleteTweet()
+        await deletePost.click()
     })
 
-    it.only('add a reply', async () => {
-        const commentBtn = await ExistingTweetsPage.commentButton()
-        const isThereATweet = await commentBtn?.isExisting() ?? false
-        if(isThereATweet){
-            await commentBtn.click()
-            const replyBtn = await ExistingTweetsPage.replyButton()
-            expect(await replyBtn.isEnabled()).toBe(false)
+    it('add a reply', async () => {
+        await profileUtils.writeReply("Eslam Elmarg")
+        const replyBtn = await ExistingTweetsPage.replyButton()
+        expect(await replyBtn.isEnabled()).toBe(true)
+        await replyBtn.click()
+    })
 
-            const replyAria = await ExistingTweetsPage.replyTextAria()
-            await replyAria.click()
-            await replyAria.setValue('This is a reply')
-            expect(await replyBtn.isEnabled()).toBe(true)
-            await replyBtn.click()
-            const backButton = await ExistingTweetsPage.backFromComment()
-            expect(await backButton.isEnabled()).toBe(true)
-            await backButton.click()
-        }
-    })  
-    
+    it('add empty reply', async () => {
+        await profileUtils.writeReply("    ")
+        const replyBtn = await ExistingTweetsPage.replyButton()
+        expect(await replyBtn.isEnabled()).toBe(false)
+    })
+
     it('like and unlike a post', async () => {
         const likeBtn = await ExistingTweetsPage.likeButton()
-        const isThereATweet = await likeBtn?.isExisting() ?? false
-        if(isThereATweet){
-            const oldLikes = await likeBtn.getAttribute('contentDescription')
-            await likeBtn.click()
-            let newLikes = await likeBtn.getAttribute('contentDescription')
-            expect(parseInt(oldLikes) == parseInt(newLikes) + 1 ||
+        const oldLikes = await likeBtn.getAttribute('contentDescription')
+        await likeBtn.click()
+        let newLikes = await likeBtn.getAttribute('contentDescription')
+        expect(parseInt(oldLikes) == parseInt(newLikes) + 1 ||
             parseInt(oldLikes) == parseInt(newLikes) - 1).toBe(true)
 
-            await likeBtn.click()
-            newLikes = await likeBtn.getAttribute('contentDescription')
-            expect(oldLikes === newLikes).toBe(true)
-        }
+        await likeBtn.click()
+        newLikes = await likeBtn.getAttribute('contentDescription')
+        expect(oldLikes === newLikes).toBe(true)
     })
-    
-    it('retweet a post', async () => {
-        
-    })
-    
-    it('delete a post', async () => {
 
+    it('retweet a post', async () => {
+        const repliesTab = await ProfilePage.repliesTab()
+        await repliesTab.click()
+        await browser.pause(2000)
+        const retweetBtn = await ExistingTweetsPage.retweetButtonInReplies()
+        await retweetBtn.click()
+        const repost = await ExistingTweetsPage.repostButton()
+        expect(await repost.isDisplayed()).toBe(true)
+        await repost.click()
+    })
+
+    it('check retweet counter', async () => {
+        const repliesTab = await ProfilePage.repliesTab()
+        await repliesTab.click()
+        await browser.pause(2000)
+        const retweetBtn = await ExistingTweetsPage.retweetButtonInReplies()
+        const oldRetweetsCounter = await retweetBtn.getAttribute('contentDescription')
+        await retweetBtn.click()
+        const repost = await ExistingTweetsPage.repostButton()
+        await repost.click()
+        const newRetweetsCounter = await retweetBtn.getAttribute('contentDescription')
+        expect(parseInt(oldRetweetsCounter) + 1 == newRetweetsCounter).toBe(true)
+    })
+
+    it('undo repost for a retweetet post', async () => {
+        const retweetBtn = await ExistingTweetsPage.retweetButtonInPosts()
+        await retweetBtn.click()
+        const undoRepost = await ExistingTweetsPage.undoRepostButton()
+        expect(await undoRepost.isDisplayed()).toBe(true)
+        await undoRepost.click()
     })
 })

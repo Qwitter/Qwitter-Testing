@@ -1,55 +1,39 @@
 class ExistingTweetsPage{
-    async firstTweet(){
-        const elements = await $$('//android.view.View[@index="0"]')
-        return elements[9]
-    }
-    async #commonButton(firstBtn, secondBtn){
-        const tweet = await this.firstTweet()
-        const buttons = await tweet.$$('//android.widget.Button')
-        if(buttons.length === 6){
-            return buttons[firstBtn]
-        }else{
-            return buttons[secondBtn]
-        }
-    }
-    async moreButton(){
-        return await this.#commonButton(3, 2)
-    }
     async likeButton(){
-        return await this.#commonButton(4, 5)
+        const elements = await $$('//android.widget.Button[@index="4"]')
+        return elements[0]
     }
-    async retweetButton(){
-        return await this.#commonButton(2, 4)
+    async retweetButtonInPosts(){
+        const elements = await $$('//android.widget.Button[@index="3"]')
+        return elements[0]
+    }
+    async retweetButtonInReplies(){
+        const elements = await $$('//android.widget.Button[@index="5"]')
+        return elements[0]
+    }
+    async repostButton(){
+        return await $('~Repost')
+    }
+    async undoRepostButton(){
+        return await $('~Undo Repost')
     }
     async commentButton(){
-        return await this.#commonButton(1, 3)
+        const elements = await $$('//android.widget.Button[@index="2"]')
+        return elements[1]
     }
-    async replyTextAria(){
-        return $('//android.widget.EditText[@index="2"]')
+    async replyTextAriaClick(){
+        return await $('//android.widget.EditText[@index="2"]')
+    }
+    async replyTextAriaAdd(){
+        return await $('//android.widget.EditText[@index="4"]')
     }
     async replyButton(){
-        return $('~Reply')
+        return await $('~Reply')
     }
     async backFromComment(){
-        return $('~Back')
+        return await $('~Back')
     }
 
-    // those elements should be removed after adding login utility
-    async signInButton(){
-        return $('~Sign in')
-    }
-    async emailField(){
-        return $('//android.widget.EditText[@index="3"]')
-    }
-    async nextButton(){
-        return $('~Next')
-    }
-    async passwordField(){
-        return $('//android.widget.EditText[@index="2"]')
-    }
-    async loginButton(){
-        return $('~Login')
-    }
 }
 
 module.exports = new ExistingTweetsPage();

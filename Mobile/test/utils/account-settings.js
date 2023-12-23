@@ -1,5 +1,5 @@
 const { browser } = require('@wdio/globals')
-const AccountSettingPage = require('../page-objects/account-settings')
+const AccountSettingPage = require('../page-objects/account-settings.js')
 
 module.exports = {
     enterEmail: async function (email){
