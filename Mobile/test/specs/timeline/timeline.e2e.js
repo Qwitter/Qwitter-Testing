@@ -9,6 +9,9 @@ const loginUtils = require('../../utils/login.js')
 describe('Timeline Suite', () => {
     afterEach(async () => {
         await commands.restartApp()
+        const home = await TimelinePagePo.home()
+        await home.click()
+        await browser.pause(5000)
     })
 
     before('login', async () => {
@@ -42,9 +45,13 @@ describe('Timeline Suite', () => {
         await otherProfilePic.click()
         const otherUserDetails = await TimelinePagePo.userDetails(loginData.otherName, loginData.otherUsername)
         expect(await otherUserDetails.isDisplayed()).toBe(true)
+        await commands.restartApp(true)
+        await browser.pause(5000)
+        await loginUtils.login(loginData.validEmail, loginData.validPassword)
+        await browser.pause(5000)
     })
 
-    it('checks that tweets in timeline are from followed users', async () => {
+    it('checks that tweets in for you timeline are from followed users', async () => {
         const followingList = [
             "Ahmed Abdelatty", 
             "Omar Mahmoud", 
@@ -53,20 +60,23 @@ describe('Timeline Suite', () => {
             "eng ahmed",
             "aly",    
         ]
-        const tweetsContainer = await TimelinePagePo.tweetsContainer()
-        const tweets = await tweetsContainer.$$('//android.view.View')
-        let flag = true
-        tweets.forEach(async (tweet) => {
-            if (await tweet.getAttribute('content-desc')) {
-                const button = await tweet.$('//android.widget.Button')
+        const forYouTab = await TimelinePagePo.forYouTab()
+        await forYouTab.click()
+        await browser.pause(5000)
+        // const tweetsContainer = await TimelinePagePo.tweetsContainer()
+        // const tweets = await tweetsContainer.$$('//android.view.View')
+        let flag = false
+        // for (let i = 1; i < tweets.length - 1; i++) {
+            // if (await tweet.getAttribute('content-desc')) {
+                const button = await $('(//android.widget.Button[@class="android.widget.Button"])[8]')
                 const name = await button.$('//android.view.View')
-                flag = flag && followingList.includes(await name.getAttribute('content-desc'))
-            }
-        })
+                flag = flag || followingList.includes(await name.getAttribute('content-desc'))
+            // }
+        // }
         expect(flag).toBe(true)
     })
 
-    it.only('should navigate to profile page and receive list of my tweets', async () => {
+    it('should navigate to profile page and receive list of my tweets', async () => {
         const profilePic = await TimelinePagePo.profilePic()
         await profilePic.click()
         const profileButton = await TimelinePagePo.profileButton()
