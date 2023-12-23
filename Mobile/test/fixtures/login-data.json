@@ -1,5 +1,9 @@
 {
     "validEmail": "ahmedradalla2001@gmail.com",
+    "name": "Ahmed Abdelatty",
+    "username": "ahmedabdelatty",
+    "otherName": "Qwitter Manager",
+    "otherUsername": "qwittermanager",
     "validPassword": "8charslong",
     "invalidEmail": "invalid@invalid.com",
     "invalidPassword": "invalidpassword",
@@ -14,6 +18,9 @@
         "currentPassword": "8charslong",
         "newPassword": "8charsormore",
         "invalidPassword": "1"
+    },
+    "timelineUser": {
+        "email": "qwitterqwitter6@gmail.com",
+        "password": "8charslong"
     }
-
 }
