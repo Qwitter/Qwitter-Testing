@@ -5,7 +5,7 @@ const AccountSettingPage = require('../../page-objects/account-settings.js')
 const accountSettingsUtils = require('../../utils/account-settings.js')
 const loginUtils = require('../../utils/login.js')
 
-describe('Forgot password test suite', ()=>{
+describe('Change password test suite', ()=>{
     before( async () => {
         await loginUtils.login(data.changePasswordPage.email, data.changePasswordPage.currentPassword)
     })
@@ -15,7 +15,7 @@ describe('Forgot password test suite', ()=>{
     })
 
     beforeEach( async ()=>{
-        // open email settings
+        // open password settings
         await accountSettingsUtils.openChangePassword()
         await browser.pause(1000);
     })

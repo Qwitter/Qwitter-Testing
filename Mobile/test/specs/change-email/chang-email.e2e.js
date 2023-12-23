@@ -10,7 +10,7 @@ const loginUtils = require('../../utils/login.js')
 
 
 
-describe('Forgot password test suite', ()=>{
+describe('Change email test suite', ()=>{
     let emailToken, currentEmail, newToken ,newEmail
     before( async () => {
         const creatAccountBtn = await SignUpPage.createAccount()

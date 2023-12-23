@@ -41,6 +41,12 @@ module.exports = {
         await this.openSettings()
         const changePassword = await AccountSettingPage.changePassword()
         await changePassword.click()
+    },
+    enterUsername: async function(username){
+        const usernameField = await AccountSettingPage.usernameField()
+        await usernameField.click()
+        await usernameField.setValue(username)
+        await browser.hideKeyboard()
     }
 
 }
