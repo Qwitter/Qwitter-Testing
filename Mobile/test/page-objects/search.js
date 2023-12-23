@@ -17,7 +17,7 @@ class SearchPage{
         return elements[6] 
     }
     async postsTab(){
-        return await $('~Posts Tab 1 of 4')
+        return await $('//android.view.View[@index="9"]')
     }
     
     async notExistingUserMessage(){

@@ -55,10 +55,18 @@ describe('Search test suite', ()=>{
         const firstUser = await SearchPage.firstUser()
         if(firstUser){
             await firstUser.click()
-            await browser.pause(1000)
+            await browser.pause(3000)
             const postsTab = await SearchPage.postsTab()
             expect(await postsTab.isDisplayed()).toBe(true)
         }
+    })
+
+    it('add text then delete it', async () => {
+        await searchUtils.searchFor(searchKeyword)
+        const clear = await SearchPage.clearSearch()
+        await clear.click()
+        const noUsersMessage = await SearchPage.notExistingUserMessage()
+        await expect(await noUsersMessage.isDisplayed()).toBe(true)
     })
 
 })
