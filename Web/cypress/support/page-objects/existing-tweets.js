@@ -47,6 +47,12 @@ class ExistingTweets{
     get profile(){
         return cy.get('[data-testid="Profile"]')
     }
+    get mediaTab(){
+        return cy.get('[data-testid="Media"]')
+    }
+    get repliesTab(){
+        return cy.get('[data-testid="Replies"]')
+    }
 }
 
 export default new ExistingTweets();
