@@ -6,5 +6,15 @@
     "validUsername": "ahmed09c8a8",
     "invalidUsername": "ahmedradalla2001",
     "emailWithManyTweets": "marwanemad910@gmail.com",
-    "passwordToEmailWithManyTweets": "MarwanEmad1"
+    "passwordToEmailWithManyTweets": "MarwanEmad1",
+    "user":{
+        "email": "marwanemad910@gmail.com",
+        "password": "MarwanEmad1"
+    },
+    "changePasswordPage": {
+        "email": "exscorpion1@gmail.com",
+        "currentPassword": "8charslong",
+        "newPassword": "8charsormore",
+        "invalidPassword": "1"
+    }
 }

@@ -1,6 +1,8 @@
 {
   "loginPage": {
     "validEmail": "ahmedradalla2001@gmail.com",
+    "username": "ahmedabdelatty",
+    "name": "Ahmed Abdelatty",
     "notEmail": "notEmail",
     "validPassword": "8charslong",
     "wrongPassword": "12345678aaa",
@@ -20,8 +22,21 @@
   "user":{
     "email":"marwanemad910@gmail.com",
     "password": "MarwanEmad1"
-  }
-  ,
+  },
+  "search":{
+    "keyword": "ma",
+    "targetUser": "marwanemad",
+    "notExistingUser": "notExistingUser"
+  },
+  "messages": {
+    "searchUser": "eng",
+    "message": "Hello",
+    "mediaUser": "qwittermanager",
+    "media": "quexit.png",
+    "replyUser": "qwittertester",
+    "reply": "Welcome to Qwitter",
+    "messageToBeDeleted": "messageToBeDeleted"
+  },
   "name": "Using fixtures to represent data",
   "email": "hello@cypress.io",
   "body": "Fixtures are a great way to mock data for responses to routes"

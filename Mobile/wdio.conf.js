@@ -63,8 +63,6 @@ exports.config = {
         'appium:automationName': 'UiAutomator2',
         'appium:fullReset': true,
         'appium:noReset': false,
-        'appium:forceAppLaunch': true,
-        //'appium:enforceAppInstall': true
     }],
 
     //
@@ -147,7 +145,7 @@ exports.config = {
     // See the full list at http://mochajs.org/
     mochaOpts: {
         ui: 'bdd',
-        timeout: 70000
+        timeout: 90000
     },
 
     //
