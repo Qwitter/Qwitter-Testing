@@ -1,8 +1,6 @@
 const { browser } = require('@wdio/globals')
 const commands = require('../../../commands')
 const loginData = require('../../fixtures/login-data.json')
-// const timelineData = require('../../fixtures/timeline-data.json')
-const LoginPagePo = require('../../page-objects/LoginPagePo')
 const TimelinePagePo = require('../../page-objects/TimelinePagePo')
 const loginUtils = require('../../utils/login.js')
 
@@ -63,16 +61,10 @@ describe('Timeline Suite', () => {
         const forYouTab = await TimelinePagePo.forYouTab()
         await forYouTab.click()
         await browser.pause(5000)
-        // const tweetsContainer = await TimelinePagePo.tweetsContainer()
-        // const tweets = await tweetsContainer.$$('//android.view.View')
         let flag = false
-        // for (let i = 1; i < tweets.length - 1; i++) {
-            // if (await tweet.getAttribute('content-desc')) {
-                const button = await $('(//android.widget.Button[@class="android.widget.Button"])[8]')
-                const name = await button.$('//android.view.View')
-                flag = flag || followingList.includes(await name.getAttribute('content-desc'))
-            // }
-        // }
+        const button = await $('(//android.widget.Button[@class="android.widget.Button"])[8]')
+        const name = await button.$('//android.view.View')
+        flag = flag || followingList.includes(await name.getAttribute('content-desc'))
         expect(flag).toBe(true)
     })
 
@@ -82,22 +74,11 @@ describe('Timeline Suite', () => {
         const profileButton = await TimelinePagePo.profileButton()
         await profileButton.click()
         await browser.pause(5000)
-        // const tweetsProfileContainer = await TimelinePagePo.tweetsProfileContainer()
-        // const tweets = await tweetsProfileContainer.$$('//android.view.View')
-        // const tweet = tweets[2]
         const button = await $('(//android.widget.Button[@class="android.widget.Button"])[19]')
         const name = await button.$('//android.view.View')
         const attr = await name.getAttribute('content-desc')
-        // expect(attr).toBe(loginData.name)
         let flag = false
-        // for (let tweet of tweets) {
-        //     // if (await tweet.getAttribute('content-desc')) {
-        //         if (await button.isDisplayed() === false) continue
-        //         // expect(attr).toBe(loginData.name)
-        //         // console.log(attr)
-                flag = flag || (loginData.name === attr)
-        //     // }
-        // }
+        flag = flag || (loginData.name === attr)
         expect(flag).toBe(true)
     })
 })
