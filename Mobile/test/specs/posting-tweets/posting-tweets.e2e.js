@@ -3,7 +3,7 @@ const commands = require('../../../commands.js')
 const loginData = require('../../fixtures/login-data.json')
 const loginUtils = require('../../utils/login.js')
 const TimelinePagePo = require('../../page-objects/TimelinePagePo.js')
-const postingTweetsPo = require('../../page-objects/postingTweetsPo.js')
+const postingTweetsPo = require('../../page-objects/PostingTweetsPo.js')
 const postingTweetUtils = require('../../utils/posting-tweets.js')
 
 describe('Posting Tweets Suite', () => {

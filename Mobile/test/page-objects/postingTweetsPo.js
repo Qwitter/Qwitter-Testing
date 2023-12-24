@@ -1,4 +1,4 @@
-class postingTweetsPo {
+class PostingTweetsPo {
     async plusButton() { return await $('//android.widget.Button[@index="9"]') }
     async postButton() { return await $('//android.widget.Button[@index="11"]') }
     async editText() { return await $('//android.widget.EditText[@class="android.widget.EditText"]') }
@@ -8,4 +8,4 @@ class postingTweetsPo {
     async done() { return await $('~Done') }
 }
 
-module.exports = new postingTweetsPo();
+module.exports = new PostingTweetsPo();
