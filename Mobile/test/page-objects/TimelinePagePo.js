@@ -3,6 +3,7 @@ class TimelinePagePo {
     async sidebarList() { return await $('(//android.view.View[@class="android.view.View"])[10]') }
     async userDetails(name, username) { return await $(`~${name}\n@${username}`) }
     async tweetsContainer() { return await $('(//android.view.View[@class="android.view.View"])[12]') }
+    async topTweet() { return (await this.tweetsContainer()).$$('android.view.View')[1] }
     async tweetsProfileContainer() { return await $('(//android.view.View[@class="android.view.View"])[24]') }
     async followingButton() { return await $('~Following') }
     async profileButton() { return await $('~Profile') }
