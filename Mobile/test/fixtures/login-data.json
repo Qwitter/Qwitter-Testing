@@ -9,6 +9,8 @@
     "invalidPassword": "invalidpassword",
     "validUsername": "ahmed09c8a8",
     "invalidUsername": "ahmedradalla2001",
+    "emailWithManyTweets": "marwanemad910@gmail.com",
+    "passwordToEmailWithManyTweets": "MarwanEmad1",
     "user":{
         "email": "marwanemad910@gmail.com",
         "password": "MarwanEmad1"

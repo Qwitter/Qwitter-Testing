@@ -138,7 +138,7 @@ exports.config = {
     reporters: ['spec',['allure', {
         outputDir: 'allure-results',
         disableWebdriverStepsReporting: true,
-        disableWebdriverScreenshotsReporting: true,
+        disableWebdriverScreenshotsReporting: false,
     }]],
 
     // Options to be passed to Mocha.
@@ -244,7 +244,11 @@ exports.config = {
      */
     // afterTest: function(test, context, { error, result, duration, passed, retries }) {
     // },
-
+    afterTest: async function(test, context, { error, result, duration, passed, retries }) {
+        if (error) {
+            await browser.takeScreenshot();
+        }
+    }
 
     /**
      * Hook that gets executed after the suite has ended
