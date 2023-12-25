@@ -9,6 +9,7 @@ export function tweetPlainTextPopup(text){
     TweetPo.postTweet.eq(1).should('be.enabled')
     TweetPo.postTweet.eq(1).click()
     TweetPo.createTweetPopup.click()
+    cy.wait(3000)
 }
 
 export function tweetPlainTextTimeline(text){
