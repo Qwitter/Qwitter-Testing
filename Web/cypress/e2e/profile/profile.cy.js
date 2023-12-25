@@ -121,6 +121,13 @@ describe('Profile page test suite', () => {
         ProfilePage.saveEdit.click()
     })
 
+    it('upload banner', () => {
+        ProfilePage.editProfile.click()
+        ProfilePage.cover.first().attachFile(bannerPic)
+        cy.wait(500)
+        ProfilePage.saveEdit.click()
+    })
+
     it('open replies tab', () => {
         ProfilePage.repliesTab.should('be.visible').click()
         cy.url().should('include', repliesUrl)
