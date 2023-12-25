@@ -52,6 +52,22 @@ class AccountSettingPage{
     async verificationCodeField(){
         return await $('//android.widget.EditText[@index="2"]')
     }
+    async changeUsername(){
+        const elements = await $$('//android.view.View[@index="0"]')
+        return elements[5]
+    }
+    async changeUsernameTitle(){
+        return await $('~What should we call you?')
+    }
+    async usernameField(){
+        return await $('//android.widget.EditText[@index="2"]')
+    }
+    async usernameErrorMessage(){
+        return await $('~Invalid Twitter username. Please check the format.')
+    }
+    async next(){
+        return await $('~Next')
+    }
     async logout(){
         return await $('~Log out')
     }

@@ -13,7 +13,8 @@
     "passwordToEmailWithManyTweets": "MarwanEmad1",
     "user":{
         "email": "marwanemad910@gmail.com",
-        "password": "MarwanEmad1"
+        "password": "MarwanEmad1",
+        "username": "marwanemad"
     },
     "changePasswordPage": {
         "email": "exscorpion1@gmail.com",
