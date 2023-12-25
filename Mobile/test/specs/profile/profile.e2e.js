@@ -99,8 +99,8 @@ describe('Profile test suite', ()=>{
         await save.click()
         await browser.pause(2000)
     })  
-    // skip untill Cross solve this issue
-    it.skip('discard changes', async () => {
+
+    it('discard changes', async () => {
         const oldName = await profileUtils.enterName(newName)
         const closeEdit = await ProfilePage.closeEdit()
         await closeEdit.click()
