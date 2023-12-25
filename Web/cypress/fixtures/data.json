@@ -37,6 +37,9 @@
     "reply": "Welcome to Qwitter",
     "messageToBeDeleted": "messageToBeDeleted"
   },
+  "mute": {
+    "searchUser": "eng"
+  },
   "notifications": {
     "engemail": "ahmed.allah01@eng-st.cu.edu.eg",
     "engpassword": "8charslong",
