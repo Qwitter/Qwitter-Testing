@@ -1,6 +1,6 @@
 class SearchPage{
     async searchTab(){
-        return await $('~Tab 2 of 5')
+        return await $('~Tab 2 of 4')
     }
     async searchBar(){
         return await $('~Search Qwitter')
@@ -21,7 +21,7 @@ class SearchPage{
     }
     
     async notExistingUserMessage(){
-        return await $('~Searching for the result')
+        return await $('~Search for users or hashtags')
     }
     
     

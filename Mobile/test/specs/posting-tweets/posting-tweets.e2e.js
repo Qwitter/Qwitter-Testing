@@ -60,7 +60,7 @@ describe('Posting Tweets Suite', () => {
         expect(topTweetText).toHaveText(tweet)
     })
 
-    it.only('posts a tweet with image using camera', async () => {
+    it('posts a tweet with image using camera', async () => {
         postingTweetUtils.writeTweet('APPIUM WAS HERE')
         postingTweetUtils.postTweetWithCamera()
         const topTweet = await TimelinePagePo.topTweet()
