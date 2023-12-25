@@ -1,6 +1,8 @@
 {
   "loginPage": {
     "validEmail": "ahmedradalla2001@gmail.com",
+    "username": "ahmedabdelatty",
+    "name": "Ahmed Abdelatty",
     "notEmail": "notEmail",
     "validPassword": "8charslong",
     "wrongPassword": "12345678aaa",
@@ -37,6 +39,29 @@
       "month": "July",
       "year": "2000"
     }
+  },
+  "search":{
+    "keyword": "ma",
+    "targetUser": "marwanemad",
+    "notExistingUser": "notExistingUser"
+  },
+  "messages": {
+    "searchUser": "eng",
+    "message": "Hello",
+    "mediaUser": "qwittermanager",
+    "media": "quexit.png",
+    "replyUser": "qwittertester",
+    "reply": "Welcome to Qwitter",
+    "messageToBeDeleted": "messageToBeDeleted"
+  },
+  "mute": {
+    "searchUser": "eng"
+  },
+  "notifications": {
+    "engemail": "ahmed.allah01@eng-st.cu.edu.eg",
+    "engpassword": "8charslong",
+    "tweet": "@ahmedabdelatty hi",
+    "tweetUrl": "/tweet/f2b7c192-3eed-4e30-bfa9-735a48f91b54"
   },
   "name": "Using fixtures to represent data",
   "email": "hello@cypress.io",

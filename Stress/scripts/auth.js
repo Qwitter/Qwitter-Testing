@@ -1,12 +1,12 @@
 import http from 'k6/http';
-import { check } from 'k6';
+import { check, sleep } from 'k6';
 import { config } from '../config.js';
 
 const baseUrl = config.authentication.baseUrl;
-const authToken = config.authentication.authToken;
-const email = config.authentication.email;
-const password = config.authentication.password;
-const username = config.authentication.username;
+const email = config.email;
+const password = config.password;
+const username = config.username;
+const params = config.params;
 
 export let options = {
     insecureSkipTLSVerify: true,
@@ -47,11 +47,7 @@ export default function () {
             body: {
                 password: password,
             },
-            params: {
-                headers: {
-                    'Authorization': `Bearer ${authToken}`,
-                }
-            }
+            
         },
         {
             method: 'POST',
@@ -61,20 +57,6 @@ export default function () {
                 password: password,
             }
         },
-        // {
-        //     method: 'POST',
-        //     url: `${baseUrl}/send-verification-email`,
-        //     body: {
-        //         email: email,
-        //     }
-        // },
-        // {
-        //     method: 'POST',
-        //     url: `${baseUrl}/forgot-password`,
-        //     body: {
-        //         email: email,
-        //     }
-        // },
         {
             method: 'POST',
             url: `${baseUrl}/change-password`,
@@ -82,11 +64,7 @@ export default function () {
                 password: password,
                 passwordConfirmation: password,
             },
-            params: {
-                headers: {
-                    'Authorization': `Bearer ${authToken}`,
-                }
-            }
+            
         },
         {
             method: 'POST',
@@ -95,11 +73,7 @@ export default function () {
                 oldPassword: password,
                 newPassword: password,
             },
-            params: {
-                headers: {
-                    'Authorization': `Bearer ${authToken}`,
-                }
-            }
+            
         },
         {
             method: 'POST',
@@ -107,11 +81,7 @@ export default function () {
             body: {
                 email: email,
             },
-            params: {
-                headers: {
-                    'Authorization': `Bearer ${authToken}`,
-                }
-            }
+            
         },
         {
             method: 'POST',
@@ -119,18 +89,16 @@ export default function () {
             body: {
                 username: username,
             },
-            params: {
-                headers: {
-                    'Authorization': `Bearer ${authToken}`,
-                }
-            }
+            
         }
-    ]
-    const responses = http.batch([
-        ...requests
-    ]);
-    check(responses[0], {
-        'is status 200': (res) => res.status === 200,
+    ];
+    requests.forEach((request) => {
+        const res = http.request(request.method, request.url, request.body, params);
+        sleep(1);
+        console.log(res.body);
+        check(res, {
+            "is status code 200: ": (r) => r.status === 200
+        });
     });
 }
 

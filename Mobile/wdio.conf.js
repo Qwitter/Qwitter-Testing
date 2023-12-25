@@ -63,8 +63,6 @@ exports.config = {
         'appium:automationName': 'UiAutomator2',
         'appium:fullReset': true,
         'appium:noReset': false,
-        'appium:forceAppLaunch': true,
-        //'appium:enforceAppInstall': true
     }],
 
     //
@@ -140,14 +138,14 @@ exports.config = {
     reporters: ['spec',['allure', {
         outputDir: 'allure-results',
         disableWebdriverStepsReporting: true,
-        disableWebdriverScreenshotsReporting: true,
+        disableWebdriverScreenshotsReporting: false,
     }]],
 
     // Options to be passed to Mocha.
     // See the full list at http://mochajs.org/
     mochaOpts: {
         ui: 'bdd',
-        timeout: 70000
+        timeout: 90000
     },
 
     //
@@ -246,7 +244,11 @@ exports.config = {
      */
     // afterTest: function(test, context, { error, result, duration, passed, retries }) {
     // },
-
+    afterTest: async function(test, context, { error, result, duration, passed, retries }) {
+        if (error) {
+            await browser.takeScreenshot();
+        }
+    }
 
     /**
      * Hook that gets executed after the suite has ended
