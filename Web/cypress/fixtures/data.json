@@ -37,6 +37,15 @@
     "reply": "Welcome to Qwitter",
     "messageToBeDeleted": "messageToBeDeleted"
   },
+  "mute": {
+    "searchUser": "eng"
+  },
+  "notifications": {
+    "engemail": "ahmed.allah01@eng-st.cu.edu.eg",
+    "engpassword": "8charslong",
+    "tweet": "@ahmedabdelatty hi",
+    "tweetUrl": "/tweet/f2b7c192-3eed-4e30-bfa9-735a48f91b54"
+  },
   "name": "Using fixtures to represent data",
   "email": "hello@cypress.io",
   "body": "Fixtures are a great way to mock data for responses to routes"
