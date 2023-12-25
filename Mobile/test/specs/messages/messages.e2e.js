@@ -44,9 +44,13 @@ describe('messages test suite', () => {
         await messagesUtils.deleteNewlyCreatedConvo()
     })
 
-    it.skip('replies to a message', async () => {
+    it('replies to a message', async () => {
         await messagesUtils.createConvo()
-        // await messagesUtils.replyToMessage()
+        let message = 'replyToMe'
+        await messagesUtils.sendTextMessage(message)
+        let reply = 'reply'
+        await messagesUtils.replyToMessage(message)
+        await messagesUtils.sendTextMessage(reply, true)
         await messagesUtils.deleteNewlyCreatedConvo()
     })
 
@@ -63,7 +67,7 @@ describe('messages test suite', () => {
         await messagesUtils.deleteNewlyCreatedConvo()
     })
 
-    it.only('deletes a message', async () => {
+    it('deletes a message', async () => {
         await messagesUtils.createConvo()
         let message = 'delete'
         await messagesUtils.sendTextMessage(message)

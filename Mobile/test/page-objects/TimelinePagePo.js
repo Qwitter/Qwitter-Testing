@@ -8,7 +8,7 @@ class TimelinePagePo {
     async followingButton() { return await $('~Following') }
     async profileButton() { return await $('~Profile') }
     async forYouTab() { return await $('//android.view.View[@content-desc="Following\nTab 2 of 2"]') }
-    async home() { return await $('//android.view.View[@content-desc="Tab 1 of 5"]') }
+    async home() { return await $('//android.view.View[@content-desc="Tab 1 of 4"]') }
 }
 
 module.exports = new TimelinePagePo()

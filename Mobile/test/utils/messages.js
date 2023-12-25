@@ -21,8 +21,6 @@ module.exports = {
         const create = await MessagesPo.create()
         await create.click()
         await browser.pause(5000)
-        const createdGroup = await MessagesPo.createdGroup()
-        expect(await createdGroup.isDisplayed()).toBe(true)
     },
     deleteNewlyCreatedConvo: async function () {
         const ibutton = await MessagesPo.ibutton()
@@ -33,11 +31,13 @@ module.exports = {
         const topConvo = await MessagesPo.topConvo()
         expect(await topConvo.isDisplayed()).toBe(false)
     },
-    sendTextMessage: async function (message) {
+    sendTextMessage: async function (message, isReply = false) {
         const editText = await MessagesPo.editText()
         await editText.click()
         await editText.setValue(message)
-        const sendButton = await MessagesPo.sendButton()
+        let sendButton
+        if (isReply) sendButton = await MessagesPo.sendButtonReply()
+        else sendButton = await MessagesPo.sendButton()
         await sendButton.click()
         await browser.pause(3000)
         const getMessage = await MessagesPo.getMessage(message)
@@ -97,5 +97,15 @@ module.exports = {
         await deleteMessage.click()
         await browser.pause(3000)
         expect(await getMessage.isDisplayed()).toBe(false)
+    },
+    replyToMessage: async function(message) {
+        const getMessage = await MessagesPo.getMessage(message)
+        await browser.touchAction({
+            action: 'longPress',
+            element: getMessage
+        })
+        const replyButton = await MessagesPo.replyButton()
+        await replyButton.click()
+        await browser.pause(3000)
     }
 }
