@@ -6,6 +6,6 @@ module.exports = {
         const search = await SearchPage.search()
         await search.click()
         await search.setValue(searchKeyword)
-        await browser.pause(3000)
+        await browser.pause(5000)
     }
 }

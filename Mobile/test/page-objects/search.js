@@ -1,6 +1,6 @@
 class SearchPage{
     async searchTab(){
-        return await $('~Tab 2 of 5')
+        return await $('~Tab 2 of 4')
     }
     async searchBar(){
         return await $('~Search Qwitter')
