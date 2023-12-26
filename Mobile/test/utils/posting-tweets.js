@@ -1,4 +1,4 @@
-const postingTweetsPo = require('../page-objects/postingTweetsPo')
+const postingTweetsPo = require('../page-objects/PostingTweetsPo')
 
 module.exports = {
     writeTweet: async function (tweet){
