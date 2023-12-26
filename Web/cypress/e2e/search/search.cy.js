@@ -1,4 +1,5 @@
 import SearchPage from '../../support/page-objects/search'
+import ExistingTweets from '../../support/page-objects/existing-tweets'
 import { login } from '../../utils/login'
 const data = require('../../fixtures/data')
 
@@ -81,7 +82,7 @@ describe('Search test suite', () => {
         SearchPage.trendsParent.then(($el) => {
             if($el.find('> li').length > 1){
                 let trend
-                SearchPage.trendsResult.first().find('div > span').invoke('text').then((text) => {
+                SearchPage.trendsResult.first().find('p').invoke('text').then((text) => {
                     trend = text.substring(1, text.length).toLowerCase()
                 }).then(() => {
                     SearchPage.trendsResult.first().click()
@@ -116,4 +117,14 @@ describe('Search test suite', () => {
         cy.contains('This account doesn’t exist').should('be.visible')
     })
 
+    it('search for tweets', () => {
+        const tweetSearch = 'test'
+        SearchPage.search.should('be.empty').type(tweetSearch).type('{enter}')
+        cy.wait(2000)
+        ExistingTweets.tweets.each(($div) => {
+            cy.wrap($div).find('article').find('p').invoke('text').then((text) => {
+                expect(text.toLowerCase()).contain(tweetSearch.substring(1).toLowerCase())
+            })
+        })
+    })
 })

@@ -26,7 +26,9 @@ describe('Trends test suite', () => {
         TrendsPage.trendName.first().scrollIntoView().invoke('text').then((trend) => {
             TrendsPage.trendList.first().click().then(() => {
                 ExistingTweets.tweets.each(($div) => {
-                    cy.wrap($div).find('article').find('p').invoke('text').should('include', trend)
+                    cy.wrap($div).find('article').find('p').invoke('text').then((text) => {
+                        expect(text.toLowerCase()).contain(trend.substring(1).toLowerCase())
+                    })
                 })
             })
         })

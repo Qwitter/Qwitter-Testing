@@ -30,7 +30,7 @@ describe('Changing email', () => {
     })
 
     it('enter wrong password then valid one', () => {
-        AccountSettingsPage.passwordField.should('have.attr', 'password')
+        AccountSettingsPage.passwordField.should('have.attr', 'type', 'password')
         AccountSettingsPage.next.should('be.visible').and('be.disabled')
         AccountSettingsPage.passwordField.type(wrongPassword)
         AccountSettingsPage.next.should('be.enabled').click()
