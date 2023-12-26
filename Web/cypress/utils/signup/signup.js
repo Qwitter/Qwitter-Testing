@@ -82,14 +82,18 @@ module.exports.checkStepOneData = (name, email, date) => {
     SignUpPage.emailField.should('be.visible')
         .should('have.value', email)
 
+    module.exports.checkBirhDateData(data.validBirthDate.day, data.validBirthDate.month, data.validBirthDate.year)
+}
+
+module.exports.checkBirhDateData = (day, month, year) => {
     SignUpPage.birthDayField.within(() => {
-        cy.get('select option:selected').should('have.value', data.validBirthDate.day)
+        cy.get('select option:selected').should('have.value', day)
     })
     SignUpPage.birthMonthField.within(() => {
-        cy.get('select option:selected').should('have.value', data.validBirthDate.month)
+        cy.get('select option:selected').should('have.value', month)
     })
     SignUpPage.birthYearField.within(() => {
-        cy.get('select option:selected').should('have.value', data.validBirthDate.year)
+        cy.get('select option:selected').should('have.value', year)
     })
 }
 

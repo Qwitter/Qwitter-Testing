@@ -1,5 +1,5 @@
 const { browser } = require('@wdio/globals')
-const AccountSettingPage = require('../page-objects/account-settings')
+const AccountSettingPage = require('../page-objects/account-settings.js')
 
 module.exports = {
     enterEmail: async function (email){
@@ -41,6 +41,12 @@ module.exports = {
         await this.openSettings()
         const changePassword = await AccountSettingPage.changePassword()
         await changePassword.click()
+    },
+    enterUsername: async function(username){
+        const usernameField = await AccountSettingPage.usernameField()
+        await usernameField.click()
+        await usernameField.setValue(username)
+        await browser.hideKeyboard()
     }
 
 }

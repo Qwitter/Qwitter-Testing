@@ -3,7 +3,7 @@ const commands = require('../../../commands.js')
 const data  = require('../../fixtures/login-data.json')
 const AccountSettingPage = require('../../page-objects/account-settings.js')
 const FollowPage = require('../../page-objects/follow.js')
-const loginUtils = require('../../utils/login.js')
+const loginUtils = require('../../utils/login')
 
 describe('Follow and unfollow test suite', ()=>{
     const follow = 'follow'
