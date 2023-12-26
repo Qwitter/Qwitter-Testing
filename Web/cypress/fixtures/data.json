@@ -45,6 +45,7 @@
     "targetUser": "marwanemad",
     "notExistingUser": "notExistingUser"
   },
+  "reply": "This is a reply"
   "messages": {
     "searchUser": "eng",
     "message": "Hello",
