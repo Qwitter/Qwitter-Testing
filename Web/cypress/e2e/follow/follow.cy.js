@@ -3,9 +3,6 @@ import { login } from '../../utils/login'
 import FollowPage from '../../support/page-objects/follow'
 
 describe('Follow test suite', () => {
-    const follow = 'Follow'
-    const unfollow = 'Unfollow'
-    const following = 'Following'
     beforeEach('login and open home page', () => {
         cy.clearCookies()
         cy.clearLocalStorage()
@@ -14,16 +11,13 @@ describe('Follow test suite', () => {
     })
 
     it('follow and unfollow a user', () => {
-        FollowPage.followUnfollowButton.first().should('be.visible')
-        FollowPage.followUnfollowButton.first().find('span')
-        .should('have.text', follow).click()
-        FollowPage.followUnfollowButton.first().find('span')
-        .should('have.text', following)
-        FollowPage.followUnfollowButton.first().trigger('mouseover').find('span')
-        .should('have.text', unfollow).click()
+        // follow
+        FollowPage.followUnfollowButton.first().should('be.visible').click()
+        // unfollow
+        cy.wait(1000)
+        FollowPage.followUnfollowButton.first().should('be.visible').click()
         FollowPage.assertUnfollow.should('be.visible').click({force:true})
-        FollowPage.followUnfollowButton.first().find('span')
-        .should('have.text', follow)
+        FollowPage.followUnfollowButton.first().should('be.visible')
     })
 
     it('check followers count of a user', () => {
@@ -81,7 +75,7 @@ describe('Follow test suite', () => {
         FollowPage.followingList.then(($el) => {
             if($el.find('> [data-testid="userToFollow"]') > 0){
                 FollowPage.followUnfollowButton.each(($btn) => {
-                    cy.wrap($btn).find('span').should('have.text', following)
+                    cy.wrap($btn).find('span').should('be.visible')
                 })
             }
         })

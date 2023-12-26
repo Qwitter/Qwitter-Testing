@@ -2,9 +2,11 @@ const { browser } = require('@wdio/globals')
 const commands = require('../../../commands.js')
 const SignUpPage = require('../../page-objects/signup.js')
 const ForgotPasswordPage = require('../../page-objects/forgotpassword.js')
+const LoginPagePo = require('../../page-objects/LoginPagePo.js')
 const data  = require('../../fixtures/forgotpassword-data.json')
 const forgotUtils = require('../../utils/forgotpassword.js')
 const signUpUtils = require('../../utils/signup.js')
+const loginUtils = require('../../utils/login.js')
 const emailEnv = require('../../fixtures/email-env.json') 
 
 describe('Forgot password test suite', ()=>{
@@ -14,11 +16,11 @@ describe('Forgot password test suite', ()=>{
         await creatAccountBtn.click()
         emailToken = await signUpUtils.goToPageOfSignUp(6)
         data.validEmail = `${emailToken}${emailEnv.emailNameSpace}`
-        await commands.restartApp()
+        await commands.restartApp(true)
     })
 
     afterEach(async () => {
-        await commands.restartApp()
+        await commands.restartApp(true)
     })
 
     beforeEach( async ()=>{
@@ -40,11 +42,6 @@ describe('Forgot password test suite', ()=>{
         const forgotBtn = await ForgotPasswordPage.forgotPasswordButton()
         expect(await forgotBtn.isDisplayed()).toBe(true)
         await forgotBtn.click()
-    })
-    //Skip for now
-    it.skip('enter not existing email', async() => {
-        // there is no error message element 
-        // to do this test
     })
 
     it('enter valid email and proceed', async() => {
@@ -149,10 +146,11 @@ describe('Forgot password test suite', ()=>{
         const next = await SignUpPage.nextButton()
         expect(await next.isEnabled()).toBe(true)
         await next.click()
-        // Skip for now - it should go to feed not login
-        //const loginPageHeader = await SignUpPage.loginPagetitle()
-        //expect(await loginPageHeader.isDisplayed()).toBe(true)
     })
 
-    // TODO: add a test to login with the new password...
+    it('login with the new password', async () => {
+        await loginUtils(data.validEmail, data.validPassword)
+        const feed = await LoginPagePo.feed()
+        expect(feed).toBeExisting()
+    })
 })

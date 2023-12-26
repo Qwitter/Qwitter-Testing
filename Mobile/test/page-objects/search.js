@@ -21,7 +21,7 @@ class SearchPage{
     }
     
     async notExistingUserMessage(){
-        return await $('~Searching for the result')
+        return await $('~Search for users or hashtags')
     }
     
     

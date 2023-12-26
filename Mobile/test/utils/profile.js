@@ -1,6 +1,6 @@
 const { browser } = require('@wdio/globals')
 const AccountSettingPage = require('../page-objects/account-settings.js')
-//const ExistingTweetsPage = require('../page-objects/existing-tweets.js')
+const ExistingTweetsPage = require('../page-objects/existing-tweets.js')
 const ProfilePage = require('../page-objects/profile.js')
 
 module.exports = {
@@ -12,7 +12,7 @@ module.exports = {
         await profileBtn.click()
         await browser.pause(3000)
     },
-    /* writeReply: async function (text){
+    writeReply: async function (text){
         const commentBtn = await ExistingTweetsPage.commentButton()
         const isThereATweet = await commentBtn?.isExisting() ?? false
         if (isThereATweet) {
@@ -26,7 +26,7 @@ module.exports = {
             const replyText = await ExistingTweetsPage.replyTextAriaAdd()
             await replyText.setValue(text)
         }
-    }, */
+    },
     enterName: async function (newName){
         const name = await ProfilePage.profileName()
         const oldName = await name.getAttribute('contentDescription')

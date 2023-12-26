@@ -78,7 +78,7 @@ describe('Tweet interactions test suite', () => {
         expect(parseInt(oldRetweetsCounter) + 1 == newRetweetsCounter).toBe(true)
     })
 
-    it('undo repost for a retweetet post', async () => {
+    it('undo repost for a retweeted post', async () => {
         const retweetBtn = await ExistingTweetsPage.retweetButtonInPosts()
         await retweetBtn.click()
         const undoRepost = await ExistingTweetsPage.undoRepostButton()

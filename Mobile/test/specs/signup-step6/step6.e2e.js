@@ -5,7 +5,7 @@ const data  = require('../../fixtures/signup-data.json')
 const signUpUtils = require('../../utils/signup.js')
 const { faker, sk, fa } = require('@faker-js/faker')
 
-describe('Sign up test suite - verification code step', ()=>{
+describe('Sign up test suite - choose username step', ()=>{
     afterEach( async ()=>{
         await commands.restartApp(true)
     })

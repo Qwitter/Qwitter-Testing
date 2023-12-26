@@ -109,7 +109,10 @@ module.exports.chooseRandomeUserName = () => {
             if (index == randomIndex) {
                 cy.wrap($el).should('be.visible').click()
                 cy.wrap($el).invoke('text').then((text) => {
-                    username = text.substring(1, text.length - 1)
+                    if(randomIndex === 4)
+                        username = text.substring(1)
+                    else 
+                        username = text.substring(1, text.length - 1)
                 }).then(() => {
                     AccountSettingsPage.usernameField.should('have.value', username)
                 })
