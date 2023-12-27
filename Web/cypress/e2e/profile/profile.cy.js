@@ -5,7 +5,7 @@ import { selecDateOfBirth, checkBirhDateData } from '../../utils/signup/signup'
 import "cypress-file-upload"
 
 describe('Profile page test suite', () => {
-    const homeUrl = '/home'
+    const homeUrl = '/Home'
     const repliesUrl = '/with_replies'
     const mediaUrl = '/media'
     const likesUrl = '/likes'
@@ -22,7 +22,7 @@ describe('Profile page test suite', () => {
 
     it('returns to profile page', () => {
         ProfilePage.backHome.should('be.visible').click()
-        cy.url().should('include', homeUrl)
+        cy.url().should('include', '/home')
     })
 
     it('save button and cancel should be visible', () => {

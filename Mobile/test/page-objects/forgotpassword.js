@@ -3,7 +3,7 @@ class ForgotPasswordPage{
         return await $('~Sign in')
     }
     async forgotPasswordButton(){
-        return await $('~Fogot password?')
+        return await $('~Forgot password ?')
     }
     async findXAccountHeader(){
         return  await $('~Find your X account')

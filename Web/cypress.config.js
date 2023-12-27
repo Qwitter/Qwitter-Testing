@@ -5,7 +5,7 @@ module.exports = defineConfig({
   reporter: 'cypress-mochawesome-reporter',
   env: {
     MAILISK_API_KEY: "TIX9v5Xw5cqu6uzXxnjX46WRFZAI2ViIM5-J9bq4pW8",
-    MAILISK_NAMESPACE: "v3rzvekshyl8"
+    MAILISK_NAMESPACE: "l34t7g89e5mp"
   },
   e2e: {
     baseUrl: 'http://localhost:3000',

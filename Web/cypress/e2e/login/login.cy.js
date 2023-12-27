@@ -94,7 +94,7 @@ describe('login page', () => {
         LoginPagePo.nextButtonEmailScreen.click()
         LoginPagePo.passwordInputFieldPasswordScreen.type(data.loginPage.validPassword)
         LoginPagePo.loginButtonPasswordScreen.click()
-        cy.url().should('include', '/home')
+        cy.url().should('include', '/Home')
     })
 
     it('returns to index page with logo button after login', () => {

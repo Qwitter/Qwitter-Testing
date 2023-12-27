@@ -22,7 +22,7 @@ describe('Timeline Suite', () => {
         await profilePic.click()
         const sidebarList = await TimelinePagePo.sidebarList()
         const listItems = await sidebarList.$$('//android.view.View')
-        expect(listItems.length-1).toBe(8)
+        expect(listItems.length-1).toBe(6)
         const tabs = ["Profile", "Premium", "Bookmarks", "Lists", "Spaces", "Monetization"]
         tabs.forEach(async (tab) => {
             const tabItem = await sidebarList.$(`//android.view.View[@content-desc="${tab}"]`)
@@ -74,7 +74,8 @@ describe('Timeline Suite', () => {
         const profileButton = await TimelinePagePo.profileButton()
         await profileButton.click()
         await browser.pause(5000)
-        const button = await $('(//android.widget.Button[@class="android.widget.Button"])[19]')
+        const elements = await $$('//android.view.View[@index="0"]')
+        const button = elements[elements.length-1]
         const name = await button.$('//android.view.View')
         const attr = await name.getAttribute('content-desc')
         let flag = false

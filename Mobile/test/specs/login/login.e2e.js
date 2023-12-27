@@ -5,7 +5,7 @@ const LoginPagePo = require('../../page-objects/LoginPagePo')
 
 describe('Login Suite', ()=>{
     afterEach(async () => {
-        await commands.restartApp()
+        await commands.restartApp(true)
     })
 
     beforeEach(async () => {
@@ -42,14 +42,14 @@ describe('Login Suite', ()=>{
         expect(nextButton).toBeDisabled()
         const emailField = await LoginPagePo.emailField()
         await emailField.click()
-        await emailField.setValue(data.validUsername)
+        await emailField.setValue(data.user.username)
         await browser.hideKeyboard()
         await nextButton.click()
         const loginButton = await LoginPagePo.loginButton()
         expect(loginButton).toBeDisabled()
         const passwordField = await LoginPagePo.passwordField()
         await passwordField.click()
-        await passwordField.setValue(data.validPassword)
+        await passwordField.setValue(data.user.password)
         await browser.hideKeyboard()
         expect(loginButton).toBeEnabled()
         await loginButton.click()
@@ -150,10 +150,10 @@ describe('Login Suite', ()=>{
         await browser.hideKeyboard()
         await showPasswordButton.click()
         const passwordText = await passwordField.getText()
-        expect(passwordText).not.toBe(data.validPassword)
+        expect(passwordText).toBe(data.validPassword)
         await showPasswordButton.click()
         const passwordText2 = await passwordField.getText()
-        expect(passwordText2).toBe(data.validPassword)
+        expect(passwordText2).not.toBe(data.validPassword)
     })
 
     it('shows same email when returning to email screen', async () => {

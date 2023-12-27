@@ -9,6 +9,8 @@ class TimelinePagePo {
     async profileButton() { return await $('~Profile') }
     async forYouTab() { return await $('//android.view.View[@content-desc="Following\nTab 2 of 2"]') }
     async home() { return await $('//android.view.View[@content-desc="Tab 1 of 4"]') }
+    async settingsAndPrivacy() { return await $('~Settings & Privacy') }
+    async sapAgain() { return await $('~Settings and privacy') }
 }
 
 module.exports = new TimelinePagePo()

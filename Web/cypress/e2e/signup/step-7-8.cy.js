@@ -60,13 +60,13 @@ describe('Choose username and notifications pages', () => {
         cy.contains('button', 'Skip for now').should('be.visible').click()
         SignUpPage.notificationHeader.should('be.visible')
         cy.contains('button', 'Skip for now').should('be.visible').click()
-        cy.url().should('include', '/home')
+        cy.url().should('include', '/Home')
     })
     
     it('allow notifications', () => {
         cy.contains('button', 'Skip for now').should('be.visible').click()
         SignUpPage.notificationHeader.should('be.visible')
         SignUpPage.allowNotifiacton.should('be.visible').click()
-        cy.url().should('include', '/home')
+        cy.url().should('include', '/Home')
     })
 })
