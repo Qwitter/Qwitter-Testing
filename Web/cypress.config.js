@@ -8,7 +8,7 @@ module.exports = defineConfig({
     MAILISK_NAMESPACE: "l34t7g89e5mp"
   },
   e2e: {
-    baseUrl: 'http://localhost:3000',
+    baseUrl: 'http://qwitter.cloudns.org:4173',
     setupNodeEvents(on, config) {
       // implement node event listeners here
       //for generating html reports
