@@ -15,7 +15,7 @@
     "newPassword": "8charsormore",
     "invalidPassword": "1"
   },
-  "accountSettingsPage":{
+  "accountSettingsPage": {
     "validUsername": "marwanemad",
     "invalidUsername": "Marwan Emad"
   },
@@ -45,7 +45,7 @@
     "targetUser": "marwanemad",
     "notExistingUser": "notExistingUser"
   },
-  "reply": "This is a reply"
+  "reply": "This is a reply",
   "messages": {
     "searchUser": "eng",
     "message": "Hello",
