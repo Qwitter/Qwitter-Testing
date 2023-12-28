@@ -56,14 +56,20 @@ module.exports = {
         const dummyReturn = "X"
         if(screenNum == 2) return dummyReturn;
         const emailToken = await module.exports.doStepTwo()
+        await browser.pause(1000)
+
         if(screenNum == 3) return emailToken; // here retun emailToken for step3
         await module.exports.doStepThree(emailToken)
+        await browser.pause(1000)
         
         if(screenNum == 4) return emailToken;
         await module.exports.doStepFour()
+        await browser.pause(1000)
 
         if(screenNum == 5) return emailToken;
         await module.exports.doStepFive()
+        await browser.pause(1000)
+
         if(screenNum == 6) return emailToken;
     },
     enterUserData: async(name, email, date, dateStep = true) =>{

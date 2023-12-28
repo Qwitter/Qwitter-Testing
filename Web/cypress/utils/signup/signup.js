@@ -82,14 +82,18 @@ module.exports.checkStepOneData = (name, email, date) => {
     SignUpPage.emailField.should('be.visible')
         .should('have.value', email)
 
+    module.exports.checkBirhDateData(data.validBirthDate.day, data.validBirthDate.month, data.validBirthDate.year)
+}
+
+module.exports.checkBirhDateData = (day, month, year) => {
     SignUpPage.birthDayField.within(() => {
-        cy.get('select option:selected').should('have.value', data.validBirthDate.day)
+        cy.get('select option:selected').should('have.value', day)
     })
     SignUpPage.birthMonthField.within(() => {
-        cy.get('select option:selected').should('have.value', data.validBirthDate.month)
+        cy.get('select option:selected').should('have.value', month)
     })
     SignUpPage.birthYearField.within(() => {
-        cy.get('select option:selected').should('have.value', data.validBirthDate.year)
+        cy.get('select option:selected').should('have.value', year)
     })
 }
 
@@ -105,7 +109,10 @@ module.exports.chooseRandomeUserName = () => {
             if (index == randomIndex) {
                 cy.wrap($el).should('be.visible').click()
                 cy.wrap($el).invoke('text').then((text) => {
-                    username = text.substring(1, text.length - 1)
+                    if(randomIndex === 4)
+                        username = text.substring(1)
+                    else 
+                        username = text.substring(1, text.length - 1)
                 }).then(() => {
                     AccountSettingsPage.usernameField.should('have.value', username)
                 })
