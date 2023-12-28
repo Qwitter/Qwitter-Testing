@@ -11,9 +11,11 @@ export function createNewConvo(searchUser, message) {
     const user = searchedUsers.find("li").first()
     cy.contains(searchUser).should('be.visible')
     user.click()
+    cy.wait(1000)
     const nextButton = cy.contains("Next")
     nextButton.should('be.enabled')
     nextButton.click()
+    cy.wait(3000)
     const startANewMessage = MessagesPo.startANewMessage
     startANewMessage.should('be.visible')
     startANewMessage.type(message)

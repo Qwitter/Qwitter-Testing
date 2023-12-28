@@ -29,10 +29,8 @@ describe('messages test suite', () => {
     })
 
     afterEach('delete first convo', () => {
-        cy.reload()
         cy.wait(6000)
         deleteFirstConvo()
-        cy.reload()
         cy.wait(6000)
     })
 
@@ -42,19 +40,17 @@ describe('messages test suite', () => {
 
     it('shows conversations', () => {
         createNewConvo(data.messages.searchUser, data.messages.message)
-        cy.reload()
+        cy.wait(6000)
         checkConvos()
     })
 
     it('sends a message with media', () => {
         createNewConvo(data.messages.mediaUser, data.messages.message)
-        cy.reload()
         sendMedia(data.messages.media)
     })
 
     it('replies to a message', () => {
         createNewConvo(data.messages.replyUser, data.messages.message)
-        cy.reload()
         replyToFirstMessage(data.messages.reply, data.messages.message)
     })
 

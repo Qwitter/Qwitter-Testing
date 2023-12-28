@@ -10,6 +10,7 @@ export function replyToFirstMessage (reply, message) {
     const replyButton = MessagesPo.replyButton.eq(0)
     replyButton.should('be.visible')
     replyButton.click()
+    cy.wait(1000)
     const startANewMessage = MessagesPo.startANewMessage
     startANewMessage.should('be.visible')
     startANewMessage.type(reply)

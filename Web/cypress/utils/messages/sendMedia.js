@@ -9,7 +9,6 @@ export function sendMedia(media) {
     const sendButton = MessagesPo.sendButton
     sendButton.should('be.visible')
     sendButton.click()
-    cy.reload()
     const messageMedia = MessagesPo.messageMedia
-    messageMedia.find(">img").should('be.visible')
+    messageMedia.find(">a>img").should('be.visible')
 }
