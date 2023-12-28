@@ -1,8 +1,9 @@
-import http from 'k6/http';
-import { check, sleep } from 'k6';
-import { config } from '../config.js';
+import http from "k6/http";
+import { check, sleep } from "k6";
+import { config } from "../../config.js";
 
-const baseUrl = config.trends.baseUrl;
+const baseUrl = config.user.baseUrl;
+const followUsername = config.user.followUsername;
 const params = config.params;
 
 export let options = {
@@ -23,10 +24,10 @@ export let options = {
 export default function () {
     const requests = [
         {
-            method: 'GET',
-            url: `${baseUrl}`,
+            method: 'POST',
+            url: `${baseUrl}/block/${followUsername}`,
         },
-    ];  
+    ];
     requests.forEach((request) => {
         const res = http.request(request.method, request.url, request.body, params);
         sleep(1);

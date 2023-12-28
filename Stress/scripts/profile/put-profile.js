@@ -1,9 +1,10 @@
 import http from 'k6/http';
 import { check, sleep } from 'k6';
-import { config } from '../config.js';
+import { config } from '../../config.js';
 
-const baseUrl = config.trends.baseUrl;
+const baseUrl = config.profile.baseUrl;
 const params = config.params;
+const name = config.profile.name;
 
 export let options = {
     insecureSkipTLSVerify: true,
@@ -23,10 +24,17 @@ export let options = {
 export default function () {
     const requests = [
         {
-            method: 'GET',
-            url: `${baseUrl}`,
+            method: 'PUT',
+            url: `${baseUrl}/profile`,
+            body: {
+                name: name,
+                description: '',
+                Location: '',
+                url: '',
+                birth_date: '2000-03-09T22:18:26.625Z',
+            },
         },
-    ];  
+    ];
     requests.forEach((request) => {
         const res = http.request(request.method, request.url, request.body, params);
         sleep(1);

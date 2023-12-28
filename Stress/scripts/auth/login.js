@@ -1,8 +1,10 @@
 import http from 'k6/http';
 import { check, sleep } from 'k6';
-import { config } from '../config.js';
+import { config } from '../../config.js';
 
-const baseUrl = config.trends.baseUrl;
+const baseUrl = config.authentication.baseUrl;
+const email = config.email;
+const password = config.password;
 const params = config.params;
 
 export let options = {
@@ -23,10 +25,14 @@ export let options = {
 export default function () {
     const requests = [
         {
-            method: 'GET',
-            url: `${baseUrl}`,
+            method: 'POST',
+            url: `${baseUrl}/login`,
+            body: {
+                email_or_username: email,
+                password: password,
+            }
         },
-    ];  
+    ];
     requests.forEach((request) => {
         const res = http.request(request.method, request.url, request.body, params);
         sleep(1);
