@@ -1,11 +1,11 @@
 # Qwitter Testing
 ## Table of Contents  
-1. [Overview](https://github.com/Qwitter/Qwitter-Testing/edit/main/README.md#overview)
-2. [Frontend Tests](https://github.com/Qwitter/Qwitter-Testing/edit/main/README.md#frontend-tests)
-3. [Cross-Platform Tests](https://github.com/Qwitter/Qwitter-Testing/edit/main/README.md#cross-platform-tests)
-4. [Stress Tests](https://github.com/Qwitter/Qwitter-Testing/edit/main/README.md#stress-tests)
-5. [Link to Videos and Reports](https://github.com/Qwitter/Qwitter-Testing/edit/main/README.md#link-to-videos-and-reports)
-6. [Link to Final Testing Document](https://github.com/Qwitter/Qwitter-Testing/edit/main/README.md#link-to-final-testing-document)
+1. [Overview](https://github.com/Qwitter/Qwitter-Testing?tab=readme-ov-file#overview)
+2. [Frontend Tests](https://github.com/Qwitter/Qwitter-Testing?tab=readme-ov-file#frontend-tests)
+3. [Cross-Platform Tests](https://github.com/Qwitter/Qwitter-Testing?tab=readme-ov-file#cross-platform-tests)
+4. [Stress Tests](https://github.com/Qwitter/Qwitter-Testing?tab=readme-ov-file#stress-tests)
+5. [Link to Videos and Reports](https://github.com/Qwitter/Qwitter-Testing?tab=readme-ov-file#link-to-videos-and-reports)
+6. [Link to Final Testing Document](https://github.com/Qwitter/Qwitter-Testing?tab=readme-ov-file#link-to-final-testing-document)
 ## Overview
 Welcome to the Qwitter Testing repository! This repository contains testing scripts for frontend, cross-platform, and stress tests for the backend of the Qwitter application. The testing suite is designed to ensure the robustness and reliability of the application across different layers.
 
